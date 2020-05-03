@@ -2,13 +2,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import * as themeColor from "./../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
-  signIn: {
+  signUp: {
     "& .MuiDialog-paper": {
       background: themeColor.signUpColor,
-      color:  themeColor.labelForm,
+      color: themeColor.labelForm,
       opacity: 0.9,
       width: 425,
-      height: 500,
     },
     "& .MuiOutlinedInput-root": {
       background: themeColor.whiteColor,
@@ -22,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiOutlinedInput-input": {
       padding: "15.5px 14px",
     },
+    "& .MuiDialogContent-root:first-child": {
+      paddingBottom: 20,
+    },
   },
   iconClose: {
     fontSize: 30,
@@ -32,6 +34,12 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
   },
   userName: {
+    marginBottom: 10,
+  },
+  email: {
+    marginBottom: 10,
+  },
+  password: {
     marginBottom: 10,
   },
   submit: {

@@ -1,22 +1,66 @@
-import React, { Fragment } from "react";
-import Header from "../../layouts/Header.js";
+import React, { Fragment, useEffect } from "react";
+import { connect } from "react-redux";
+import MobileApp from "../../modules/home/components/AppMobile/index.js";
 import Banner from "../../modules/home/components/Banner";
-import Showtime from "../../modules/home/components/Showtime/index.js";
 import InfoCinema from "../../modules/home/components/InfoCinema/index.js";
 import News from "../../modules/home/components/News/index.js";
-import MobileApp from "../../modules/home/components/AppMobile/index.js";
-import Footer from "../../layouts/Footer/index.js";
+import Showtime from "../../modules/home/components/Showtime/index.js";
+import {
+actGetCinemaBranch,
+  // actGetCinemaBranchFirst,
+  actGetCinemaList, actGetMovieList, actGetShowTimeAll, actGetShowTimeDetail
+} from "./../../modules/home/actions";
 
-export default function HomePage(props) {
+
+
+function HomePage(props) {
+  const {
+    dispatch,
+    movieList,
+    cinemaList,
+    cinemaBrach,
+    showTimeDetail,
+  } = props;
+  useEffect(() => {
+    dispatch(actGetMovieList());
+    dispatch(actGetCinemaList());
+    // tạm đóng
+    // dispatch(actGetCinemaBranchFirst({ maHeThongRap: "CGV" }));
+  }, [dispatch]);
+
+  const handleGetCinemaBrach = (maHeThongRap) => {
+    dispatch(actGetCinemaBranch({ maHeThongRap }));
+    dispatch(actGetShowTimeAll({ maHeThongRap }));
+  };
+
+  //lay lich chieu theo cum rap
+  const handleGetShowTimeDetail = (maCumRap) => {
+    dispatch(actGetShowTimeDetail(maCumRap));
+  };
+
+
   return (
     <Fragment>
-      <Header />
       <Banner />
-      <Showtime />
-      <InfoCinema />
+      <Showtime movieList={movieList} />
+      <InfoCinema
+        cinemaList={cinemaList}
+        handleGetCinemaBrach={handleGetCinemaBrach}
+        cinemaBrach={cinemaBrach}
+        handleGetShowTimeDetail={handleGetShowTimeDetail}
+        showTimeDetail={showTimeDetail}
+      />
       <News />
       <MobileApp />
-      <Footer />
     </Fragment>
   );
 }
+
+const mapStateToProps = (state) => ({
+  movieList: state.home.movieList,
+  cinemaList: state.home.cinemaList,
+  cinemaBrach: state.home.cinemaBrach,
+  showTimeDetail: state.home.showTimeDetail,
+});
+
+export default connect(mapStateToProps)(HomePage);

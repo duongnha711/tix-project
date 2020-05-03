@@ -36,7 +36,14 @@ const useStyles = makeStyles((theme) => ({
   contentCinema: {
     flexGrow: 1,
     marginLeft: 5,
-    "& p, h6": {
+    "& h6": {
+      display: "-webkit-box",
+      WebkitLineClamp: 2,
+      WebkitBoxOrient: "vertical",
+      textOverflow: "ellipsis",
+      overflow: "hidden",
+    },
+    "& p": {
       display: "-webkit-box",
       WebkitLineClamp: 1,
       WebkitBoxOrient: "vertical",
@@ -114,8 +121,16 @@ const useStyles = makeStyles((theme) => ({
       minWidth: 0,
       borderRight: "none",
     },
+  },
+  [theme.breakpoints.down("460")]: {
     listLogo: {
-      minWidth: 0,
+      minWidth: 70,
+    },
+    itemLogo: {
+      padding: 10,
+    },
+    itemCinema: {
+      padding: 10,
     },
   },
 }));

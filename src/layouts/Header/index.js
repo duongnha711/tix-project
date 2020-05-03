@@ -1,12 +1,12 @@
 import { Box, Button, Divider, Grid, Hidden } from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MenuIcon from "@material-ui/icons/Menu";
-import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined";
 import React, { useState } from "react";
-import MenuResponsive from "../../components/MenuResponsive";
-import useStyles from "./styles";
 import { connect } from "react-redux";
-import * as Actions from "./../../commons/actions";
+import { Link } from "react-router-dom";
+import * as Actions from "../../commons/actions";
+import MenuResponsive from "../../components/MenuResponsive";
+import UserInfo from "../../components/UserInfo";
+import useStyles from "./styles";
 
 function Header(props) {
   const classes = useStyles();
@@ -20,7 +20,10 @@ function Header(props) {
   };
 
   const handleOnClickOpenLogin = () => {
-    dispatch(Actions.actOpenLogin);
+    dispatch(Actions.actOpenLogin());
+  };
+  const handleOnClickOpenRegister = () => {
+    dispatch(Actions.actOpenRegister());
   };
 
   return (
@@ -28,7 +31,9 @@ function Header(props) {
       <Box className={classes.containerFluid}>
         <Grid justify="space-between" container>
           <Grid className={classes.logo} item>
-            <img src="./images/logo.png" alt="logo" width="50" />
+            <Link to="/">
+              <img src="/images/logo.png" alt="logo" width="50" />
+            </Link>
           </Grid>
           {/* button login - location <730 -> hidden */}
           <Hidden smDown>
@@ -58,6 +63,9 @@ function Header(props) {
                 className={classes.contentLogin}
               >
                 {/*  igLogin ? Duong Nha : log in */}
+
+                <UserInfo />
+
                 <Button
                   onClick={handleOnClickOpenLogin}
                   className={classes.button}
@@ -68,10 +76,15 @@ function Header(props) {
                   Log in
                 </Button>
                 <Divider orientation="vertical" flexItem />
-                <Box className={classes.location}>
-                  <RoomOutlinedIcon color="secondary" />
-                  <Box marginRight={3}>Tp. Hồ Chí Minh</Box>
-                  <ExpandMoreIcon color="secondary" />
+                <Box marginLeft={1} className={classes.location}>
+                  <Button
+                    onClick={handleOnClickOpenRegister}
+                    color="primary"
+                    variant="outlined"
+                    size="large"
+                  >
+                    Register
+                  </Button>
                 </Box>
               </Grid>
             </Hidden>

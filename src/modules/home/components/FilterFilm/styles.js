@@ -5,55 +5,77 @@ const useStyles = makeStyles((theme) => ({
   container: {
     width: 940,
     margin: "0 auto",
+    padding: "15px 10px",
+
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+
     position: "absolute",
-    bottom: "-35px",
+    top: "-35px",
     left: "50%",
     zIndex: 99,
     transform: "translateX(-50%)",
   },
-  itemFilter: {
-    cursor: "pointer",
-    padding: "20px 7px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
+  name: {
+    width: 282,
+    marginRight: 10,
   },
-  button: {
-    padding: "9.5px 10px",
-    marginLeft: 10,
+  cinema: {
+    width: 200,
   },
-
-  nameMovie: {
-    width: 260,
-    display: "-webkit-box",
-    WebkitLineClamp: 1,
-    WebkitBoxOrient: "vertical",
-    textOverflow: "ellipsis",
-    overflow: "hidden",
+  date: {
+    width: 130,
+    marginRight: 10,
   },
-  nameCinema: {
-    width: 181,
-    display: "-webkit-box",
-    WebkitLineClamp: 1,
-    WebkitBoxOrient: "vertical",
-    textOverflow: "ellipsis",
-    overflow: "hidden",
-  },
-  dayMovie: {
+  time: {
     width: 110,
-    display: "-webkit-box",
-    WebkitLineClamp: 1,
-    WebkitBoxOrient: "vertical",
-    textOverflow: "ellipsis",
-    overflow: "hidden",
   },
-  timeMovie: {
-    width: 100,
-    display: "-webkit-box",
-    WebkitLineClamp: 1,
-    WebkitBoxOrient: "vertical",
-    textOverflow: "ellipsis",
-    overflow: "hidden",
+  [theme.breakpoints.down("980")]: {
+    container: {
+      position: "unset",
+      transform: "unset",
+      width: "70%",
+      display: "block",
+      textAlign: "center",
+      "& .MuiFormControl-root": {
+        display: "block",
+        width: "48%",
+      },
+    },
+    wrapperItem: {
+      marginBottom: 15,
+    },
+    name: {
+      width: "100%",
+      marginRight: 0,
+    },
+    cinema: {
+      width: "100%",
+    },
+    date: {
+      width: "100%",
+      marginRight: 0,
+    },
+    time: {
+      width: "100%",
+    },
+  },
+  [theme.breakpoints.down("600")]: {
+    wrapperItem: {
+      display: "block",
+    },
+    container: {
+      "& .MuiFormControl-root": {
+        width: "100%",
+      },
+    },
+    name: {
+      marginBottom: 15,
+    },
+    date: {
+      marginBottom: 15,
+    },
   },
 }));
 

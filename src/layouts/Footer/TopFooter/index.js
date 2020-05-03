@@ -3,31 +3,31 @@ import React from "react";
 import useStyles from "./styles";
 
 const arrLogo = [
-  { url: "./images/vietcom.png", name: "vietcom" },
-  { url: "./images/vietin.png", name: "vietin" },
-  { url: "./images/cgv.png", name: "cgv" },
-  { url: "./images/bhd.png", name: "bhd" },
-  { url: "./images/lotte.png", name: "lotte" },
-  { url: "./images/bhd.png", name: "bhd" },
-  { url: "./images/cgv.png", name: "cgv" },
-  { url: "./images/bhd.png", name: "bhd" },
-  { url: "./images/lotte.png", name: "lotte" },
-  { url: "./images/starLight.png", name: "starLight" },
-  { url: "./images/cgv.png", name: "cgv" },
-  { url: "./images/bhd.png", name: "bhd" },
-  { url: "./images/lotte.png", name: "lotte" },
-  { url: "./images/starLight.png", name: "starLight" },
-  { url: "./images/bhd.png", name: "bhd" },
-  { url: "./images/starLight.png", name: "starLight" },
-  { url: "./images/cgv.png", name: "cgv" },
-  { url: "./images/bhd.png", name: "bhd" },
-  { url: "./images/lotte.png", name: "lotte" },
-  { url: "./images/starLight.png", name: "starLight" },
-  { url: "./images/bhd.png", name: "bhd" },
-  { url: "./images/starLight.png", name: "starLight" },
-  { url: "./images/cgv.png", name: "cgv" },
-  { url: "./images/bhd.png", name: "bhd" },
-  { url: "./images/lotte.png", name: "lotte" },
+  { url: "/images/vietcom.png", name: "vietcom" },
+  { url: "/images/vietin.png", name: "vietin" },
+  { url: "/images/cgv.png", name: "cgv" },
+  { url: "/images/bhd.png", name: "bhd" },
+  { url: "/images/lotte.png", name: "lotte" },
+  { url: "/images/bhd.png", name: "bhd" },
+  { url: "/images/cgv.png", name: "cgv" },
+  { url: "/images/bhd.png", name: "bhd" },
+  { url: "/images/lotte.png", name: "lotte" },
+  { url: "/images/starLight.png", name: "starLight" },
+  { url: "/images/cgv.png", name: "cgv" },
+  { url: "/images/bhd.png", name: "bhd" },
+  { url: "/images/lotte.png", name: "lotte" },
+  { url: "/images/starLight.png", name: "starLight" },
+  { url: "/images/bhd.png", name: "bhd" },
+  { url: "/images/starLight.png", name: "starLight" },
+  { url: "/images/cgv.png", name: "cgv" },
+  { url: "/images/bhd.png", name: "bhd" },
+  { url: "/images/lotte.png", name: "lotte" },
+  { url: "/images/starLight.png", name: "starLight" },
+  { url: "/images/bhd.png", name: "bhd" },
+  { url: "/images/starLight.png", name: "starLight" },
+  { url: "/images/cgv.png", name: "cgv" },
+  { url: "/images/bhd.png", name: "bhd" },
+  { url: "/images/lotte.png", name: "lotte" },
 ];
 
 export default function TopFooter() {
@@ -74,13 +74,13 @@ export default function TopFooter() {
             <Typography className={classes.title}>MOBILE APP</Typography>
             <Box>
               <img
-                src="./images/apple.png"
+                src="/images/apple.png"
                 alt="apple"
                 width="30px"
                 height="30px"
               />
               <img
-                src="./images/android.png"
+                src="/images/android.png"
                 alt="android"
                 width="30px"
                 height="30px"
@@ -91,13 +91,13 @@ export default function TopFooter() {
             <Typography className={classes.title}>SOCIAL</Typography>
             <Box>
               <img
-                src="./images/facebook.png"
+                src="/images/facebook.png"
                 alt="facebook"
                 width="30px"
                 height="30px"
               />
               <img
-                src="./images/zalo.png"
+                src="/images/zalo.png"
                 alt="zalo"
                 width="30px"
                 height="30px"

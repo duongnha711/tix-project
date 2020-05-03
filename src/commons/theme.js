@@ -8,6 +8,7 @@ const tagColor = "#ffe0b2";
 const tagBorderColor = "#fb8c00";
 const footerColor = "#222";
 const signUpColor = "#173055";
+const labelForm = "#04ffc5";
 
 export {
   signUpColor,
@@ -18,6 +19,7 @@ export {
   tagColor,
   tagBorderColor,
   footerColor,
+  labelForm
 };
 
 let theme = createMuiTheme({
@@ -42,8 +44,8 @@ let theme = createMuiTheme({
       light: "#cccccc",
     },
     text: {
-      secondary: "#e9e9e9"
-    }
+      secondary: "#e9e9e9",
+    },
   },
   //h6 16 body 14 h4 24 h5 20
   typography: {

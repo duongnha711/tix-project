@@ -1,67 +1,195 @@
-import { Box, Button, Divider, Grid, Paper } from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { Box, Button, Paper } from "@material-ui/core";
 import React from "react";
+import { connect } from "react-redux";
+import {
+  changeFormateDate,
+  convertFrom24To12Format,
+  getUniqueListByCinema,
+  getUniqueListByDate,
+} from "../../../../functions/helper";
+import SelectInput from "./../../../../components/SelectInput";
+import {
+  actChangeShowTimeCode,
+  actFilterByCinema,
+  actFilterByDay,
+  actFilterByName,
+} from "./../../actions";
 import useStyles from "./styles";
-import SimplePopover from "../../../../components/Popover";
+import { useHistory } from "react-router-dom";
 
-export default function FilterFilm() {
+function FilterFilm(props) {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleOpenContentFilter = (event) => {
-    setAnchorEl(event.currentTarget);
+  const {
+    dispatch,
+    movieList,
+    arrShowTimeOfOneMovie,
+    arrDateOfOneMovie,
+    arrHourOfOneMovie,
+    maLichChieu,
+    activeName,
+  } = props;
+  let history = useHistory();
+  const renderMovieList = () => {
+    if (movieList && movieList.length > 0) {
+      return movieList.map((movie) => (
+        <option key={movie.maPhim} value={movie.maPhim}>
+          {movie.tenPhim}
+        </option>
+      ));
+    }
   };
 
-  const handleCloseContentFilter = () => {
-    setAnchorEl(null);
+  const renderCinemaList = () => {
+    const arrUniqueShowTimeOfOneMovie = getUniqueListByCinema(
+      arrShowTimeOfOneMovie,
+      "thongTinRap",
+      "tenCumRap"
+    );
+    if (arrUniqueShowTimeOfOneMovie && arrUniqueShowTimeOfOneMovie.length > 0) {
+      return arrUniqueShowTimeOfOneMovie.map((cinema, index) => {
+        const { thongTinRap } = cinema;
+        return (
+          <option key={index} value={thongTinRap.maCumRap}>
+            {thongTinRap.tenCumRap}
+          </option>
+        );
+      });
+    }
+  };
+
+  const renderDateList = () => {
+    const arrUniqueDateOfOneMovie = getUniqueListByDate(
+      arrDateOfOneMovie,
+      "ngayChieuGioChieu"
+    );
+    if (arrUniqueDateOfOneMovie && arrUniqueDateOfOneMovie.length > 0) {
+      return arrUniqueDateOfOneMovie.map((cinema, index) => {
+        const valueDay = cinema.ngayChieuGioChieu.substring(0, 10);
+        const showDay = changeFormateDate(valueDay);
+        return (
+          <option key={index} value={valueDay}>
+            {showDay}
+          </option>
+        );
+      });
+    }
+  };
+
+  const renderHourList = () => {
+    if (
+      arrHourOfOneMovie &&
+      arrHourOfOneMovie.length > 0 &&
+      arrDateOfOneMovie.length > 0
+    ) {
+      return arrHourOfOneMovie.map((cinema, index) => {
+        const subHour = cinema.ngayChieuGioChieu.substring(
+          11,
+          cinema.ngayChieuGioChieu.length
+        );
+        const showHour = convertFrom24To12Format(subHour);
+
+        return (
+          <option key={index} value={cinema.maLichChieu}>
+            {showHour}
+          </option>
+        );
+      });
+    }
+  };
+
+  const handleChooseName = (e) => {
+    const { value } = e.target;
+    dispatch(actFilterByName({ MaPhim: value }));
+  };
+
+  const handleChooseCinema = (e) => {
+    const { value } = e.target;
+    dispatch(actFilterByCinema(value));
+  };
+
+  const handleChooseDate = (e) => {
+    const { value } = e.target;
+    dispatch(actFilterByDay(value));
+  };
+
+  const handleChooseHour = (e) => {
+    const { value } = e.target;
+    dispatch(actChangeShowTimeCode(value));
+  };
+
+  const handleBuySticket = () => {
+    if (!maLichChieu) {
+      alert("vui long chon du thong tin");
+    } else {
+      history.push(`/booking-ticket/${maLichChieu}`);
+    }
   };
 
   return (
     <Paper elevation={3} className={classes.container}>
-      <Grid alignItems="center" container>
-        <Box onClick={handleOpenContentFilter} className={classes.itemFilter}>
-          <Box className={classes.nameMovie}>
-            Vì anh vẫn tin - I still believe
-          </Box>
-          <ExpandMoreIcon color="secondary" />
-        </Box>
+      <Box
+        className={classes.wrapperItem}
+        justifyContent="space-between"
+        display="flex"
+      >
+        <SelectInput
+          defaultValue=""
+          onChange={handleChooseName}
+          className={classes.name}
+        >
+          {renderMovieList()}
+        </SelectInput>
 
-        {/* //Popover */}
-        <SimplePopover
-          anchorEl={anchorEl}
-          handleCloseContentFilter={handleCloseContentFilter}
-        />
+        <SelectInput
+          value={activeName}
+          onChange={handleChooseCinema}
+          className={classes.cinema}
+        >
+          <option value="">Chọn rạp</option>
 
-        <Divider orientation="vertical" flexItem />
-        <Box onClick={handleOpenContentFilter} className={classes.itemFilter}>
-          <Box className={classes.nameCinema}> Rạp </Box>
-          <ExpandMoreIcon color="secondary" />
-        </Box>
+          {renderCinemaList()}
+        </SelectInput>
+      </Box>
+      <Box
+        className={classes.wrapperItem}
+        justifyContent="space-between"
+        display="flex"
+      >
+        <SelectInput onChange={handleChooseDate} className={classes.date}>
+          <option value="">Chọn ngày</option>
 
-        <Divider orientation="vertical" flexItem />
-        <Box onClick={handleOpenContentFilter} className={classes.itemFilter}>
-          <Box className={classes.dayMovie}> Ngày </Box>
-          <ExpandMoreIcon color="secondary" />
-        </Box>
+          {renderDateList()}
+        </SelectInput>
+        <SelectInput
+          value={maLichChieu}
+          name="lichChieu"
+          onChange={handleChooseHour}
+          className={classes.time}
+        >
+          <option value="">Chọn giờ</option>
 
-        <Divider orientation="vertical" flexItem />
-        <Box onClick={handleOpenContentFilter} className={classes.itemFilter}>
-          <Box className={classes.timeMovie}> Suất chiếu </Box>
-          <ExpandMoreIcon color="secondary" />
-        </Box>
-
-        <Divider orientation="vertical" flexItem />
-        <Box>
-          <Button
-            className={classes.button}
-            variant="contained"
-            size="small"
-            color="primary"
-          >
-            Mua vé ngay
-          </Button>
-        </Box>
-      </Grid>
+          {renderHourList()}
+        </SelectInput>
+      </Box>
+      <Button
+        onClick={handleBuySticket}
+        variant="contained"
+        color="primary"
+        size="large"
+      >
+        Mua Vé Ngay
+      </Button>
     </Paper>
   );
 }
+
+const mapStateToProps = (state) => ({
+  movieList: state.home.movieList,
+  arrShowTimeOfOneMovie: state.home.arrShowTimeOfOneMovie,
+  arrDateOfOneMovie: state.home.arrDateOfOneMovie,
+  arrHourOfOneMovie: state.home.arrHourOfOneMovie,
+  maLichChieu: state.home.maLichChieu,
+  activeName: state.home.activeName,
+});
+
+export default connect(mapStateToProps)(FilterFilm);

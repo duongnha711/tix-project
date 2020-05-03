@@ -1,8 +1,20 @@
 import { Box, Paper, Typography } from "@material-ui/core";
-import React from "react";
-import Slider from "react-slick";
-import useStyles from "./styles";
 import StarIcon from "@material-ui/icons/Star";
+import PropTypes from "prop-types";
+import React from "react";
+import { Link } from "react-router-dom";
+import Slider from "react-slick";
+import FilterFilm from "../FilterFilm";
+import useStyles from "./styles";
+
+function Arrow(props) {
+  const { className, onClick, url } = props;
+  return (
+    <div className={className} onClick={onClick}>
+      <img src={url} alt="next" />
+    </div>
+  );
+}
 
 const settings = {
   infinite: true,
@@ -10,8 +22,8 @@ const settings = {
   speed: 500,
   rows: 2,
   slidesPerRow: 4,
-  nextArrow: <NextArrow />,
-  prevArrow: <PrevArrow />,
+  nextArrow: <Arrow url="./images/next-arrow.png" />,
+  prevArrow: <Arrow url="./images/back-arrow.png" />,
   responsive: [
     {
       breakpoint: 960,
@@ -29,87 +41,63 @@ const settings = {
   ],
 };
 
-function NextArrow(props) {
-  const { className, onClick } = props;
-  return (
-    <div className={className} onClick={onClick}>
-      <img src="./images/next-arrow.png" alt="next" />
-    </div>
-  );
-}
-function PrevArrow(props) {
-  const { className, onClick } = props;
-  return (
-    <div className={className} onClick={onClick}>
-      <img src="./images/back-arrow.png" alt="back" />
-    </div>
-  );
-}
-
-//demo data
-const arrMovie = [
-  { name: "Truy tìm phép thuật - Onward", url: "./images/movie-magic.jpg" },
-  {
-    name: "Góa phụ đen - Black Widow",
-    url: "./images/movie-widow.jpg",
-  },
-  {
-    name: "Vì anh vẫn tin - I still believe I still believe  ",
-    url: "./images/movie-believe.jpg",
-  },
-  { name: "BloodShoot", url: "./images/movie-blood.jpg" },
-  {
-    name: "Vì anh vẫn tin - I still believe I still believe ",
-    url: "./images/movie-believe.jpg",
-  },
-  { name: "BloodShoot", url: "./images/movie-blood.jpg" },
-  {
-    name: "Góa phụ đen - Black Widow",
-    url: "./images/movie-widow.jpg",
-  },
-  { name: "Truy tìm phép thuật - Onward", url: "./images/movie-magic.jpg" },
-  { name: "BloodShoot", url: "./images/movie-blood.jpg" },
-  {
-    name: "Góa phụ đen - Black Widow",
-    url: "./images/movie-widow.jpg",
-  },
-  { name: "Truy tìm phép thuật - Onward", url: "./images/movie-magic.jpg" },
-];
-
-export default function Showtime() {
+export default function Showtime(props) {
   const classes = useStyles();
 
+  const { movieList } = props;
+
+  // const addEmptyImage = (e) => {
+  //   e.target.src = "./images/emptyIMG.png";
+  // };
+
   const renderMovie = () => {
-    if (Array.isArray(arrMovie) && arrMovie.length > 0) {
-      return arrMovie.map((movie, index) => (
-        <Box key={index} className={classes.itemWrapper} padding={1}>
-          <Paper className={classes.itemCarousel} elevation={1}>
-            <img src={movie.url} alt={movie.name} />
-            <Box component="span" className={classes.iconPlay}>
-              <img src="./images/play-video.png" alt="play-video" />
-            </Box>
-            <Box className={classes.ageType}>C16</Box>
-            <Box className={classes.avgPoint}>
-              <Box>6.6</Box>
-              <Box>
-                <StarIcon color="primary" className={classes.star} />
-                <StarIcon color="primary" className={classes.star} />
-                <StarIcon color="primary" className={classes.star} />
+    if (Array.isArray(movieList) && movieList.length > 0) {
+      return movieList.map((movie, index) => (
+        <Link
+          key={index}
+          to={`/detail/${movie.maPhim}`}
+          className={classes.link}
+        >
+          <Box className={classes.itemWrapper} padding={1}>
+            <Paper
+              style={{ backgroundImage: `url('${movie.hinhAnh}')` }}
+              className={classes.itemCarousel}
+              elevation={1}
+            >
+              {/* <img
+                onError={addEmptyImage}
+                src={movie.hinhAnh}
+                alt={movie.tenPhim}
+                className={classes.images}
+              /> */}
+              <Box component="span" className={classes.iconPlay}>
+                <img src="./images/play-video.png" alt="play-video" />
               </Box>
-            </Box>
-            <Box component="span" className={classes.overLay}></Box>
-          </Paper>
-          <Typography className={classes.nameMovie} variant="h6">
-            {movie.name}
-          </Typography>
-          <Typography className={classes.duration}>110 phút</Typography>
-        </Box>
+              <Box className={classes.ageType}>C16</Box>
+              <Box className={classes.avgPoint}>
+                <Box>{movie.danhGia}</Box>
+                <Box>
+                  <StarIcon color="primary" className={classes.star} />
+                  <StarIcon color="primary" className={classes.star} />
+                  <StarIcon color="primary" className={classes.star} />
+                </Box>
+              </Box>
+              <Box component="span" className={classes.overLay}></Box>
+            </Paper>
+            <Typography className={classes.nameMovie} variant="h6">
+              {movie.tenPhim}
+            </Typography>
+            <Typography className={classes.duration}>110 phút</Typography>
+          </Box>
+        </Link>
       ));
     }
   };
 
   return (
     <Box id="showTime" className={classes.showtime}>
+          <FilterFilm />
+
       <Box className={classes.container}>
         <Box className={classes.titleWrapper}>
           <Typography className={classes.title} variant="h5">
@@ -126,3 +114,6 @@ export default function Showtime() {
     </Box>
   );
 }
+Showtime.propTypes = {
+  movieList: PropTypes.array,
+};

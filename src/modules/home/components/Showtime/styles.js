@@ -2,6 +2,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import * as themeColor from "./../../../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
+  showtime: {
+    position: "relative",
+  },
   container: {
     width: "70%",
     margin: "0 auto",
@@ -44,15 +47,30 @@ const useStyles = makeStyles((theme) => ({
   },
 
   //item
+  link: {
+    textDecoration: "none",
+    color: themeColor.blackColor,
+  },
   itemWrapper: {
     cursor: "pointer",
     "&:hover span": {
       display: "block",
     },
   },
+  images: {
+    width: "100%",
+  },
   itemCarousel: {
-    overflow: "hidden",
+    paddingTop: "143%",
+
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+
     position: "relative",
+    overflow: "hidden",
+
+    // background: "red"
   },
   nameMovie: {
     marginTop: 5,
@@ -79,9 +97,7 @@ const useStyles = makeStyles((theme) => ({
     height: 48,
     cursor: "pointer",
     transition: "all 0.1s linear",
-    "& img": {
-      width: "100%",
-    },
+
     "&:hover": {
       transform: "translate( -50%,-50%) scale(1.1)",
     },

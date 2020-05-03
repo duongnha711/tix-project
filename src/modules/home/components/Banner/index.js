@@ -1,8 +1,7 @@
+import { Box } from "@material-ui/core";
 import React from "react";
-import useStyles from "./styles";
-import { Box, Hidden } from "@material-ui/core";
 import Slider from "react-slick";
-import FilterFilm from "../FilterFilm";
+import useStyles from "./styles";
 
 function NextArrow(props) {
   const { className, onClick } = props;
@@ -68,10 +67,7 @@ export default function Banner() {
         <Box component="span" className={classes.iconPlay}>
           <img src="./images/play-video.png" alt="play-video" />
         </Box>
-        {/* filter film */}
-        <Hidden mdDown>
-          <FilterFilm />
-        </Hidden>
+
         <Slider {...settings}>{renderBanner()}</Slider>
       </Box>
     </Box>

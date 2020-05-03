@@ -8,7 +8,7 @@ export default function BottomFooter() {
   return (
     <Box className={classes.bottomFooter}>
       <Box className={classes.imgLeft}>
-        <img src="./images/zion.jpg" alt="zion" width="80px" />
+        <img src="/images/zion.jpg" alt="zion" width="80px" />
       </Box>
       <Box className={classes.address}>
         <Typography className={classes.title}>
@@ -33,7 +33,7 @@ export default function BottomFooter() {
         </Typography>
       </Box>
       <Box className={classes.imgRight}>
-        <img src="./images/notify.png" alt="zion" width="130px" />
+        <img src="/images/notify.png" alt="zion" width="130px" />
       </Box>
     </Box>
   );
