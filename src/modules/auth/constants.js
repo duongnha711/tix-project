@@ -2,3 +2,8 @@ export const REGISTER = "REGISTER";
 
 export const LOG_IN = "LOG_IN";
 export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS";
+
+export const LOG_OUT = "LOG_OUT";
+
+export const GET_INFO_BOOKING_USER = "GET_INFO_BOOKING_USER";
+export const GET_INFO_BOOKING_USER_SUCCESS = "GET_INFO_BOOKING_USER_SUCCESS";

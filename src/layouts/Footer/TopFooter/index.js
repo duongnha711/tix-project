@@ -8,26 +8,8 @@ const arrLogo = [
   { url: "/images/cgv.png", name: "cgv" },
   { url: "/images/bhd.png", name: "bhd" },
   { url: "/images/lotte.png", name: "lotte" },
-  { url: "/images/bhd.png", name: "bhd" },
-  { url: "/images/cgv.png", name: "cgv" },
-  { url: "/images/bhd.png", name: "bhd" },
-  { url: "/images/lotte.png", name: "lotte" },
-  { url: "/images/starLight.png", name: "starLight" },
-  { url: "/images/cgv.png", name: "cgv" },
-  { url: "/images/bhd.png", name: "bhd" },
-  { url: "/images/lotte.png", name: "lotte" },
-  { url: "/images/starLight.png", name: "starLight" },
-  { url: "/images/bhd.png", name: "bhd" },
-  { url: "/images/starLight.png", name: "starLight" },
-  { url: "/images/cgv.png", name: "cgv" },
-  { url: "/images/bhd.png", name: "bhd" },
-  { url: "/images/lotte.png", name: "lotte" },
-  { url: "/images/starLight.png", name: "starLight" },
-  { url: "/images/bhd.png", name: "bhd" },
-  { url: "/images/starLight.png", name: "starLight" },
-  { url: "/images/cgv.png", name: "cgv" },
-  { url: "/images/bhd.png", name: "bhd" },
-  { url: "/images/lotte.png", name: "lotte" },
+
+
 ];
 
 export default function TopFooter() {

@@ -30,3 +30,7 @@ export const GET_SEAT_LIST = "GET_SEAT_LIST";
 export const GET_SEAT_LIST_SUCCESS = "GET_SEAT_LIST_SUCCESS";
 
 export const CHOOSE_SEAT = "CHOOSE_SEAT";
+
+export const BOOK_TICKET = "BOOK_TICKET";
+export const BOOK_TICKET_SUCCESS = "BOOK_TICKET_SUCCESS";
+

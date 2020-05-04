@@ -7,6 +7,7 @@ import Slider from "react-slick";
 import FilterFilm from "../FilterFilm";
 import useStyles from "./styles";
 
+
 function Arrow(props) {
   const { className, onClick, url } = props;
   return (
@@ -55,7 +56,7 @@ export default function Showtime(props) {
       return movieList.map((movie, index) => (
         <Link
           key={index}
-          to={`/detail/${movie.maPhim}`}
+          to={`/detail/${movie.maPhim}/${movie.biDanh}`}
           className={classes.link}
         >
           <Box className={classes.itemWrapper} padding={1}>
@@ -96,7 +97,7 @@ export default function Showtime(props) {
 
   return (
     <Box id="showTime" className={classes.showtime}>
-          <FilterFilm />
+      <FilterFilm />
 
       <Box className={classes.container}>
         <Box className={classes.titleWrapper}>

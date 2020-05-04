@@ -1,9 +1,16 @@
 import { takeLatest, call, delay, put } from "redux-saga/effects";
-import * as ActionType from "./constants";
-import { registerApi, logInApi } from "./handler";
+import { REGISTER, LOG_IN, GET_INFO_BOOKING_USER } from "./constants";
+import { registerApi, logInApi, getInfoAccountApi } from "./handler";
 import Alert from "./../../components/Alert";
 import STATUS from "./status";
-import { actCloseRegister, actOpenLogin } from "./../../commons/actions";
+import {
+  actCloseRegister,
+  actOpenLogin,
+  actCloseLogin,
+  actOpenGlobalLoading,
+  actCloseGlobalLoading,
+} from "./../../commons/actions";
+import { actLogInSuccess, actGetInfoBookingUserSuccess } from "./actions";
 
 function* registerSaga({ account }) {
   try {
@@ -28,29 +35,44 @@ function* registerSaga({ account }) {
 
 function* logInSaga({ account }) {
   try {
+    yield put(actOpenGlobalLoading());
     const response = yield call(logInApi, account);
     const { data, status } = response;
     if (status === STATUS.SUCCESS) {
-      console.log("function*logInSaga -> data", data);
-      //set sesstion account + token
-      //close log in
-      //dispatch login thanh cong
-      //set account len reducer 
-      // -> neu account co ton tai -> thi an nut login + register - chi hien ten user 
-      
+      yield put(actCloseLogin());
+      yield put(actLogInSuccess(data));
     }
+    yield delay(1000);
+    yield put(actCloseGlobalLoading());
   } catch (err) {
     Alert({ icon: "error", text: err.response.data });
+    yield put(actCloseGlobalLoading());
+  }
+}
+
+function* getInfoBookingUserSaga({ account }) {
+  try {
+    const response = yield call(getInfoAccountApi, account);
+    const { status, data } = response;
+    if (status === STATUS.SUCCESS) {
+      yield put(actGetInfoBookingUserSuccess(data));
+    }
+  } catch (err) {
+    console.log("function*getInfoBookingUserSaga -> err", err);
   }
 }
 
 //watch~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function* watchRegister() {
-  yield takeLatest(ActionType.REGISTER, registerSaga);
+  yield takeLatest(REGISTER, registerSaga);
 }
 
 function* watchLogIn() {
-  yield takeLatest(ActionType.LOG_IN, logInSaga);
+  yield takeLatest(LOG_IN, logInSaga);
 }
-export default [watchRegister(), watchLogIn()];
+
+function* watchGetInfoBookingUser() {
+  yield takeLatest(GET_INFO_BOOKING_USER, getInfoBookingUserSaga);
+}
+export default [watchRegister(), watchLogIn(), watchGetInfoBookingUser()];

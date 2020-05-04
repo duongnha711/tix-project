@@ -13,11 +13,11 @@ import { actLogIn } from "../../modules/auth/actions";
 const validate = (values) => {
   const errors = {};
   if (!values.taiKhoan) {
-    errors.taiKhoan = "Uername not empty";
+    errors.taiKhoan = "Not empty";
   }
 
   if (!values.matKhau) {
-    errors.matKhau = "Password not empty";
+    errors.matKhau = "Not empty";
   }
   return errors;
 };
@@ -37,20 +37,23 @@ const renderTextField = ({
 
 let SignIn = (props) => {
   const classes = useStyles();
-  const { dispatch, isShowLogin } = props;
+  const { dispatch, isShowLogin, reset } = props;
   const { handleSubmit } = props;
 
   const handleClose = () => {
     dispatch(Actions.actCloseLogin());
+    reset()
   };
 
   const handleGoToRegister = () => {
     dispatch(Actions.actCloseLogin());
     dispatch(Actions.actOpenRegister());
+    reset()
   };
 
   const submit = (values) => {
     dispatch(actLogIn(values))
+    reset()
   };
 
   return (
@@ -70,10 +73,10 @@ let SignIn = (props) => {
             <Typography variant="h5">Welcome to N-Cinema</Typography>
           </Box>
           <form onSubmit={handleSubmit(submit)}>
-            <label>Account *</label>
+            <label>Tài khoản *</label>
             <Field
               name="taiKhoan"
-              placeholder="Enter your account"
+              placeholder="Nhập tài khoản"
               variant="outlined"
               fullWidth
               component={renderTextField}
@@ -84,7 +87,7 @@ let SignIn = (props) => {
             <Field
               name="matKhau"
               type="password"
-              placeholder="Enter your password"
+              placeholder="Nhập password"
               variant="outlined"
               fullWidth
               component={renderTextField}
@@ -101,7 +104,7 @@ let SignIn = (props) => {
             </Button>
             <Box>
               <Typography onClick={handleGoToRegister} className={classes.link}>
-                {"Don't have an account? Sign Up"}
+                {"Bạn chưa có tài khoản? Đăng Ký"}
               </Typography>
             </Box>
           </form>

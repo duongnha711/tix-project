@@ -4,10 +4,15 @@ import cn from "classnames";
 import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
 import useStyles from "./styles";
-import { actChooseSeat, actGetSeatList } from "./../../modules/home/actions";
+import {
+  actChooseSeat,
+  actGetSeatList,
+  actBookTicket,
+} from "./../../modules/home/actions";
 import { sortName, formatCurrencyVND } from "./../../functions/helper";
 import ClearIcon from "@material-ui/icons/Clear";
 
+import Alert from "./../../components/Alert";
 
 function BookingPage(props) {
   const classes = useStyles();
@@ -17,10 +22,11 @@ function BookingPage(props) {
     arrVipSeatList,
     danhSachVe,
     infoMovieForTicket,
+    isLogged,
+    account,
   } = props;
   const { match } = props;
   const { params } = match;
-
   useEffect(() => {
     dispatch(actGetSeatList(params));
   }, [dispatch, params]);
@@ -56,7 +62,7 @@ function BookingPage(props) {
               {daDat ? (
                 <ClearIcon className={classes.iconBooked} />
               ) : (
-                isChoose && item.nameToShow
+                item.nameToShow
               )}
             </Box>
             {(index + 1) % 10 === 0 && <br />}
@@ -98,7 +104,7 @@ function BookingPage(props) {
               {daDat ? (
                 <ClearIcon className={classes.iconBooked} />
               ) : (
-                isChoose && item.nameToShow
+                item.nameToShow
               )}
             </Box>
             {(index + 1) % 10 === 0 && <br />}
@@ -137,7 +143,7 @@ function BookingPage(props) {
 
         return (
           <Box className={classes.seatItemInfo} key={seat.maGhe}>
-            {nameToShow}{" "}
+            {nameToShow}
             <ClearIcon
               onClick={() => {
                 handleChooseSeat({ maGhe: seat.maGhe });
@@ -147,6 +153,33 @@ function BookingPage(props) {
           </Box>
         );
       });
+    }
+  };
+
+  const handlePayment = () => {
+    if (isLogged) {
+      if (danhSachVe.length > 0) {
+        const arrDanhSachVe = [];
+        const arrNameToShow = [];
+        danhSachVe.forEach((item) => {
+          arrDanhSachVe.push({ maGhe: item.maGhe, giaVe: item.giaVe });
+          arrNameToShow.push(item.nameToShow);
+        });
+        const payload = {
+          data: {
+            maLichChieu: parseInt(params.MaLichChieu),
+            danhSachVe: arrDanhSachVe,
+            taiKhoanNguoiDung: account.taiKhoan,
+          },
+          token: account.accessToken,
+          arrNameToShow,
+        };
+        dispatch(actBookTicket(payload));
+      } else {
+        Alert({ html: "Vui lòng chọn ghế", icon: "warning" });
+      }
+    } else {
+      Alert({ icon: "warning", text: "Vui lòng đăng nhập" });
     }
   };
 
@@ -235,7 +268,15 @@ function BookingPage(props) {
               )}
             </Box>
           </Box>
-          <Button className={classes.button}  fullWidth color="primary" variant="contained" >Thanh toán</Button>
+          <Button
+            onClick={handlePayment}
+            className={classes.button}
+            fullWidth
+            color="primary"
+            variant="contained"
+          >
+            Thanh toán
+          </Button>
         </Box>
       </Box>
     </Box>
@@ -246,6 +287,8 @@ const mapStateToProps = (state) => ({
   arrNormalSeatList: state.home.arrNormalSeatList,
   infoMovieForTicket: state.home.infoMovieForTicket,
   danhSachVe: state.home.danhSachVe,
+  isLogged: state.auth.isLogged,
+  account: state.auth.account,
 });
 
 export default connect(mapStateToProps)(BookingPage);
