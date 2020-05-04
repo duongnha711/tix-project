@@ -140,7 +140,7 @@ const homeReducer = (state = initialState, action) => {
       if (index === -1) {
         // >= 10 thi return lun ko dc push
         if (state.danhSachVe.length >= 10) {
-          Alert({ title: "Maximum 10 tickets one time", icon: "warning" });
+          Alert({ text: "Đặt tối đa 10 vé", icon: "warning" });
           return { ...state };
         }
         //neu duoi 10 thi push
@@ -150,6 +150,37 @@ const homeReducer = (state = initialState, action) => {
         newArrDanhSachGhe.splice(index, 1);
         return { ...state, danhSachVe: newArrDanhSachGhe };
       }
+    }
+
+    case ActionType.BOOK_TICKET_SUCCESS: {
+      const { payload } = action;
+      const { danhSachVe } = payload.data;
+      console.log("homeReducer -> danhSachVe", danhSachVe);
+      const { arrNormalSeatList, arrVipSeatList } = state;
+      console.log("homeReducer -> arrNormalSeatList", arrNormalSeatList);
+
+      danhSachVe.forEach((ticket) => {
+        //  NORMAL
+        arrNormalSeatList.forEach((itemNor) => {
+          if (ticket.maGhe === itemNor.maGhe) {
+            itemNor.daDat = true;
+          }
+        });
+
+        //  VIP
+        arrVipSeatList.forEach((itemNor) => {
+          if (ticket.maGhe === itemNor.maGhe) {
+            itemNor.daDat = true; // thay doi truc tiep item {} trong mang
+          }
+        });
+      });
+
+      return {
+        ...state,
+        arrVipSeatList: [...state.arrVipSeatList],
+        arrNormalSeatList: [...state.arrNormalSeatList],
+        danhSachVe: [],
+      };
     }
 
     default:

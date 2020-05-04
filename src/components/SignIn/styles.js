@@ -5,10 +5,10 @@ const useStyles = makeStyles((theme) => ({
   signIn: {
     "& .MuiDialog-paper": {
       background: themeColor.signUpColor,
-      color:  themeColor.labelForm,
+      
+      color: themeColor.labelForm,
       opacity: 0.9,
       width: 425,
-      height: 500,
     },
     "& .MuiOutlinedInput-root": {
       background: themeColor.whiteColor,
@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
     },
     "& .MuiOutlinedInput-input": {
       padding: "15.5px 14px",
+    },
+    "& .MuiDialogContent-root:first-child": {
+      paddingBottom: 20,
     },
   },
   iconClose: {

@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { primaryColor } from "../../commons/theme";
+import { primaryColor, blackColor } from "../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
   drawerPaper: {
@@ -22,6 +22,20 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
     "&:hover": {
       color: primaryColor,
+    },
+  },
+  ava: {
+    width: 30,
+    height: 30,
+    fontSize: 15,
+    marginRight: 10,
+    lineHeight: 30,
+    backgroundColor: "#024b9ed1",
+  },
+  link: {
+    "& a": {
+      textDecoration: "none",
+      color: blackColor,
     },
   },
 }));

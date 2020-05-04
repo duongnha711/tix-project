@@ -7,7 +7,9 @@ const whiteColor = "#fff";
 const tagColor = "#ffe0b2";
 const tagBorderColor = "#fb8c00";
 const footerColor = "#222";
-const signUpColor = "#173055";
+// const signUpColor = "linear-gradient(to top,#614385 , #516395)";
+const signUpColor = "linear-gradient(to right,#000428 , #004e92)";
+
 const labelForm = "#04ffc5";
 
 export {
@@ -19,7 +21,7 @@ export {
   tagColor,
   tagBorderColor,
   footerColor,
-  labelForm
+  labelForm,
 };
 
 let theme = createMuiTheme({

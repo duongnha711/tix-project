@@ -13,7 +13,11 @@ import { actRegister } from "./../../modules/auth/actions";
 const validate = (values) => {
   const errors = {};
   if (!values.taiKhoan) {
-    errors.taiKhoan = "Username not empty";
+    errors.taiKhoan = "Not empty";
+  } else if (values.taiKhoan.length < 4) {
+    errors.taiKhoan = "At least 4 characters";
+  } else if (values.taiKhoan.length > 20) {
+    errors.taiKhoan = "Maximum 20 characters";
   }
 
   if (!values.matKhau) {
@@ -27,19 +31,19 @@ const validate = (values) => {
   }
 
   if (!values.email) {
-    errors.email = "Email not empty";
+    errors.email = "Not empty";
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = "Invalid email address";
+    errors.email = "Invalid";
   }
 
   if (!values.soDt) {
-    errors.soDt = "Phone number not empty";
+    errors.soDt = "Not empty";
   } else if (isNaN(Number(values.soDt))) {
-    errors.soDt = "Invalid phone number";
+    errors.soDt = "Invalid";
   }
 
   if (!values.hoTen) {
-    errors.hoTen = "Full name not empty";
+    errors.hoTen = "Not empty";
   }
 
   return errors;
@@ -60,22 +64,25 @@ const renderTextField = ({
 
 let SignUp = (props) => {
   const classes = useStyles();
-  const { dispatch, isShowRegister } = props;
+  const { dispatch, isShowRegister, reset } = props;
   const { handleSubmit } = props;
 
   const handleClose = () => {
     dispatch(Actions.actCloseRegister());
+    reset();
   };
 
   const handleGoToLogin = () => {
     dispatch(Actions.actCloseRegister());
     dispatch(Actions.actOpenLogin());
+    reset();
   };
 
   const submit = (values) => {
     const account = { ...values, maNhom: "GP01", maLoaiNguoiDung: "KhachHang" };
     delete account.confirmPassword;
     dispatch(actRegister(account));
+    reset();
   };
 
   return (
@@ -92,7 +99,7 @@ let SignUp = (props) => {
             <Typography variant="h5">Welcome to N-Cinema</Typography>
           </Box>
           <form onSubmit={handleSubmit(submit)}>
-            <label>Your Username *</label>
+            <label>Tài khoản *</label>
             <Field
               name="taiKhoan"
               variant="outlined"
@@ -136,7 +143,7 @@ let SignUp = (props) => {
             />
             <Box display="flex">
               <Box width="50%" paddingRight={1}>
-                <label>Full Name *</label>
+                <label>Họ Tên *</label>
                 <Field
                   name="hoTen"
                   variant="outlined"
@@ -145,7 +152,7 @@ let SignUp = (props) => {
                 />
               </Box>
               <Box width="50%" paddingLeft={1}>
-                <label>Phone Number *</label>
+                <label>Số điện thoại *</label>
                 <Field
                   name="soDt"
                   variant="outlined"
@@ -166,7 +173,7 @@ let SignUp = (props) => {
             </Button>
             <Box>
               <Typography onClick={handleGoToLogin} className={classes.link}>
-                {"Already have an account? Sign in"}
+                {"Bạn đã có tài khoản? Đăng Nhập"}
               </Typography>
             </Box>
           </form>

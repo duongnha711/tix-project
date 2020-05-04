@@ -137,3 +137,17 @@ export const actChooseSeat = (payload) => {
     payload,
   };
 };
+
+export const actBookTicket = (payload) => {
+  return {
+    type: ActionType.BOOK_TICKET,
+    payload,
+  };
+};
+
+export const actBookTicketSuccess = (payload) => {
+  return {
+    type: ActionType.BOOK_TICKET_SUCCESS,
+    payload,
+  };
+};

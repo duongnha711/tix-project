@@ -16,6 +16,7 @@ import {
 } from "./../../actions";
 import useStyles from "./styles";
 import { useHistory } from "react-router-dom";
+import Alert from "../../../../components/Alert";
 
 function FilterFilm(props) {
   const classes = useStyles();
@@ -119,7 +120,7 @@ function FilterFilm(props) {
 
   const handleBuySticket = () => {
     if (!maLichChieu) {
-      alert("vui long chon du thong tin");
+      Alert({ text: "Vui lòng chọn đủ thông tin", icon: "warning" });
     } else {
       history.push(`/booking-ticket/${maLichChieu}`);
     }

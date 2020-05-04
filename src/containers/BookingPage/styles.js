@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-// import * as themeColor from "./../../commons/theme";
+import * as themeColor from "./../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
   booking: {
@@ -104,8 +104,9 @@ const useStyles = makeStyles((theme) => ({
     padding: 10,
     borderRadius: 4,
 
-    background: "#102b47b0",
+    background: themeColor.signUpColor,
     boxShadow: "0 2px 2px 0 rgba(223, 173, 173, 0.2), 0 5px 10px 0 #d8d8d8",
+    opacity: 0.9,
   },
   imgMovie: {
     width: 50,
@@ -140,7 +141,8 @@ const useStyles = makeStyles((theme) => ({
     padding: 10,
     borderRadius: 4,
 
-    background: "#102b47b0",
+    background: themeColor.signUpColor,
+    opacity: 0.9,
 
     boxShadow: "0 2px 2px 0 rgba(223, 173, 173, 0.2), 0 5px 10px 0 #d8d8d8",
   },
@@ -223,7 +225,6 @@ const useStyles = makeStyles((theme) => ({
       width: 340,
     },
   },
-
 }));
 
 export default useStyles;

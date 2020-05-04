@@ -39,7 +39,6 @@ export const getShowTimeAllApi = (maRap) => {
   });
 };
 
-
 export const getShowTimeOfOneMovieApi = (MaPhim) => {
   const params = queryString.stringify(MaPhim);
   return sendRequest({
@@ -51,5 +50,16 @@ export const getSeatListApi = (MaLichChieu) => {
   const params = queryString.stringify(MaLichChieu);
   return sendRequest({
     url: `${ENDPOINTS.LayDanhSachPhongVe}?${params}`,
+  });
+};
+
+export const bookTicketApi = (payload) => {
+  const { data, token } = payload;
+
+  return sendRequest({
+    url: `${ENDPOINTS.DatVe}`,
+    method: "POST",
+    data,
+    headers: { Authorization: `Bearer ${token}` },
   });
 };

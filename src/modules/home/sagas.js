@@ -1,9 +1,8 @@
-import { call, put, takeLatest, delay } from "redux-saga/effects";
+import { call, delay, put, takeLatest } from "redux-saga/effects";
 import {
   actCloseGlobalLoading,
   actOpenGlobalLoading,
 } from "./../../commons/actions";
-
 import {
   actFilterByName,
   actFilterByNameSuccess,
@@ -11,20 +10,22 @@ import {
   actGetCinemaListSuccess,
   actGetMovieDetailSuccess,
   actGetMovieListSuccess,
-  actGetShowTimeAllSuccess,
   actGetSeatListSuccess,
+  actGetShowTimeAllSuccess,
+  actBookTicketSuccess,
 } from "./actions";
-
 import * as ActionType from "./constants";
 import {
   getCinemaBranchesApi,
   getCinemaListApi,
   getMovieDetailApi,
   getMovieListApi,
-  getShowTimeAllApi,
   getSeatListApi,
+  getShowTimeAllApi,
+  bookTicketApi,
 } from "./handler";
 import STATUS from "./status";
+import Alert from "../../components/Alert";
 
 function* getMovieListSaga() {
   try {
@@ -122,6 +123,33 @@ function* getSeatListSaga({ maLichChieu }) {
     yield put(actCloseGlobalLoading());
   }
 }
+
+function* bookTicketSaga({ payload }) {
+  try {
+    const response = yield call(bookTicketApi, payload);
+    
+    const { arrNameToShow } = payload;
+    let strNameToShow = "";
+    arrNameToShow.forEach((item, index) => {
+      if (index === arrNameToShow.length - 1) {
+        strNameToShow += `${item}`;
+      } else {
+        strNameToShow += `${item}, `;
+      }
+    });
+
+    const { data, status } = response;
+    if (status === STATUS.SUCCESS) {
+      Alert({
+        icon: "success",
+        html: `${data}<br/>${strNameToShow}`,
+      });
+      yield put(actBookTicketSuccess(payload));
+    }
+  } catch (err) {
+    console.log(err.response);
+  }
+}
 //watch~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function* watchGetMovieList() {
@@ -156,6 +184,10 @@ function* watchGetSeatList() {
   yield takeLatest(ActionType.GET_SEAT_LIST, getSeatListSaga);
 }
 
+function* watchBookTicket() {
+  yield takeLatest(ActionType.BOOK_TICKET, bookTicketSaga);
+}
+
 export default [
   watchGetMovieList(),
   watchGetMovieDetail(),
@@ -165,4 +197,5 @@ export default [
   watchGetShowTimeAll(),
   watchFilterByName(),
   watchGetSeatList(),
+  watchBookTicket(),
 ];

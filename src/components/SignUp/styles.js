@@ -48,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
   link: {
     cursor: "pointer",
   },
+
   [theme.breakpoints.down("440")]: {
     signUp: {
       "& .MuiGrid-container": {

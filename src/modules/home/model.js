@@ -14,6 +14,7 @@ const ENDPOINTS = {
 
   //ticket
   LayDanhSachPhongVe: `${rootUrl}${ticket}LayDanhSachPhongVe`,
+  DatVe: `${rootUrl}${ticket}DatVe`,
 
 };
 
