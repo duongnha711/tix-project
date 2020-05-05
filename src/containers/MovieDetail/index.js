@@ -1,10 +1,10 @@
 import { Box, Grid, Typography } from "@material-ui/core";
 import StarIcon from "@material-ui/icons/Star";
 import React, { useEffect } from "react";
-import useStyles from "./styles";
-
 import { connect } from "react-redux";
 import { actGetMovieDetail } from "./../../modules/home/actions";
+import useStyles from "./styles";
+
 
 function MovieDetail(props) {
   const classes = useStyles();
@@ -19,7 +19,6 @@ function MovieDetail(props) {
     dispatch(actGetMovieDetail(params));
   }, [dispatch, params]);
 
-  
   return (
     <Box className={classes.movieDetail}>
       <Box className={classes.container}>
@@ -32,15 +31,12 @@ function MovieDetail(props) {
               width="217px"
             />
             <Box marginLeft={2}>
-              <Typography color="textSecondary">
-                {movieDetail.ngayKhoiChieu}
-              </Typography>
               <Typography className={classes.titleMovie} variant="h5">
                 <span className={classes.ageType}>C16</span>{" "}
                 {movieDetail.tenPhim}
               </Typography>
               <Typography color="textSecondary">
-              120 phút - 0 IMdb - 2D/Digital
+                120 phút - 0 IMdb - 2D/Digital
               </Typography>
             </Box>
           </Box>

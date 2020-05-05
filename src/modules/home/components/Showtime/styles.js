@@ -59,18 +59,19 @@ const useStyles = makeStyles((theme) => ({
   },
   images: {
     width: "100%",
+    height: "100%",
+
+    position: "absolute",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
   },
   itemCarousel: {
     paddingTop: "143%",
 
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-
     position: "relative",
     overflow: "hidden",
-
-    // background: "red"
   },
   nameMovie: {
     marginTop: 5,

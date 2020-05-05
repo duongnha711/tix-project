@@ -30,6 +30,8 @@ function FilterFilm(props) {
     activeName,
   } = props;
   let history = useHistory();
+
+
   const renderMovieList = () => {
     if (movieList && movieList.length > 0) {
       return movieList.map((movie) => (

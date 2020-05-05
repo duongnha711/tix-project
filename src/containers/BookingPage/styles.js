@@ -108,14 +108,21 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0 2px 2px 0 rgba(223, 173, 173, 0.2), 0 5px 10px 0 #d8d8d8",
     opacity: 0.9,
   },
-  imgMovie: {
+  wrapperImg: {
     width: 50,
-    height: 75,
     borderRadius: 4,
-    overflow: "hidden",
+  },
+  contentImg: {
+    paddingTop: "120%",
+    position: "relative",
     "& img": {
       width: "100%",
-      display: "block",
+      height: "100%",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
     },
   },
   textMovie: {

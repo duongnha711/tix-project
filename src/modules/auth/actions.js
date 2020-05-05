@@ -1,10 +1,12 @@
 import {
-  REGISTER,
+  CHANGE_PASSWORD_SUCCESS,
+  CHANGE_PASSWORD,
+  GET_INFO_BOOKING_USER,
+  GET_INFO_BOOKING_USER_SUCCESS,
   LOG_IN,
   LOG_IN_SUCCESS,
   LOG_OUT,
-  GET_INFO_BOOKING_USER,
-  GET_INFO_BOOKING_USER_SUCCESS,
+  REGISTER,
 } from "./constants";
 
 export const actRegister = (account) => {
@@ -45,5 +47,20 @@ export const actGetInfoBookingUserSuccess = (payload) => {
   return {
     type: GET_INFO_BOOKING_USER_SUCCESS,
     payload,
+  };
+};
+
+export const actChangePassword = (account, token) => {
+  return {
+    type: CHANGE_PASSWORD,
+    account,
+    token,
+  };
+};
+
+export const actChangePasswordSuccess = (account) => {
+  return {
+    type: CHANGE_PASSWORD_SUCCESS,
+    account,
   };
 };

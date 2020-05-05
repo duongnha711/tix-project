@@ -11,6 +11,7 @@ import { Field, reduxForm } from "redux-form";
 
 import { connect } from "react-redux";
 import Alert from "../../../components/Alert";
+import { actChangePassword } from "../../../modules/auth/actions";
 
 const validate = (values) => {
   const errors = {};
@@ -47,14 +48,23 @@ const renderTextField = ({
 let UserChangePass = (props) => {
   const classes = useStyles();
 
-  const { handleSubmit, reset, currentPass } = props;
-  console.log("UserChangePass -> currentPass", currentPass);
+  const { dispatch, handleSubmit, reset, userInfo, token } = props;
 
   const submit = (value) => {
-    if (value.currentPass !== currentPass) {
-      console.log("true");
+    if (value.currentPass !== userInfo.matKhau) {
       Alert({ icon: "error", text: "Mật khẩu hiện tại không đúng" });
     } else {
+      const account = {
+        taiKhoan: userInfo.taiKhoan,
+        matKhau: value.matKhau,
+        email: userInfo.email,
+        soDt: userInfo.soDt,
+        maNhom: userInfo.maNhom,
+        maLoaiNguoiDung: "KhachHang",
+        hoTen: userInfo.hoTen,
+      };
+
+      dispatch(actChangePassword(account,token));
       reset();
     }
   };

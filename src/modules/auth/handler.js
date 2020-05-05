@@ -26,3 +26,12 @@ export const getInfoAccountApi = (taiKhoan) => {
     data: taiKhoan,
   });
 };
+
+export const changePasswordAPI = (taiKhoan, token) => {
+  return sendRequest({
+    url: ENDPOINTS.CapNhatThongTinNguoiDung,
+    method: "PUT",
+    data: taiKhoan,
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};

@@ -1,16 +1,30 @@
-import { takeLatest, call, delay, put } from "redux-saga/effects";
-import { REGISTER, LOG_IN, GET_INFO_BOOKING_USER } from "./constants";
-import { registerApi, logInApi, getInfoAccountApi } from "./handler";
-import Alert from "./../../components/Alert";
-import STATUS from "./status";
+import { call, delay, put, takeLatest } from "redux-saga/effects";
 import {
-  actCloseRegister,
-  actOpenLogin,
-  actCloseLogin,
-  actOpenGlobalLoading,
   actCloseGlobalLoading,
+  actCloseLogin,
+  actCloseRegister,
+  actOpenGlobalLoading,
+  actOpenLogin,
 } from "./../../commons/actions";
-import { actLogInSuccess, actGetInfoBookingUserSuccess } from "./actions";
+import Alert from "./../../components/Alert";
+import {
+  actChangePasswordSuccess,
+  actGetInfoBookingUserSuccess,
+  actLogInSuccess,
+} from "./actions";
+import {
+  CHANGE_PASSWORD,
+  GET_INFO_BOOKING_USER,
+  LOG_IN,
+  REGISTER,
+} from "./constants";
+import {
+  changePasswordAPI,
+  getInfoAccountApi,
+  logInApi,
+  registerApi,
+} from "./handler";
+import STATUS from "./status";
 
 function* registerSaga({ account }) {
   try {
@@ -58,7 +72,23 @@ function* getInfoBookingUserSaga({ account }) {
       yield put(actGetInfoBookingUserSuccess(data));
     }
   } catch (err) {
-    console.log("function*getInfoBookingUserSaga -> err", err);
+    console.log("function*getInfoBookingUserSaga -> err", err.response);
+  }
+}
+
+function* changePasswordSaga({ account, token }) {
+  try {
+    const response = yield call(changePasswordAPI, account, token);
+    const { status, data } = response;
+    if (status === STATUS.SUCCESS) {
+      yield put(actChangePasswordSuccess(data));
+      Alert({
+        icon: "success",
+        html: "Đổi mật khẩu thành công",
+      });
+    }
+  } catch (err) {
+    console.log("function*changePasswordSaga -> err", err.response);
   }
 }
 
@@ -75,4 +105,13 @@ function* watchLogIn() {
 function* watchGetInfoBookingUser() {
   yield takeLatest(GET_INFO_BOOKING_USER, getInfoBookingUserSaga);
 }
-export default [watchRegister(), watchLogIn(), watchGetInfoBookingUser()];
+
+function* watchChangePassword() {
+  yield takeLatest(CHANGE_PASSWORD, changePasswordSaga);
+}
+export default [
+  watchRegister(),
+  watchLogIn(),
+  watchGetInfoBookingUser(),
+  watchChangePassword(),
+];
