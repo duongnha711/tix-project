@@ -2,6 +2,7 @@ import {
   LOG_IN_SUCCESS,
   LOG_OUT,
   GET_INFO_BOOKING_USER_SUCCESS,
+  CHANGE_PASSWORD_SUCCESS,
 } from "./constants";
 
 const account = JSON.parse(sessionStorage.getItem("account"))
@@ -14,7 +15,7 @@ const initialState = {
   account,
   isLogged,
   userBookingInfo: [],
-  currentPass: "",
+  userInfo: {},
 };
 
 const authReducer = (state = initialState, action) => {
@@ -32,11 +33,27 @@ const authReducer = (state = initialState, action) => {
 
     case GET_INFO_BOOKING_USER_SUCCESS: {
       const { payload } = action;
+
+      const objUserInfo = {
+        taiKhoan: payload.taiKhoan,
+        matKhau: payload.matKhau,
+        email: payload.email,
+        soDt: payload.soDT,
+        maNhom: payload.maNhom,
+        maLoaiNguoiDung: payload.loaiNguoiDung,
+        hoTen: payload.hoTen,
+      };
+
       return {
         ...state,
         userBookingInfo: payload.thongTinDatVe,
-        currentPass: payload.matKhau,
+        userInfo: objUserInfo,
       };
+    }
+
+    case CHANGE_PASSWORD_SUCCESS: {
+      const { account } = action;
+      return { ...state, userInfo: account };
     }
 
     default:

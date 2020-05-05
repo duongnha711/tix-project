@@ -184,6 +184,27 @@ function BookingPage(props) {
     }
   };
 
+  const renderTime = () => {
+    if (infoMovieForTicket.gioChieu) {
+      let time = infoMovieForTicket.gioChieu;
+
+      if (time.substring(0, 2) === "10") {
+        time = time.substring(0, 3) + "10 am";
+      } else {
+        time = time.substring(0, 3) + "10 pm";
+      }
+      return time;
+    }
+  };
+
+  const addEmptyImage = (e) => {
+    e.target.src = "/images/defaultImage.png";
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Box className={classes.booking}>
       <Box className={classes.container}>
@@ -226,11 +247,14 @@ function BookingPage(props) {
         </Box>
         <Box className={classes.wrapperInfo}>
           <Box className={classes.infoMovie}>
-            <Box className={classes.imgMovie}>
-              <img
-                src={infoMovieForTicket.hinhAnh}
-                alt={infoMovieForTicket.tenPhim}
-              />
+            <Box className={classes.wrapperImg}>
+              <Box className={classes.contentImg}>
+                <img
+                  onError={addEmptyImage}
+                  src={infoMovieForTicket.hinhAnh}
+                  alt={infoMovieForTicket.tenPhim}
+                />
+              </Box>
             </Box>
             <Box className={classes.textMovie}>
               <Typography className={classes.nameMovie}>
@@ -240,7 +264,7 @@ function BookingPage(props) {
                 Ngày chiếu: {infoMovieForTicket.ngayChieu}
               </Typography>
               <Typography variant="subtitle1">
-                Giờ chiếu: {infoMovieForTicket.gioChieu}
+                Giờ chiếu: {renderTime()}
               </Typography>
             </Box>
           </Box>

@@ -7,7 +7,6 @@ import Slider from "react-slick";
 import FilterFilm from "../FilterFilm";
 import useStyles from "./styles";
 
-
 function Arrow(props) {
   const { className, onClick, url } = props;
   return (
@@ -47,9 +46,9 @@ export default function Showtime(props) {
 
   const { movieList } = props;
 
-  // const addEmptyImage = (e) => {
-  //   e.target.src = "./images/emptyIMG.png";
-  // };
+  const addEmptyImage = (e) => {
+    e.target.src = "/images/defaultImage.png";
+  };
 
   const renderMovie = () => {
     if (Array.isArray(movieList) && movieList.length > 0) {
@@ -60,19 +59,15 @@ export default function Showtime(props) {
           className={classes.link}
         >
           <Box className={classes.itemWrapper} padding={1}>
-            <Paper
-              style={{ backgroundImage: `url('${movie.hinhAnh}')` }}
-              className={classes.itemCarousel}
-              elevation={1}
-            >
-              {/* <img
+            <Paper className={classes.itemCarousel} elevation={1}>
+              <img
                 onError={addEmptyImage}
                 src={movie.hinhAnh}
                 alt={movie.tenPhim}
                 className={classes.images}
-              /> */}
+              />
               <Box component="span" className={classes.iconPlay}>
-                <img src="./images/play-video.png" alt="play-video" />
+                <img src="/images/play-video.png" alt="play-video" />
               </Box>
               <Box className={classes.ageType}>C16</Box>
               <Box className={classes.avgPoint}>

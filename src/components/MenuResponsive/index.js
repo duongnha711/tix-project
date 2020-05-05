@@ -19,9 +19,11 @@ import {
 import useStyles from "./styles";
 import { actLogOut } from "../../modules/auth/actions";
 import { HashLink } from "react-router-hash-link";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function MenuResponsive(props) {
+  let history = useHistory();
+
   const { isShowMenuResponsive } = props;
   const classes = useStyles();
 
@@ -41,6 +43,7 @@ function MenuResponsive(props) {
   };
 
   const handleLogOut = () => {
+    history.push("/");
     props.handleCloseMenuResponsive();
     dispatch(actLogOut());
     dispatch(actOpenGlobalLoading());

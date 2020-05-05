@@ -19,9 +19,16 @@ import cn from "classnames";
 function UserManagement(props) {
   const classes = useStyles();
 
-  const [suitShow, setSuitShow] = useState("change");
+  const [suitShow, setSuitShow] = useState("info");
 
-  const { dispatch, account, userBookingInfo, isLogged, currentPass } = props;
+  const {
+    dispatch,
+    account,
+    userBookingInfo,
+    isLogged,
+    userInfo,
+    token,
+  } = props;
 
   useEffect(() => {
     dispatch(actGetInfoBookingUser({ taiKhoan: account.taiKhoan }));
@@ -89,7 +96,7 @@ function UserManagement(props) {
             {/* // goi ham render if else */}
             {suitShow === "info" && <UserInformation />}
             {suitShow === "change" && (
-              <UserChangePass currentPass={currentPass} />
+              <UserChangePass userInfo={userInfo} token={token} />
             )}
             {suitShow === "history" && (
               <HistoryBooking userBookingInfo={userBookingInfo} />
@@ -105,7 +112,8 @@ const mapStateToProps = (state) => ({
   account: state.auth.account,
   userBookingInfo: state.auth.userBookingInfo,
   isLogged: state.auth.isLogged,
-  currentPass: state.auth.currentPass,
+  userInfo: state.auth.userInfo,
+  token: state.auth.account.accessToken,
 });
 
 export default connect(mapStateToProps)(UserManagement);

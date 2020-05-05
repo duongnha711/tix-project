@@ -8,9 +8,11 @@ import {
 } from "../../commons/actions";
 import { actLogOut } from "../../modules/auth/actions";
 import useStyles from "./styles";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function UserInfo(props) {
+  let history = useHistory();
+
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -29,6 +31,7 @@ function UserInfo(props) {
   const id = open ? "simple-popover" : undefined;
 
   const handleLogOut = () => {
+    history.push("/");
     setAnchorEl(null);
     dispatch(actLogOut());
     dispatch(actOpenGlobalLoading());

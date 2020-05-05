@@ -34,12 +34,13 @@ function* getMovieListSaga() {
     const { data, status } = response;
     if (status === STATUS.SUCCESS) {
       yield put(actGetMovieListSuccess(data));
-      yield put(actFilterByName({ MaPhim: data[0].maPhim })); //lấy đc list name -> thi set cinema là cinema đầu tiên
+      yield put(actFilterByName({ MaPhim: data[0].maPhim })); //chi lay thang dau tien
     }
+
     yield delay(1000);
     yield put(actCloseGlobalLoading());
   } catch (err) {
-    console.log(err.response);
+    console.log(err);
     yield put(actCloseGlobalLoading());
   }
 }
@@ -127,7 +128,7 @@ function* getSeatListSaga({ maLichChieu }) {
 function* bookTicketSaga({ payload }) {
   try {
     const response = yield call(bookTicketApi, payload);
-    
+
     const { arrNameToShow } = payload;
     let strNameToShow = "";
     arrNameToShow.forEach((item, index) => {
