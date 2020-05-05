@@ -20,8 +20,6 @@ const arrCarousel = [
   { url: "./images/slide3.jpg", name: "slide3" },
   { url: "./images/slide4.jpg", name: "slide4" },
   { url: "./images/slide5.jpg", name: "slide5" },
-  { url: "./images/slide6.jpg", name: "slide6" },
-  { url: "./images/slide7.jpg", name: "slide7" },
 ];
 
 export default function Mobile() {

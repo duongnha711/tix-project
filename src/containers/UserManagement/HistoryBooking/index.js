@@ -10,7 +10,11 @@ export default function HistoryBooking(props) {
 
   const renderItemBooked = () => {
     if (userBookingInfo && userBookingInfo.length > 0) {
-      return userBookingInfo.map((item, index) => {
+      const userBookingInfoAfterSort = userBookingInfo.sort(
+        (a, b) => new Date(b.ngayDat) - new Date(a.ngayDat)
+      );
+
+      return userBookingInfoAfterSort.map((item, index) => {
         let total = 0;
         let idTicket = "";
         let quantityTikect = item.danhSachGhe.length;

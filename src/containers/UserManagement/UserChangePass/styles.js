@@ -4,8 +4,9 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(() => ({
   input: {
     display: "block",
-    "& .MuiOutlinedInput-notchedOutline": {
+    "& .MuiInputBase-input": {
       background: "white",
+      borderRadius: 4,
     },
   },
   button: {

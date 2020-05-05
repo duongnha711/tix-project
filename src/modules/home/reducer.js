@@ -155,9 +155,7 @@ const homeReducer = (state = initialState, action) => {
     case ActionType.BOOK_TICKET_SUCCESS: {
       const { payload } = action;
       const { danhSachVe } = payload.data;
-      console.log("homeReducer -> danhSachVe", danhSachVe);
       const { arrNormalSeatList, arrVipSeatList } = state;
-      console.log("homeReducer -> arrNormalSeatList", arrNormalSeatList);
 
       danhSachVe.forEach((ticket) => {
         //  NORMAL

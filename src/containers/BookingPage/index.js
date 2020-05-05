@@ -25,6 +25,7 @@ function BookingPage(props) {
     isLogged,
     account,
   } = props;
+
   const { match } = props;
   const { params } = match;
   useEffect(() => {
