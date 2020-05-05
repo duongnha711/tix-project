@@ -17,6 +17,7 @@ import {
 import useStyles from "./styles";
 import { useHistory } from "react-router-dom";
 import Alert from "../../../../components/Alert";
+import InternalLoading from "../../../../components/InternalLoading";
 
 function FilterFilm(props) {
   const classes = useStyles();
@@ -30,7 +31,6 @@ function FilterFilm(props) {
     activeName,
   } = props;
   let history = useHistory();
-
 
   const renderMovieList = () => {
     if (movieList && movieList.length > 0) {
@@ -149,8 +149,8 @@ function FilterFilm(props) {
           className={classes.cinema}
         >
           <option value="">Chọn rạp</option>
-
           {renderCinemaList()}
+          <InternalLoading className={classes.loading} />
         </SelectInput>
       </Box>
       <Box

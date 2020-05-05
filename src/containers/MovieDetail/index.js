@@ -9,6 +9,7 @@ import useStyles from "./styles";
 function MovieDetail(props) {
   const classes = useStyles();
   const { dispatch, match, movieDetail } = props;
+  console.log("MovieDetail -> movieDetail", movieDetail)
   const { params } = match;
 
   const handleAddDefaultImage = (e) => {

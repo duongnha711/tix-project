@@ -31,6 +31,14 @@ const useStyles = makeStyles((theme) => ({
   time: {
     width: 110,
   },
+
+  loading: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    zIndex: 990,
+  },
+  
   [theme.breakpoints.down("980")]: {
     container: {
       position: "unset",

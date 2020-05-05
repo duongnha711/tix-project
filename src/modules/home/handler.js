@@ -7,7 +7,7 @@ export const getMovieListApi = () => {
   return sendRequest({
     url: ENDPOINTS.LayDanhSachPhim,
     params: {
-      maNhom: "GP07",
+      maNhom: "GP14",
     },
   });
 };
