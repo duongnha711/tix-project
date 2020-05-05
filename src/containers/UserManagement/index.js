@@ -19,9 +19,9 @@ import cn from "classnames";
 function UserManagement(props) {
   const classes = useStyles();
 
-  const [suitShow, setSuitShow] = useState("info");
+  const [suitShow, setSuitShow] = useState("change");
 
-  const { dispatch, account, userBookingInfo, isLogged } = props;
+  const { dispatch, account, userBookingInfo, isLogged, currentPass } = props;
 
   useEffect(() => {
     dispatch(actGetInfoBookingUser({ taiKhoan: account.taiKhoan }));
@@ -88,7 +88,9 @@ function UserManagement(props) {
           <Paper className={classes.infoUser}>
             {/* // goi ham render if else */}
             {suitShow === "info" && <UserInformation />}
-            {suitShow === "change" && <UserChangePass />}
+            {suitShow === "change" && (
+              <UserChangePass currentPass={currentPass} />
+            )}
             {suitShow === "history" && (
               <HistoryBooking userBookingInfo={userBookingInfo} />
             )}
@@ -103,6 +105,7 @@ const mapStateToProps = (state) => ({
   account: state.auth.account,
   userBookingInfo: state.auth.userBookingInfo,
   isLogged: state.auth.isLogged,
+  currentPass: state.auth.currentPass,
 });
 
 export default connect(mapStateToProps)(UserManagement);

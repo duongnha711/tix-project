@@ -14,6 +14,7 @@ const initialState = {
   account,
   isLogged,
   userBookingInfo: [],
+  currentPass: "",
 };
 
 const authReducer = (state = initialState, action) => {
@@ -31,7 +32,11 @@ const authReducer = (state = initialState, action) => {
 
     case GET_INFO_BOOKING_USER_SUCCESS: {
       const { payload } = action;
-      return { ...state, userBookingInfo: payload.thongTinDatVe };
+      return {
+        ...state,
+        userBookingInfo: payload.thongTinDatVe,
+        currentPass: payload.matKhau,
+      };
     }
 
     default:

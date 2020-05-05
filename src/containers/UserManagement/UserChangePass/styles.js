@@ -8,9 +8,12 @@ const useStyles = makeStyles(() => ({
       background: "white",
       borderRadius: 4,
     },
+    "& .MuiFormHelperText-contained": {
+      margin: 0,
+    },
   },
   button: {
-    marginTop: 30,
+    marginTop: 10,
   },
 }));
 

@@ -10,11 +10,20 @@ import useStyles from "./styles";
 import { Field, reduxForm } from "redux-form";
 
 import { connect } from "react-redux";
+import Alert from "../../../components/Alert";
 
 const validate = (values) => {
   const errors = {};
-  if (!values.username) {
-    errors.username = "Required";
+  if (!values.currentPass) {
+    errors.currentPass = "Not empty";
+  }
+  if (!values.matKhau) {
+    errors.matKhau = "Not empty";
+  }
+  if (!values.confirmMatKhau) {
+    errors.confirmMatKhau = "Not empty";
+  } else if (values.confirmMatKhau !== values.matKhau) {
+    errors.confirmMatKhau = "Password not match";
   }
   return errors;
 };
@@ -35,13 +44,19 @@ const renderTextField = ({
   />
 );
 
-function UserChangePass(props) {
+let UserChangePass = (props) => {
   const classes = useStyles();
 
-  const { handleSubmit, pristine, reset, submitting } = props;
+  const { handleSubmit, reset, currentPass } = props;
+  console.log("UserChangePass -> currentPass", currentPass);
 
   const submit = (value) => {
-    console.log("submit -> value", value);
+    if (value.currentPass !== currentPass) {
+      console.log("true");
+      Alert({ icon: "error", text: "Mật khẩu hiện tại không đúng" });
+    } else {
+      reset();
+    }
   };
 
   return (
@@ -95,7 +110,7 @@ function UserChangePass(props) {
       </form>
     </List>
   );
-}
+};
 
 UserChangePass = reduxForm({
   form: "changePass",
