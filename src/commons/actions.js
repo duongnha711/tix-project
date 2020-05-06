@@ -16,6 +16,14 @@ export const actCloseGlobalLoading = () => ({
   type: ActionType.CLOSE_GLOBAL_LOADING,
 });
 
+export const actOpenFilterLoading = () => ({
+  type: ActionType.OPEN_FILTER_LOADING,
+});
+
+export const actCloseFilterLoading = () => ({
+  type: ActionType.CLOSE_FILTER_LOADING,
+});
+
 export const actOpenRegister = () => ({
   type: ActionType.OPEN_REGISTER,
 });

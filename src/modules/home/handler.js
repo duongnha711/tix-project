@@ -1,4 +1,4 @@
-import ENDPOINTS from "./model";
+import ENDPOINTS, { MA_NHOM } from "./model";
 import queryString from "querystring";
 
 import { sendRequest } from "./../../functions/effect";
@@ -7,7 +7,7 @@ export const getMovieListApi = () => {
   return sendRequest({
     url: ENDPOINTS.LayDanhSachPhim,
     params: {
-      maNhom: "GP07",
+      maNhom: MA_NHOM,
     },
   });
 };
@@ -35,14 +35,14 @@ export const getCinemaBranchesApi = (maRap) => {
 export const getShowTimeAllApi = (maRap) => {
   const params = queryString.stringify(maRap);
   return sendRequest({
-    url: `${ENDPOINTS.LayThongTinLichChieuHeThongRap}?${params}`,
+    url: `${ENDPOINTS.LayThongTinLichChieuHeThongRap}?${params}&maNhom=${MA_NHOM}`,
   });
 };
 
 export const getShowTimeOfOneMovieApi = (MaPhim) => {
   const params = queryString.stringify(MaPhim);
   return sendRequest({
-    url: `${ENDPOINTS.LayThongTinLichChieuHeThongRap}?${params}`,
+    url: `${ENDPOINTS.LayThongTinLichChieuHeThongRap}?${params}&maNhom=${MA_NHOM}`,
   });
 };
 

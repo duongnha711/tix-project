@@ -1,12 +1,22 @@
 import { Box, Divider, Paper, Typography } from "@material-ui/core";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import useStyles from "./styles";
+import cn from "classnames";
 
 export default function InfoCinema(props) {
-  const { cinemaList, cinemaBrach, showTimeDetail } = props;
-
   const classes = useStyles();
+
+  //state cho time va date
+  const [dateState, SetDateState] = useState("");
+
+  const {
+    cinemaList,
+    cinemaBrach,
+    showTimeDetail,
+    maHeThongRap,
+    maCumRap,
+  } = props;
 
   const renderCinemaLogo = () => {
     if (Array.isArray(cinemaList) && cinemaList.length > 0) {
@@ -16,7 +26,10 @@ export default function InfoCinema(props) {
             onClick={() => {
               handleClickLogo(cinema.maHeThongRap);
             }}
-            className={classes.itemLogo}
+            className={cn(
+              classes.itemLogo,
+              maHeThongRap === cinema.maHeThongRap && classes.activeLogo
+            )}
           >
             <img src={cinema.logo} alt={cinema.maHeThongRap} />
           </Box>
@@ -26,7 +39,7 @@ export default function InfoCinema(props) {
     }
   };
 
-  const renderCinemaBrach = () => {
+  const renderCinemaBranch = () => {
     if (Array.isArray(cinemaBrach) && cinemaBrach.length > 0) {
       return cinemaBrach.map((cinema, index) => (
         <Fragment key={index}>
@@ -34,7 +47,10 @@ export default function InfoCinema(props) {
             onClick={() => {
               handleClickCinema(cinema.maCumRap);
             }}
-            className={classes.itemCinema}
+            className={cn(
+              classes.itemCinema,
+              maCumRap === cinema.maCumRap && classes.activeCinema
+            )}
           >
             <Box className={classes.imgCinema}>
               <img
@@ -56,43 +72,29 @@ export default function InfoCinema(props) {
         </Fragment>
       ));
     } else {
-      return (
-        <Box className={classes.itemCinema}>
-          Gọi API để vừa vào lấy đầu tiên{" "}
-        </Box>
-      );
+      return <Box className={classes.itemCinema}>Không có suất chiếu</Box>;
     }
   };
 
   const renderMovie = () => {
     if (Array.isArray(showTimeDetail) && showTimeDetail.length > 0) {
       return showTimeDetail.map((movie, index) => {
-        // const date = new Date();
-        // console.log("renderMovie -> date", date);
-        // const d = date.getDate();
-        // const m = date.getMonth();
-
-        // const y = date.getFullYear();
-        // console.log(` ${d} - ${m} - ${y}`);
-        // console.log("renderMovie -> movie", movie.lstLichChieuTheoPhim);
-        // movie.lstLichChieuTheoPhim.map((item) => {
-        //   console.log(item.ngayChieuGioChieu);
-        // });
-
         return (
           <Box key={index} className={classes.itemMovie}>
-            <Paper className={classes.imgMovie}>
-              <img src={movie.hinhAnh} alt="believe" />
-            </Paper>
+            <Box>
+              <Paper className={classes.wrapperImg}>
+                <Box className={classes.contentImg}>
+                  <img
+                    onError={addEmptyImage}
+                    src={movie.hinhAnh}
+                    alt={movie.tenPhim}
+                  />
+                </Box>
+              </Paper>
+            </Box>
             <Box className={classes.contentMovie}>
-              <Box>
-                <Box className={classes.tag} component="span">
-                  Love Story
-                </Box>
-                <Box className={classes.tag} component="span">
-                  Drama
-                </Box>
-              </Box>
+              {/* //date */}
+              <Box display="flex">{renderDate(movie.lstLichChieuTheoPhim)}</Box>
               <Typography className={classes.titleMovie} variant="h5">
                 {movie.tenPhim}
               </Typography>
@@ -110,16 +112,39 @@ export default function InfoCinema(props) {
                   <AccessTimeIcon fontSize="small" />
                   View Time
                 </Box>
-                <Box className={classes.timeDetail}>8:20:00 PM</Box>
+
+                <Box key={index} className={classes.timeDetail}>
+                  17h
+                </Box>
               </Box>
             </Box>
           </Box>
         );
       });
     } else {
-      return (
-        <Box className={classes.itemMovie}>Gọi API để vừa vào lấy đầu tiên</Box>
-      );
+      return <Box className={classes.itemMovie}>Không có suất chiếu</Box>;
+    }
+  };
+
+  const renderDate = (arrDateTime) => {
+    if (arrDateTime && arrDateTime.length > 0) {
+      return arrDateTime.map((item, index) => {
+        return (
+          <Box
+            onClick={() => {
+              handleClickDateOfMovie(item.ngayChieuGioChieu.substring(0, 10));
+            }}
+            key={index}
+            className={cn(
+              classes.timeDetail,
+              dateState === item.ngayChieuGioChieu.substring(0, 10) &&
+                classes.activeDate
+            )}
+          >
+            {item.ngayChieuGioChieu.substring(0, 10)}
+          </Box>
+        );
+      });
     }
   };
 
@@ -131,13 +156,22 @@ export default function InfoCinema(props) {
     props.handleGetShowTimeDetail(maCumRap);
   };
 
+  const handleClickDateOfMovie = (date) => {
+    SetDateState(date)
+    console.log("handleClickDateOfMovie -> date", date);
+  };
+
+  const addEmptyImage = (e) => {
+    e.target.src = "/images/defaultImage.png";
+  };
+
   return (
     <Box id="infoCinema" className={classes.infoCinema}>
       <Paper elevation={1} className={classes.container}>
         <Box className={classes.cinemaWrapper}>
           <Box display="flex">
             <Box className={classes.listLogo}>{renderCinemaLogo()}</Box>
-            <Box className={classes.listCinema}>{renderCinemaBrach()}</Box>
+            <Box className={classes.listCinema}>{renderCinemaBranch()}</Box>
           </Box>
           <Box className={classes.listMovie}>{renderMovie()}</Box>
         </Box>

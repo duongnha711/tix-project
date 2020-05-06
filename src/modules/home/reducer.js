@@ -21,6 +21,9 @@ const initialState = {
   maLichChieu: "",
   activeName: "",
 
+  maHeThongRap: "",
+  maCumRap: "",
+
   //ticket
   infoMovieForTicket: {},
   arrNormalSeatList: [],
@@ -40,7 +43,8 @@ const homeReducer = (state = initialState, action) => {
       return { ...state, cinemaList: action.payload };
 
     case ActionType.GET_CINEMA_BRANCH_SUCCESS:
-      return { ...state, cinemaBrach: action.payload };
+      const { data, maHeThongRap } = action.payload;
+      return { ...state, cinemaBrach: data, maHeThongRap };
 
     case ActionType.GET_SHOWTIME_ALL_SUCCESS:
       return { ...state, showTimeAll: action.payload };
@@ -60,10 +64,11 @@ const homeReducer = (state = initialState, action) => {
           }
         });
       }
+      //neu rap ko co danh sach phim - se~ undifiel va moi~ ham` map
       if (newObj.danhSachPhim) {
-        return { ...state, showTimeDetail: newObj.danhSachPhim };
+        return { ...state, showTimeDetail: newObj.danhSachPhim, maCumRap };
       } else {
-        return { ...state, showTimeDetail: [] };
+        return { ...state, showTimeDetail: [], maCumRap };
       }
     }
 

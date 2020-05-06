@@ -184,6 +184,7 @@ function BookingPage(props) {
     }
   };
 
+  //back end trả data về ko đúng ...phải làm kiểu này
   const renderTime = () => {
     if (infoMovieForTicket.gioChieu) {
       let time = infoMovieForTicket.gioChieu;
