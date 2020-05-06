@@ -107,14 +107,15 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     marginLeft: 10,
   },
-  tag: {
-    background: themeColor.tagColor,
-    border: `1px solid ${themeColor.tagBorderColor}`,
-    padding: "2px 4px",
-    borderRadius: 4,
-    marginRight: 10,
-    color: themeColor.primaryColor,
-  },
+
+  // tag: {
+  //   background: themeColor.tagColor,
+  //   border: `1px solid ${themeColor.tagBorderColor}`,
+  //   padding: "2px 4px",
+  //   borderRadius: 4,
+  //   marginRight: 10,
+  //   color: themeColor.primaryColor,
+  // },
   titleMovie: {
     display: "-webkit-box",
     WebkitLineClamp: 1,
@@ -141,11 +142,29 @@ const useStyles = makeStyles((theme) => ({
   },
   timeDetail: {
     marginRight: 10,
+    marginBottom: 5,
     cursor: "pointer",
+    border: "1px solid",
+    padding: 5,
+    borderRadius: 4,
+  },
+  listDate: {
+    padding: 20,
+    paddingBottom: 0,
+  },
+  dateMovie: {
+    cursor: "pointer",
+    marginRight: 10,
+    marginBottom: 5,
+    cursor: "pointer",
+    border: "1px solid",
+    padding: 5,
+    borderRadius: 4,
   },
   activeDate: {
     color: "red",
   },
+
   [theme.breakpoints.down("1140")]: {
     container: {
       width: "90%",
