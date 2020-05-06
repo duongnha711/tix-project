@@ -1,14 +1,9 @@
 import { Box, Divider, Paper, Typography } from "@material-ui/core";
-import AccessTimeIcon from "@material-ui/icons/AccessTime";
-import React, { Fragment, useState, useEffect } from "react";
-import useStyles from "./styles";
 import cn from "classnames";
-import {
-  removeDuplicateInArr,
-  changeFormateDate,
-  convertFrom24To12Format,
-} from "../../../../functions/helper";
+import React, { Fragment, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { changeFormateDate, convertFrom24To12Format, removeDuplicateInArr } from "../../../../functions/helper";
+import useStyles from "./styles";
 
 export default function InfoCinema(props) {
   const classes = useStyles();
