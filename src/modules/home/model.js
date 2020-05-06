@@ -1,7 +1,7 @@
 const rootUrl = "http://movie0706.cybersoft.edu.vn/api/";
 const movie = "QuanLyPhim/";
 const cinema = "QuanLyRap/";
-const ticket = "QuanLyDatVe/"
+const ticket = "QuanLyDatVe/";
 
 const ENDPOINTS = {
   LayDanhSachPhim: `${rootUrl}${movie}LayDanhSachPhim`,
@@ -15,7 +15,8 @@ const ENDPOINTS = {
   //ticket
   LayDanhSachPhongVe: `${rootUrl}${ticket}LayDanhSachPhongVe`,
   DatVe: `${rootUrl}${ticket}DatVe`,
-
 };
+
+export const MA_NHOM = "GP01";
 
 export default ENDPOINTS;

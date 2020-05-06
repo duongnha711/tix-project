@@ -17,7 +17,7 @@ import {
 import useStyles from "./styles";
 import { useHistory } from "react-router-dom";
 import Alert from "../../../../components/Alert";
-import InternalLoading from "../../../../components/InternalLoading";
+import InternalLoading from "./../../../../components/InternalLoading";
 
 function FilterFilm(props) {
   const classes = useStyles();
@@ -29,6 +29,7 @@ function FilterFilm(props) {
     arrHourOfOneMovie,
     maLichChieu,
     activeName,
+    isShowFilterLoading,
   } = props;
   let history = useHistory();
 
@@ -130,6 +131,7 @@ function FilterFilm(props) {
 
   return (
     <Paper elevation={3} className={classes.container}>
+      {isShowFilterLoading && <InternalLoading className={classes.loading} />}
       <Box
         className={classes.wrapperItem}
         justifyContent="space-between"
@@ -149,8 +151,8 @@ function FilterFilm(props) {
           className={classes.cinema}
         >
           <option value="">Chọn rạp</option>
+
           {renderCinemaList()}
-          <InternalLoading className={classes.loading} />
         </SelectInput>
       </Box>
       <Box
@@ -193,6 +195,7 @@ const mapStateToProps = (state) => ({
   arrHourOfOneMovie: state.home.arrHourOfOneMovie,
   maLichChieu: state.home.maLichChieu,
   activeName: state.home.activeName,
+  isShowFilterLoading: state.ui.isShowFilterLoading,
 });
 
 export default connect(mapStateToProps)(FilterFilm);

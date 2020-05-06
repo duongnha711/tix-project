@@ -2,6 +2,8 @@ import { call, delay, put, takeLatest } from "redux-saga/effects";
 import {
   actCloseGlobalLoading,
   actOpenGlobalLoading,
+  actCloseFilterLoading,
+  actOpenFilterLoading,
 } from "./../../commons/actions";
 import {
   actFilterByName,
@@ -13,6 +15,9 @@ import {
   actGetSeatListSuccess,
   actGetShowTimeAllSuccess,
   actBookTicketSuccess,
+  actGetCinemaBranch,
+  actGetShowTimeAll,
+  actGetShowTimeDetail,
 } from "./actions";
 import * as ActionType from "./constants";
 import {
@@ -40,50 +45,61 @@ function* getMovieListSaga() {
     yield delay(1000);
     yield put(actCloseGlobalLoading());
   } catch (err) {
-    console.log(err);
+    console.log("function*getMovieListSaga -> err", err.response);
     yield put(actCloseGlobalLoading());
   }
 }
 
 function* getMovieDetailSaga({ params }) {
-  yield put(actOpenGlobalLoading());
-  const response = yield call(getMovieDetailApi, params);
-  const { status, data } = response;
-  if (status === STATUS.SUCCESS) {
-    yield put(actGetMovieDetailSuccess(data));
+  try {
+    yield put(actOpenGlobalLoading());
+    const response = yield call(getMovieDetailApi, params);
+    const { status, data } = response;
+    if (status === STATUS.SUCCESS) {
+      yield put(actGetMovieDetailSuccess(data));
+    }
+    yield put(actCloseGlobalLoading());
+  } catch (err) {
+    console.log("function*getMovieDetailSaga -> err", err.response);
   }
-  yield put(actCloseGlobalLoading());
 }
 
 function* getCinemaListSaga() {
-  yield put(actOpenGlobalLoading());
-  const response = yield call(getCinemaListApi);
-  const { data, status } = response;
-  if (status === STATUS.SUCCESS) {
-    yield put(actGetCinemaListSuccess(data));
+  try {
+    yield put(actOpenGlobalLoading());
+    const response = yield call(getCinemaListApi);
+    const { data, status } = response;
+    if (status === STATUS.SUCCESS) {
+      yield put(actGetCinemaListSuccess(data));
+      //lấy branch theo thằng logo đầu tiên
+      yield put(actGetCinemaBranch({ maHeThongRap: data[0].maHeThongRap }));
+      yield put(actGetShowTimeAll({ maHeThongRap: data[0].maHeThongRap }));
+    }
+    yield delay(1000);
+    yield put(actCloseGlobalLoading());
+  } catch (err) {
+    console.log("function*getCinemaListSaga -> err", err.response);
   }
-  yield delay(1000);
-  yield put(actCloseGlobalLoading());
 }
 
-function* getCinemaBrachSaga({ maHeThongRap }) {
-  const response = yield call(getCinemaBranchesApi, maHeThongRap);
-  const { data, status } = response;
-  if (status === STATUS.SUCCESS) {
-    yield put(actGetCinemaBranchSuccess(data));
+function* getCinemaBranchSaga({ maHeThongRap }) {
+  try {
+    const response = yield call(getCinemaBranchesApi, maHeThongRap);
+    const { data, status } = response;
+    if (status === STATUS.SUCCESS) {
+      yield put(
+        actGetCinemaBranchSuccess({
+          data,
+          maHeThongRap: maHeThongRap.maHeThongRap,
+        })
+      );
+    }
+    //lấy danh sách phim theo thằng cinema đầu tiên
+    yield delay(100);
+    yield put(actGetShowTimeDetail(data[0].maCumRap));
+  } catch (err) {
+    console.log("function*getCinemaBranchSaga -> err", err.response);
   }
-}
-
-function* getCinemaBrachFirstSaga({ maHeThongRap }) {
-  yield put(actOpenGlobalLoading());
-
-  const response = yield call(getCinemaBranchesApi, maHeThongRap);
-  const { data, status } = response;
-  if (status === STATUS.SUCCESS) {
-    yield put(actGetCinemaBranchSuccess(data));
-  }
-  yield delay(1000);
-  yield put(actCloseGlobalLoading());
 }
 
 function* getShowTimeAllSaga({ maHeThongRap }) {
@@ -96,17 +112,17 @@ function* getShowTimeAllSaga({ maHeThongRap }) {
 
 function* filterByNameSaga({ MaPhim }) {
   try {
-    yield put(actOpenGlobalLoading());
+    yield put(actOpenFilterLoading());
 
     const response = yield call(getMovieDetailApi, MaPhim);
     const { status, data } = response;
     if (status === STATUS.SUCCESS) {
       yield put(actFilterByNameSuccess(data));
     }
-    yield put(actCloseGlobalLoading());
+    yield put(actCloseFilterLoading());
   } catch (err) {
     console.log("function*filterByNameSaga -> err", err.response);
-    yield put(actCloseGlobalLoading());
+    yield put(actCloseFilterLoading());
   }
 }
 
@@ -165,12 +181,8 @@ function* watchGetCinemaList() {
   yield takeLatest(ActionType.GET_CINEMA_LIST, getCinemaListSaga);
 }
 
-function* watchGetCinemaBrach() {
-  yield takeLatest(ActionType.GET_CINEMA_BRANCH, getCinemaBrachSaga);
-}
-
-function* watchGetCinemaBrachFirst() {
-  yield takeLatest(ActionType.GET_CINEMA_BRANCH_FIRST, getCinemaBrachFirstSaga);
+function* watchGetCinemaBranch() {
+  yield takeLatest(ActionType.GET_CINEMA_BRANCH, getCinemaBranchSaga);
 }
 
 function* watchGetShowTimeAll() {
@@ -193,8 +205,7 @@ export default [
   watchGetMovieList(),
   watchGetMovieDetail(),
   watchGetCinemaList(),
-  watchGetCinemaBrach(),
-  watchGetCinemaBrachFirst(),
+  watchGetCinemaBranch(),
   watchGetShowTimeAll(),
   watchFilterByName(),
   watchGetSeatList(),

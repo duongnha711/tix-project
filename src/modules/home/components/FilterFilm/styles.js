@@ -31,17 +31,18 @@ const useStyles = makeStyles((theme) => ({
   time: {
     width: 110,
   },
-
   loading: {
     position: "absolute",
-    top: 0,
-    left: 0,
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%,-50%)",
     zIndex: 990,
   },
-  
   [theme.breakpoints.down("980")]: {
     container: {
-      position: "unset",
+      position: "relative",
+      top: 0,
+      left: 0,
       transform: "unset",
       width: "70%",
       display: "block",

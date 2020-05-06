@@ -5,13 +5,14 @@ import Banner from "../../modules/home/components/Banner";
 import InfoCinema from "../../modules/home/components/InfoCinema/index.js";
 import News from "../../modules/home/components/News/index.js";
 import Showtime from "../../modules/home/components/Showtime/index.js";
+// import { sendRequest } from "./../../functions/effect";
 import {
-actGetCinemaBranch,
-  // actGetCinemaBranchFirst,
-  actGetCinemaList, actGetMovieList, actGetShowTimeAll, actGetShowTimeDetail
+  actGetCinemaBranch,
+  actGetCinemaList,
+  actGetMovieList,
+  actGetShowTimeAll,
+  actGetShowTimeDetail,
 } from "./../../modules/home/actions";
-
-
 
 function HomePage(props) {
   const {
@@ -20,30 +21,54 @@ function HomePage(props) {
     cinemaList,
     cinemaBrach,
     showTimeDetail,
+    maHeThongRap,
+    maCumRap,
   } = props;
   useEffect(() => {
     dispatch(actGetMovieList());
     dispatch(actGetCinemaList());
-    // tạm đóng
-    // dispatch(actGetCinemaBranchFirst({ maHeThongRap: "CGV" }));
   }, [dispatch]);
 
   const handleGetCinemaBrach = (maHeThongRap) => {
     dispatch(actGetCinemaBranch({ maHeThongRap }));
     dispatch(actGetShowTimeAll({ maHeThongRap }));
+    // dispatch()
   };
 
   //lay lich chieu theo cum rap
   const handleGetShowTimeDetail = (maCumRap) => {
-    dispatch(actGetShowTimeDetail(maCumRap));
+    dispatch(actGetShowTimeDetail(maCumRap)); 
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // //test
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  //     const LayThongTinLichChieuHeThongRap = await sendRequest({
+  //       url:
+  //         "http://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maHeThongRap=BHDStar&maNhom=GP10",
+  //     });
+  //     console.log(
+  //       "getData -> LayThongTinLichChieuHeThongRap",
+  //       LayThongTinLichChieuHeThongRap.data
+  //     );
+
+  //     //~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  //   };
+  //   getData();
+  // }, []);
 
   return (
     <Fragment>
       <Banner />
       <Showtime movieList={movieList} />
       <InfoCinema
+        maCumRap={maCumRap}
+        maHeThongRap={maHeThongRap}
         cinemaList={cinemaList}
         handleGetCinemaBrach={handleGetCinemaBrach}
         cinemaBrach={cinemaBrach}
@@ -61,6 +86,8 @@ const mapStateToProps = (state) => ({
   cinemaList: state.home.cinemaList,
   cinemaBrach: state.home.cinemaBrach,
   showTimeDetail: state.home.showTimeDetail,
+  maHeThongRap: state.home.maHeThongRap,
+  maCumRap: state.home.maCumRap,
 });
 
 export default connect(mapStateToProps)(HomePage);

@@ -1,6 +1,5 @@
-import React from "react";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { Box } from "@material-ui/core";
+import React from "react";
 
 export default function InternalLoading({ ...options }) {
   return (
@@ -8,8 +7,8 @@ export default function InternalLoading({ ...options }) {
       <img
         src="/images/filterLoading.gif"
         alt="filterLoading"
-        width="50"
-        height="50"
+        width="100"
+        height="100"
       />
     </Box>
   );

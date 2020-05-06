@@ -15,23 +15,44 @@ const useStyles = makeStyles((theme) => ({
   listLogo: {
     minWidth: 90,
     borderRight: "1px solid rgba(0,0,0,0.12)",
+    maxHeight: 600,
+    overflowY: "auto",
   },
   itemLogo: {
     padding: 20,
     cursor: "pointer",
+    opacity: 0.3,
+    transition: "all 0.1s linear",
+    "&:hover": {
+      opacity: 1,
+    },
+
     "& img": {
       width: "50px",
     },
   },
+  activeLogo: {
+    opacity: 1,
+  },
   listCinema: {
-    minWidth: 282,
+    width: 282,
     borderRight: "1px solid rgba(0,0,0,0.12)",
+    maxHeight: 600,
+    overflowY: "auto",
   },
   itemCinema: {
     display: "flex",
     alignItems: "center",
     padding: 20,
     cursor: "pointer",
+    opacity: 0.3,
+    transition: "all 0.1s linear",
+    "&:hover": {
+      opacity: 1,
+    },
+  },
+  activeCinema: {
+    opacity: 1,
   },
   contentCinema: {
     flexGrow: 1,
@@ -56,19 +77,30 @@ const useStyles = makeStyles((theme) => ({
   },
   listMovie: {
     flexGrow: 1,
-    overflow: "hidden",
+    maxHeight: 600,
+    overflowY: "auto",
   },
   itemMovie: {
     padding: "20px",
     display: "flex",
-    cursor: "pointer",
   },
-  imgMovie: {
+
+  wrapperImg: {
+    width: 107, // kích thước width mong muốn
+    borderRadius: 4,
     overflow: "hidden",
-    height: 155,
-    minWidth: 107,
+  },
+  contentImg: {
+    paddingTop: "143%", // dựa theo width thẻ bọc nó
+    position: "relative",
     "& img": {
       width: "100%",
+      height: "100%",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
     },
   },
   contentMovie: {
@@ -106,6 +138,13 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     marginRight: 10,
+  },
+  timeDetail: {
+    marginRight: 10,
+    cursor: "pointer",
+  },
+  activeDate: {
+    color: "red",
   },
   [theme.breakpoints.down("1140")]: {
     container: {

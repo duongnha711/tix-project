@@ -5,32 +5,37 @@ import { connect } from "react-redux";
 import { actGetMovieDetail } from "./../../modules/home/actions";
 import useStyles from "./styles";
 
-
 function MovieDetail(props) {
   const classes = useStyles();
   const { dispatch, match, movieDetail } = props;
-  console.log("MovieDetail -> movieDetail", movieDetail)
   const { params } = match;
 
-  const handleAddDefaultImage = (e) => {
-    e.target.src = "/images/emptyIMG.png";
+  const addEmptyImg = (e) => {
+    e.target.src = "/images/defaultImage.png";
   };
 
   useEffect(() => {
     dispatch(actGetMovieDetail(params));
   }, [dispatch, params]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Box className={classes.movieDetail}>
       <Box className={classes.container}>
         <Box className={classes.topDetail}>
           <Box className={classes.textDetail}>
-            <img
-              onError={handleAddDefaultImage}
-              src={movieDetail.hinhAnh}
-              alt={movieDetail.biDanh}
-              width="217px"
-            />
+            <Box className={classes.wrapperImg}>
+              <Box className={classes.contentImg}>
+                <img
+                  onError={addEmptyImg}
+                  src={movieDetail.hinhAnh}
+                  alt={movieDetail.biDanh}
+                />
+              </Box>
+            </Box>
             <Box marginLeft={2}>
               <Typography className={classes.titleMovie} variant="h5">
                 <span className={classes.ageType}>C16</span>{" "}
