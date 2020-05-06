@@ -16,8 +16,7 @@ export default function MobileApp() {
                 Ứng dụng tiện lợi cho người yêu điện ảnh!
               </Typography>
               <Typography className={classes.text} variant="h6">
-                Không chỉ đặt vé, bạn còn có thể bình luận phim, chấm điểm rạp
-                và đổi quà hấp dẫn.
+                Không chỉ đặt vé, bạn còn có thể đổi quà hấp dẫn.
               </Typography>
               <Button
                 className={classes.button}
@@ -27,7 +26,7 @@ export default function MobileApp() {
               >
                 App miễn phí - Tải về!
               </Button>
-              <Typography>Tix có 2 phiên bản iOS & Android</Typography>
+              <Typography>Download 2 phiên bản iOS & Android</Typography>
             </Box>
           </Grid>
           <Grid className={classes.mobileContent} item xs={12} lg={6}>

@@ -4,7 +4,6 @@ import * as themeColor from "./../../commons/theme";
 const useStyles = makeStyles((theme) => ({
   wrapperUser: {
     backgroundImage: "url('/images/backApp.jpg')",
-    height: 620,
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",

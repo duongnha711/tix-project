@@ -153,7 +153,6 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: 0,
   },
   dateMovie: {
-    cursor: "pointer",
     marginRight: 10,
     marginBottom: 5,
     cursor: "pointer",

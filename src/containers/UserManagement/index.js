@@ -19,7 +19,7 @@ import cn from "classnames";
 function UserManagement(props) {
   const classes = useStyles();
 
-  const [suitShow, setSuitShow] = useState("info");
+  const [suitShow, setSuitShow] = useState("history");
 
   const {
     dispatch,
