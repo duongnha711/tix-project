@@ -1,15 +1,17 @@
 import { Box, Divider, Paper, Typography } from "@material-ui/core";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import useStyles from "./styles";
 import cn from "classnames";
+import {
+  removeDuplicateInArr,
+  changeFormateDate,
+  convertFrom24To12Format,
+} from "../../../../functions/helper";
+import { useHistory } from "react-router-dom";
 
 export default function InfoCinema(props) {
   const classes = useStyles();
-
-  //state cho time va date
-  const [dateState, SetDateState] = useState("");
-
   const {
     cinemaList,
     cinemaBrach,
@@ -17,6 +19,10 @@ export default function InfoCinema(props) {
     maHeThongRap,
     maCumRap,
   } = props;
+
+  const [choseDate, SetChoseDate] = useState("");
+
+  const history = useHistory();
 
   const renderCinemaLogo = () => {
     if (Array.isArray(cinemaList) && cinemaList.length > 0) {
@@ -93,8 +99,6 @@ export default function InfoCinema(props) {
               </Paper>
             </Box>
             <Box className={classes.contentMovie}>
-              {/* //date */}
-              <Box display="flex">{renderDate(movie.lstLichChieuTheoPhim)}</Box>
               <Typography className={classes.titleMovie} variant="h5">
                 {movie.tenPhim}
               </Typography>
@@ -108,13 +112,8 @@ export default function InfoCinema(props) {
               </Typography>
 
               <Box className={classes.time}>
-                <Box className={classes.timeView}>
-                  <AccessTimeIcon fontSize="small" />
-                  View Time
-                </Box>
-
-                <Box key={index} className={classes.timeDetail}>
-                  17h
+                <Box key={index} display="flex" flexWrap="wrap">
+                  {renderHour(movie.maPhim)}
                 </Box>
               </Box>
             </Box>
@@ -126,25 +125,82 @@ export default function InfoCinema(props) {
     }
   };
 
-  const renderDate = (arrDateTime) => {
-    if (arrDateTime && arrDateTime.length > 0) {
-      return arrDateTime.map((item, index) => {
+  //set State thang dau tien cho date
+  useEffect(() => {
+    if (showTimeDetail && showTimeDetail.length > 0) {
+      SetChoseDate(
+        showTimeDetail[0].lstLichChieuTheoPhim[0].ngayChieuGioChieu.substring(
+          0,
+          10
+        )
+      );
+    }
+  }, [showTimeDetail]);
+
+  const renderDate = () => {
+    let arrDate = [];
+    if (showTimeDetail && showTimeDetail.length > 0) {
+      showTimeDetail.forEach((item) => {
+        item.lstLichChieuTheoPhim.forEach((subItem) => {
+          arrDate.push(subItem.ngayChieuGioChieu.substring(0, 10));
+        });
+      });
+    }
+    arrDate = removeDuplicateInArr(arrDate);
+    return arrDate.map((item, index) => {
+      return (
+        <Box
+          onClick={() => {
+            handleClickDate(item);
+          }}
+          className={cn(
+            classes.dateMovie,
+            item === choseDate && classes.activeDate
+          )}
+          marginRight={1}
+          key={index}
+        >
+          {changeFormateDate(item)}
+        </Box>
+      );
+    });
+  };
+
+  const renderHour = (maPhim) => {
+    let arrHour = [];
+    showTimeDetail.forEach((item) => {
+      if (item.maPhim === maPhim) {
+        item.lstLichChieuTheoPhim.forEach((subItem) => {
+          if (subItem.ngayChieuGioChieu.substring(0, 10) === choseDate) {
+            arrHour.push({
+              ngayChieuGioChieu: subItem.ngayChieuGioChieu,
+              maLichChieu: subItem.maLichChieu,
+            });
+          }
+        });
+      }
+    });
+    if (arrHour && arrHour.length > 0) {
+      return arrHour.map((item) => {
         return (
           <Box
             onClick={() => {
-              handleClickDateOfMovie(item.ngayChieuGioChieu.substring(0, 10));
+              handleClickHour(item.maLichChieu);
             }}
-            key={index}
-            className={cn(
-              classes.timeDetail,
-              dateState === item.ngayChieuGioChieu.substring(0, 10) &&
-                classes.activeDate
-            )}
+            key={item.maLichChieu}
+            className={classes.timeDetail}
           >
-            {item.ngayChieuGioChieu.substring(0, 10)}
+            {convertFrom24To12Format(
+              item.ngayChieuGioChieu.substring(
+                11,
+                item.ngayChieuGioChieu.length
+              )
+            )}
           </Box>
         );
       });
+    } else {
+      return <Box>Không có suất chiếu</Box>;
     }
   };
 
@@ -156,9 +212,12 @@ export default function InfoCinema(props) {
     props.handleGetShowTimeDetail(maCumRap);
   };
 
-  const handleClickDateOfMovie = (date) => {
-    SetDateState(date)
-    console.log("handleClickDateOfMovie -> date", date);
+  const handleClickDate = (date) => {
+    SetChoseDate(date);
+  };
+
+  const handleClickHour = (maLichChieu) => {
+    history.push(`/booking-ticket/${maLichChieu}`);
   };
 
   const addEmptyImage = (e) => {
@@ -173,7 +232,13 @@ export default function InfoCinema(props) {
             <Box className={classes.listLogo}>{renderCinemaLogo()}</Box>
             <Box className={classes.listCinema}>{renderCinemaBranch()}</Box>
           </Box>
-          <Box className={classes.listMovie}>{renderMovie()}</Box>
+
+          <Box className={classes.listMovie}>
+            <Box className={classes.listDate} flexWrap="wrap" display="flex">
+              {renderDate()}
+            </Box>
+            {renderMovie()}
+          </Box>
         </Box>
       </Paper>
     </Box>

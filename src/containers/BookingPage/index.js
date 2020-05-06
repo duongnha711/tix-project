@@ -189,11 +189,11 @@ function BookingPage(props) {
     if (infoMovieForTicket.gioChieu) {
       let time = infoMovieForTicket.gioChieu;
 
-      if (time.substring(0, 2) === "10") {
-        time = time.substring(0, 3) + "10 am";
-      } else {
-        time = time.substring(0, 3) + "10 pm";
-      }
+      // if (time.substring(0, 2) === "10") {
+      //   time = time.substring(0, 3) + "10 am";
+      // } else {
+      //   time = time.substring(0, 3) + "10 pm";
+      // }
       return time;
     }
   };
