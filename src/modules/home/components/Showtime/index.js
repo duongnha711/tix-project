@@ -4,7 +4,9 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
+// import FilterFilm from "../FilterFilm";
 import FilterFilm from "../FilterFilm";
+
 import useStyles from "./styles";
 
 function Arrow(props) {

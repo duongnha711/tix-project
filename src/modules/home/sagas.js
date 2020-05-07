@@ -1,9 +1,38 @@
 import { call, delay, put, takeLatest } from "redux-saga/effects";
 import Alert from "../../components/Alert";
-import { actCloseFilterLoading, actCloseGlobalLoading, actOpenFilterLoading, actOpenGlobalLoading } from "./../../commons/actions";
-import { actBookTicketSuccess, actFilterByNameSuccess, actGetCinemaBranch, actGetCinemaBranchSuccess, actGetCinemaListSuccess, actGetDetailMovieOfficialSuccess, actGetMovieListSuccess, actGetSeatListSuccess, actGetShowTimeAll, actGetShowTimeAllSuccess, actGetShowTimeDetail } from "./actions";
+import {
+  actCloseFilterLoading,
+  actCloseGlobalLoading,
+  actOpenFilterLoading,
+  actOpenGlobalLoading,
+} from "./../../commons/actions";
+import {
+  actBookTicketSuccess,
+  actFilterByNameSuccess,
+  actGetCinemaBranch,
+  actGetCinemaBranchSuccess,
+  actGetCinemaListSuccess,
+  actGetDetailMovieOfficialSuccess,
+  actGetMovieListSuccess,
+  actGetSeatListSuccess,
+  actGetShowTimeAll,
+  actGetShowTimeAllSuccess,
+  actGetShowTimeDetail,
+  actFilterByNameOfficial,
+  actFilterByNameOfficialSuccess,
+} from "./actions";
 import * as ActionType from "./constants";
-import { bookTicketApi, getCinemaBranchesApi, getCinemaListApi, getMovieDetailApi, getMovieDetailOfficialApi, getMovieListApi, getSeatListApi, getShowTimeAllApi } from "./handler";
+import {
+  bookTicketApi,
+  getCinemaBranchesApi,
+  getCinemaListApi,
+  getMovieDetailApi,
+  getMovieDetailOfficialApi,
+  getMovieListApi,
+  getSeatListApi,
+  getShowTimeAllApi,
+  filterByNameOfficialApi,
+} from "./handler";
 import STATUS from "./status";
 
 function* getMovieListSaga() {
@@ -13,7 +42,7 @@ function* getMovieListSaga() {
     const { data, status } = response;
     if (status === STATUS.SUCCESS) {
       yield put(actGetMovieListSuccess(data));
-      // yield put(actFilterByName({ MaPhim: data[0].maPhim })); //chi lay thang dau tien
+      yield put(actFilterByNameOfficial({ MaPhim: data[0].maPhim })); //chi lay thang dau tien
     }
 
     yield delay(1000);
@@ -33,6 +62,7 @@ function* getCinemaListSaga() {
     const { data, status } = response;
     if (status === STATUS.SUCCESS) {
       yield put(actGetCinemaListSuccess(data));
+      yield delay(50); // có thể bỏ
       //lấy branch theo thằng logo đầu tiên
       yield put(actGetCinemaBranch({ maHeThongRap: data[0].maHeThongRap }));
       yield put(actGetShowTimeAll({ maHeThongRap: data[0].maHeThongRap }));
@@ -57,7 +87,7 @@ function* getCinemaBranchSaga({ maHeThongRap }) {
       );
     }
     //lấy danh sách phim theo thằng cinema đầu tiên
-    yield delay(200);
+    yield delay(50); //bắt buộc phải có nếu ko lỗi
     yield put(actGetShowTimeDetail(data[0].maCumRap));
   } catch (err) {
     console.log("function*getCinemaBranchSaga -> err", err.response);
@@ -153,6 +183,23 @@ function* getDetailMovieOfficialSaga({ maPhim }) {
   }
 }
 
+function* filterByNameOfficialSaga({ maPhim }) {
+  try {
+    const response = yield call(filterByNameOfficialApi, maPhim);
+    const { data, status } = response;
+    if (status === STATUS.SUCCESS) {
+      yield put(actFilterByNameOfficialSuccess(data));
+    }
+  } catch (err) {
+    if (err.response) {
+      console.log(
+        "function*filterByNameOfficialSaga -> err.response",
+        err.response
+      );
+    }
+  }
+}
+
 //watch~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function* watchGetMovieList() {
@@ -190,6 +237,13 @@ function* watchGetDetailMovieOfficial() {
   );
 }
 
+function* watchFilterByNameOfficial() {
+  yield takeLatest(
+    ActionType.FILTER_BY_NAME_OFFICIAL,
+    filterByNameOfficialSaga
+  );
+}
+
 export default [
   watchGetMovieList(),
   watchGetCinemaList(),
@@ -199,4 +253,5 @@ export default [
   watchGetSeatList(),
   watchBookTicket(),
   watchGetDetailMovieOfficial(),
+  watchFilterByNameOfficial(),
 ];

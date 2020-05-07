@@ -1,89 +1,70 @@
 import { makeStyles } from "@material-ui/core/styles";
-// import { primaryColor } from "./../../../../commons/theme";
+// import * as themeColor from "./../../../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    width: 940,
+    width: 950,
     margin: "0 auto",
-    padding: "15px 10px",
-
+    padding: 15,
     display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
 
     position: "absolute",
-    top: "-35px",
-    left: "50%",
-    zIndex: 99,
-    transform: "translateX(-50%)",
-  },
-  name: {
-    width: 282,
-    marginRight: 10,
-  },
-  cinema: {
-    width: 200,
-  },
-  date: {
-    width: 130,
-    marginRight: 10,
-  },
-  time: {
-    width: 110,
-  },
-  loading: {
-    position: "absolute",
-    top: "50%",
+    top: -5,
     left: "50%",
     transform: "translate(-50%,-50%)",
-    zIndex: 990,
+    zIndex: 100,
+  },
+  wrapperSelect: {
+    display: "flex",
+  },
+  nameSelect: {
+    width: 280,
+    marginRight: 10,
+  },
+  branchSelect: {
+    width: 230,
+    marginRight: 10,
+  },
+  dateSelect: {
+    width: 120,
+    marginRight: 10,
+  },
+  hourSelect: {
+    width: 110,
+    marginRight: 10,
   },
   [theme.breakpoints.down("980")]: {
     container: {
-      position: "relative",
-      top: 0,
-      left: 0,
-      transform: "unset",
-      width: "70%",
+      width: "80%",
       display: "block",
+      position: "unset",
+      top: "unset",
+      left: "unset",
+      transform: "unset",
+    },
+    nameSelect: {
+      width: "100%",
+      marginBottom: 10,
+    },
+    branchSelect: {
+      width: "100%",
+      marginBottom: 10,
+    },
+    dateSelect: {
+      width: "100%",
+      marginBottom: 10,
+    },
+    hourSelect: {
+      width: "100%",
+      marginBottom: 10,
+    },
+    button: {
       textAlign: "center",
-      "& .MuiFormControl-root": {
-        display: "block",
-        width: "48%",
-      },
-    },
-    wrapperItem: {
-      marginBottom: 15,
-    },
-    name: {
-      width: "100%",
-      marginRight: 0,
-    },
-    cinema: {
-      width: "100%",
-    },
-    date: {
-      width: "100%",
-      marginRight: 0,
-    },
-    time: {
-      width: "100%",
     },
   },
-  [theme.breakpoints.down("600")]: {
-    wrapperItem: {
+  [theme.breakpoints.down("610")]: {
+    wrapperSelect: {
       display: "block",
-    },
-    container: {
-      "& .MuiFormControl-root": {
-        width: "100%",
-      },
-    },
-    name: {
-      marginBottom: 15,
-    },
-    date: {
-      marginBottom: 15,
     },
   },
 }));

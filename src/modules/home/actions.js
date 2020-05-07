@@ -151,3 +151,17 @@ export const actGetDetailMovieOfficialSuccess = (payload) => {
     payload,
   };
 };
+
+export const actFilterByNameOfficial = (maPhim) => {
+  return {
+    type: ActionType.FILTER_BY_NAME_OFFICIAL,
+    maPhim,
+  };
+};
+
+export const actFilterByNameOfficialSuccess = (payload) => {
+  return {
+    type: ActionType.FILTER_BY_NAME_OFFICIAL_SUCCESS,
+    payload,
+  };
+};

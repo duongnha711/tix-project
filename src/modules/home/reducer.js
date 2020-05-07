@@ -24,6 +24,8 @@ const initialState = {
   maHeThongRap: "",
   maCumRap: "",
 
+  arrFilterByName: [],
+
   //ticket
   infoMovieForTicket: {},
   arrNormalSeatList: [],
@@ -187,6 +189,11 @@ const homeReducer = (state = initialState, action) => {
     case ActionType.GET_MOVIE_DETAIL_OFFICIAL_SUCCESS: {
       const { payload } = action;
       return { ...state, movieDetail: payload };
+    }
+
+    case ActionType.FILTER_BY_NAME_OFFICIAL_SUCCESS: {
+      const { payload } = action;
+      return { ...state, arrFilterByName: payload };
     }
 
     default:
