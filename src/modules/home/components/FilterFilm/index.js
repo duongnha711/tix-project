@@ -1,201 +1,313 @@
-import { Box, Button, Paper } from "@material-ui/core";
-import React from "react";
-import { connect } from "react-redux";
+import { Box, Select, Button, Paper, FormControl } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
 import {
   changeFormateDate,
   convertFrom24To12Format,
-  getUniqueListByCinema,
-  getUniqueListByDate,
+  removeDuplicateInArr,
 } from "../../../../functions/helper";
-import SelectInput from "./../../../../components/SelectInput";
-import {
-  actChangeShowTimeCode,
-  actFilterByCinema,
-  actFilterByDay,
-  actFilterByName,
-} from "./../../actions";
 import useStyles from "./styles";
 import { useHistory } from "react-router-dom";
-import Alert from "../../../../components/Alert";
-import InternalLoading from "./../../../../components/InternalLoading";
+import { connect } from "react-redux";
+import { actFilterByNameOfficial } from "../../actions";
 
 function FilterFilm(props) {
   const classes = useStyles();
-  const {
-    dispatch,
-    movieList,
-    arrShowTimeOfOneMovie,
-    arrDateOfOneMovie,
-    arrHourOfOneMovie,
-    maLichChieu,
-    activeName,
-    isShowFilterLoading,
-  } = props;
-  let history = useHistory();
+  const { dispatch, arrFilterByName, movieList } = props;
+  const history = useHistory();
 
-  const renderMovieList = () => {
-    if (movieList && movieList.length > 0) {
-      return movieList.map((movie) => (
-        <option key={movie.maPhim} value={movie.maPhim}>
-          {movie.tenPhim}
-        </option>
-      ));
-    }
-  };
+  const [maCumRap, setMaCumRap] = useState("");
+  const [activeDate, setActiveDate] = useState("");
+  const [maLichChieu, setMaLichChieu] = useState("");
 
-  const renderCinemaList = () => {
-    const arrUniqueShowTimeOfOneMovie = getUniqueListByCinema(
-      arrShowTimeOfOneMovie,
-      "thongTinRap",
-      "tenCumRap"
-    );
-    if (arrUniqueShowTimeOfOneMovie && arrUniqueShowTimeOfOneMovie.length > 0) {
-      return arrUniqueShowTimeOfOneMovie.map((cinema, index) => {
-        const { thongTinRap } = cinema;
-        return (
-          <option key={index} value={thongTinRap.maCumRap}>
-            {thongTinRap.tenCumRap}
-          </option>
-        );
-      });
-    }
-  };
-
-  const renderDateList = () => {
-    const arrUniqueDateOfOneMovie = getUniqueListByDate(
-      arrDateOfOneMovie,
-      "ngayChieuGioChieu"
-    );
-    if (arrUniqueDateOfOneMovie && arrUniqueDateOfOneMovie.length > 0) {
-      return arrUniqueDateOfOneMovie.map((cinema, index) => {
-        const valueDay = cinema.ngayChieuGioChieu.substring(0, 10);
-        const showDay = changeFormateDate(valueDay);
-        return (
-          <option key={index} value={valueDay}>
-            {showDay}
-          </option>
-        );
-      });
-    }
-  };
-
-  const renderHourList = () => {
+  //active cinema dau tien
+  useEffect(() => {
     if (
-      arrHourOfOneMovie &&
-      arrHourOfOneMovie.length > 0 &&
-      arrDateOfOneMovie.length > 0
+      arrFilterByName.heThongRapChieu &&
+      arrFilterByName.heThongRapChieu.length > 0
     ) {
-      return arrHourOfOneMovie.map((cinema, index) => {
-        const subHour = cinema.ngayChieuGioChieu.substring(
-          11,
-          cinema.ngayChieuGioChieu.length
-        );
-        const showHour = convertFrom24To12Format(subHour);
+      setMaCumRap(arrFilterByName.heThongRapChieu[0].cumRapChieu[0].maCumRap);
+    }
+  }, [arrFilterByName]);
+  //active hour dau tien
+  useEffect(() => {
+    let arrHour = [];
+    if (
+      arrFilterByName.heThongRapChieu &&
+      arrFilterByName.heThongRapChieu.length > 0
+    ) {
+      arrFilterByName.heThongRapChieu.forEach((item) => {
+        // if (item.maHeThongRap === maHeThongRap) {
+        if (item.cumRapChieu && item.cumRapChieu.length > 0) {
+          item.cumRapChieu.forEach((cinema) => {
+            if (cinema.maCumRap === maCumRap) {
+              if (cinema.lichChieuPhim && cinema.lichChieuPhim.length > 0) {
+                cinema.lichChieuPhim.forEach((hour) => {
+                  if (activeDate === hour.ngayChieuGioChieu.substring(0, 10)) {
+                    arrHour.push(hour);
+                  }
+                });
+              }
+            }
+          });
+          // }
+        }
+      });
+    }
+    if (arrHour && arrHour.length > 0) {
+      setMaLichChieu(arrHour[0].maLichChieu);
+    } else {
+      setMaLichChieu("");
+    }
+  }, [arrFilterByName, maCumRap, activeDate]);
 
+  //active date dau tien
+  useEffect(() => {
+    if (
+      arrFilterByName.heThongRapChieu &&
+      arrFilterByName.heThongRapChieu.length > 0
+    ) {
+      arrFilterByName.heThongRapChieu.forEach((item) => {
+        // if (item.maHeThongRap === maHeThongRap) {
+        if (item.cumRapChieu && item.cumRapChieu.length > 0) {
+          item.cumRapChieu.forEach((cinema) => {
+            if (cinema.maCumRap === maCumRap) {
+              setActiveDate(
+                cinema.lichChieuPhim[0].ngayChieuGioChieu.substring(0, 10)
+              );
+            }
+          });
+        }
+        // }
+      });
+    }
+  }, [arrFilterByName, maCumRap]);
+
+  const renderNameList = () => {
+    if (movieList && movieList.length > 0) {
+      return movieList.map((item) => {
         return (
-          <option key={index} value={cinema.maLichChieu}>
-            {showHour}
+          <option key={item.maPhim} value={item.maPhim}>
+            {item.tenPhim}
           </option>
         );
       });
+    } else {
+      return <option>Không có suất chiếu</option>;
+    }
+  };
+
+  const renderBranch = () => {
+    if (
+      arrFilterByName.heThongRapChieu &&
+      arrFilterByName.heThongRapChieu.length > 0
+    ) {
+      let arrBranch = [];
+      arrFilterByName.heThongRapChieu.forEach((item) => {
+        // if (item.maHeThongRap === maHeThongRap) {
+        item.cumRapChieu.forEach((cinema) => {
+          arrBranch.push({
+            maCumRap: cinema.maCumRap,
+            tenCumRap: cinema.tenCumRap,
+          });
+        });
+        // }
+      });
+      if (arrBranch && arrBranch.length > 0) {
+        return arrBranch.map((item) => {
+          return (
+            <option value={item.maCumRap} key={item.maCumRap}>
+              {item.tenCumRap}
+            </option>
+          );
+        });
+      }
+    } else {
+      return <option>Không có suất chiếu</option>;
+    }
+  };
+
+  const renderDate = () => {
+    if (
+      arrFilterByName.heThongRapChieu &&
+      arrFilterByName.heThongRapChieu.length > 0
+    ) {
+      let arrLichChieu = [];
+      arrFilterByName.heThongRapChieu.forEach((item) => {
+        // if (item.maHeThongRap === maHeThongRap) {
+        item.cumRapChieu.forEach((cinema) => {
+          if (cinema.maCumRap === maCumRap) {
+            arrLichChieu = cinema.lichChieuPhim;
+          }
+        });
+        // }
+      });
+
+      if (arrLichChieu && arrLichChieu.length > 0) {
+        let arrDate = [];
+        arrLichChieu.forEach((item) => {
+          arrDate.push(item.ngayChieuGioChieu.substring(0, 10));
+        });
+
+        if (arrDate && arrDate.length > 0) {
+          return removeDuplicateInArr(arrDate).map((item, index) => {
+            return (
+              <option value={item} key={index}>
+                {changeFormateDate(item)}
+              </option>
+            );
+          });
+        }
+      }
+    } else {
+      return <option>Không có suất chiếu</option>;
+    }
+  };
+
+  const renderHour = () => {
+    if (
+      arrFilterByName.heThongRapChieu &&
+      arrFilterByName.heThongRapChieu.length > 0
+    ) {
+      let arrLichChieu = [];
+      arrFilterByName.heThongRapChieu.forEach((item) => {
+        // if (item.maHeThongRap === maHeThongRap) {
+        item.cumRapChieu.forEach((cinema) => {
+          if (cinema.maCumRap === maCumRap) {
+            arrLichChieu = cinema.lichChieuPhim;
+          }
+        });
+        // }
+      });
+
+      if (arrLichChieu && arrLichChieu.length > 0) {
+        let arrHour = [];
+        arrLichChieu.forEach((item) => {
+          arrHour.push({
+            ngayChieuGioChieu: item.ngayChieuGioChieu,
+            maLichChieu: item.maLichChieu,
+          });
+        });
+
+        if (arrHour && arrHour.length > 0) {
+          const arrHourToShow = [];
+          arrHour.forEach((item) => {
+            if (item.ngayChieuGioChieu.substring(0, 10) === activeDate) {
+              arrHourToShow.push(item);
+            }
+          });
+
+          if (arrHourToShow && arrHourToShow.length > 0) {
+            return arrHourToShow.map((item) => {
+              return (
+                <option key={item.maLichChieu} value={item.maLichChieu}>
+                  {convertFrom24To12Format(
+                    item.ngayChieuGioChieu.substring(
+                      11,
+                      item.ngayChieuGioChieu.length
+                    )
+                  )}
+                </option>
+              );
+            });
+          }
+        }
+      }
+    } else {
+      return <option>Không có suất chiếu</option>;
     }
   };
 
   const handleChooseName = (e) => {
     const { value } = e.target;
-    dispatch(actFilterByName({ MaPhim: value }));
+    const maPhim = { MaPhim: value };
+    dispatch(actFilterByNameOfficial(maPhim));
   };
 
   const handleChooseCinema = (e) => {
     const { value } = e.target;
-    dispatch(actFilterByCinema(value));
+    setMaCumRap(value);
   };
 
   const handleChooseDate = (e) => {
     const { value } = e.target;
-    dispatch(actFilterByDay(value));
+    setActiveDate(value);
   };
 
   const handleChooseHour = (e) => {
     const { value } = e.target;
-    dispatch(actChangeShowTimeCode(value));
+    setMaLichChieu(value);
   };
 
-  const handleBuySticket = () => {
-    if (!maLichChieu) {
-      Alert({ text: "Vui lòng chọn đủ thông tin", icon: "warning" });
-    } else {
+  const handleOnclick = () => {
+    if (maLichChieu) {
       history.push(`/booking-ticket/${maLichChieu}`);
+    } else {
+      alert("ma lich chieu rong~");
     }
   };
 
   return (
-    <Paper elevation={3} className={classes.container}>
-      {isShowFilterLoading && <InternalLoading className={classes.loading} />}
-      <Box
-        className={classes.wrapperItem}
-        justifyContent="space-between"
-        display="flex"
-      >
-        <SelectInput
-          defaultValue=""
-          onChange={handleChooseName}
-          className={classes.name}
-        >
-          {renderMovieList()}
-        </SelectInput>
+    <Paper className={classes.container}>
+      <Box className={classes.wrapperSelect}>
+        <FormControl className={classes.nameSelect} size="small">
+          <Select
+            onChange={handleChooseName}
+            defaultValue={maCumRap}
+            native
+            variant="outlined"
+          >
+            {renderNameList()}
+          </Select>
+        </FormControl>
 
-        <SelectInput
-          value={activeName}
-          onChange={handleChooseCinema}
-          className={classes.cinema}
-        >
-          <option value="">Chọn rạp</option>
-
-          {renderCinemaList()}
-        </SelectInput>
+        <FormControl className={classes.branchSelect} size="small">
+          <Select
+            onChange={handleChooseCinema}
+            defaultValue={maCumRap}
+            native
+            variant="outlined"
+          >
+            {renderBranch()}
+          </Select>
+        </FormControl>
       </Box>
-      <Box
-        className={classes.wrapperItem}
-        justifyContent="space-between"
-        display="flex"
-      >
-        <SelectInput onChange={handleChooseDate} className={classes.date}>
-          <option value="">Chọn ngày</option>
 
-          {renderDateList()}
-        </SelectInput>
-        <SelectInput
-          value={maLichChieu}
-          name="lichChieu"
-          onChange={handleChooseHour}
-          className={classes.time}
-        >
-          <option value="">Chọn giờ</option>
+      <Box className={classes.wrapperSelect}>
+        <FormControl className={classes.dateSelect} size="small">
+          <Select
+            onChange={handleChooseDate}
+            defaultValue={activeDate}
+            native
+            variant="outlined"
+          >
+            {renderDate()}
+          </Select>
+        </FormControl>
 
-          {renderHourList()}
-        </SelectInput>
+        <FormControl className={classes.hourSelect} size="small">
+          <Select
+            onChange={handleChooseHour}
+            defaultValue={maLichChieu}
+            native
+            variant="outlined"
+          >
+            {renderHour()}
+          </Select>
+        </FormControl>
       </Box>
-      <Button
-        onClick={handleBuySticket}
-        variant="contained"
-        color="primary"
-        size="large"
-      >
-        Mua Vé Ngay
-      </Button>
+
+      <Box className={classes.button}>
+        <Button onClick={handleOnclick} variant="contained" color="primary">
+          Mua vé ngay
+        </Button>
+      </Box>
     </Paper>
   );
 }
 
 const mapStateToProps = (state) => ({
+  arrFilterByName: state.home.arrFilterByName,
   movieList: state.home.movieList,
-  arrShowTimeOfOneMovie: state.home.arrShowTimeOfOneMovie,
-  arrDateOfOneMovie: state.home.arrDateOfOneMovie,
-  arrHourOfOneMovie: state.home.arrHourOfOneMovie,
-  maLichChieu: state.home.maLichChieu,
-  activeName: state.home.activeName,
-  isShowFilterLoading: state.ui.isShowFilterLoading,
 });
 
 export default connect(mapStateToProps)(FilterFilm);

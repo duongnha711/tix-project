@@ -13,6 +13,7 @@ import { sortName, formatCurrencyVND } from "./../../functions/helper";
 import ClearIcon from "@material-ui/icons/Clear";
 
 import Alert from "./../../components/Alert";
+import AlertConfirm from "./../../components/AlertConfirm";
 
 function BookingPage(props) {
   const classes = useStyles();
@@ -175,7 +176,21 @@ function BookingPage(props) {
           token: account.accessToken,
           arrNameToShow,
         };
-        dispatch(actBookTicket(payload));
+
+        //lay string truyen vao alert
+        let strNameToShow = "";
+        arrNameToShow.forEach((item) => {
+          strNameToShow += item + " ";
+        });
+
+        //function de pass vao AlertConfirm
+        const callbackFunc = () => {
+          dispatch(actBookTicket(payload));
+        };
+        AlertConfirm(
+          { html: `Xác nhận đặt vé <br/> ${strNameToShow}` },
+          callbackFunc
+        );
       } else {
         Alert({ html: "Vui lòng chọn ghế", icon: "warning" });
       }
