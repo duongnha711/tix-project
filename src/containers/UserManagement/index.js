@@ -15,6 +15,7 @@ import { Redirect, Link } from "react-router-dom";
 import UserInformation from "./UserInformation";
 import UserChangePass from "./UserChangePass";
 import cn from "classnames";
+import { sendRequest } from "./../../functions/effect";
 
 function UserManagement(props) {
   const classes = useStyles();
@@ -37,6 +38,30 @@ function UserManagement(props) {
   const handleSuitShow = (value) => {
     setSuitShow(value);
   };
+
+  // //test
+  useEffect(() => {
+    const getData = async () => {
+      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      const LayThongTinLichChieuPhim = await sendRequest({
+        url:
+          "http://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=1359",
+      });
+      console.log(
+        "getData -> LayThongTinLichChieuHeThongRap",
+        LayThongTinLichChieuPhim.data
+      );
+
+      const LayThongTinPhim = await sendRequest({
+        url:
+          "http://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayThongTinPhim?MaPhim=1359",
+      });
+      console.log("getData -> LayThongTinPhim", LayThongTinPhim.data);
+
+      //~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    };
+    getData();
+  }, []);
 
   return (
     <Fragment>

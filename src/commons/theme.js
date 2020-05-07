@@ -9,6 +9,7 @@ const tagBorderColor = "#fb8c00";
 const footerColor = "#222";
 // const signUpColor = "linear-gradient(to top,#614385 , #516395)";
 const signUpColor = "linear-gradient(to right,#000428 , #004e92)";
+const hoverActiveTitleColor = "#50ffe7";
 
 const labelForm = "#04ffc5";
 
@@ -22,6 +23,7 @@ export {
   tagBorderColor,
   footerColor,
   labelForm,
+  hoverActiveTitleColor,
 };
 
 let theme = createMuiTheme({

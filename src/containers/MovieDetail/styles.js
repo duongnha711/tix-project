@@ -28,7 +28,8 @@ const useStyles = makeStyles((theme) => ({
     width: 217,
     borderRadius: 4,
     overflow: "hidden",
-    boxShadow: "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)",
+    boxShadow:
+      "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)",
   },
   contentImg: {
     paddingTop: "143%",
@@ -82,19 +83,28 @@ const useStyles = makeStyles((theme) => ({
   info: {
     marginRight: 30,
     cursor: "pointer",
-    transition: "all 0.1s linear",
+    transition: "all 0.2s linear",
     "&:hover": {
-      transform: "scale(1.1)",
+      transform: "scale(1.2)",
+      color: themeColor.hoverActiveTitleColor,
     },
   },
   evaluate: {
     cursor: "pointer",
-    transition: "all 0.1s linear",
+    transition: "all 0.2s linear",
     "&:hover": {
-      transform: "scale(1.1)",
+      transform: "scale(1.2)",
+      color: themeColor.hoverActiveTitleColor,
     },
   },
- 
+  activeTitle: {
+    transform: "scale(1.2)",
+    color: themeColor.hoverActiveTitleColor,
+  },
+
+  button: {
+    marginTop: 10,
+  },
 
   [theme.breakpoints.down("900")]: {
     container: {

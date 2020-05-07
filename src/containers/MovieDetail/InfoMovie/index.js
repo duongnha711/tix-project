@@ -27,27 +27,27 @@ export default function InfoMovie(props) {
               Định dạng
             </Box>
             <Box marginRight={2} marginBottom={1}>
-              Quốc Gia SX
+              Quốc Gia
             </Box>
           </Box>
           <Box>
             <Box marginRight={2} marginBottom={1}>
-              13.03.2020
+              Someday
             </Box>
             <Box className={classes.text} marginRight={2} marginBottom={1}>
-              Jade Bunyoprakarn
+              Someone in the world
             </Box>
             <Box className={classes.text} marginRight={2} marginBottom={1}>
-              n/a
+              Someone in the world
             </Box>
             <Box className={classes.text} marginRight={2} marginBottom={1}>
-              tình cảm, hài hước
+              Some kind of wonderful
             </Box>
             <Box marginRight={2} marginBottom={1}>
               2D/Digital
             </Box>
             <Box marginRight={2} marginBottom={1}>
-              Thái Lan
+              In the world
             </Box>
           </Box>
         </Box>
@@ -55,7 +55,8 @@ export default function InfoMovie(props) {
       <Grid md={5} item className={classes.content}>
         <Typography>Nội dung</Typography>
         <Typography className={classes.textContent}>
-          {movieDetail.moTa}
+          {movieDetail.tenPhim} is a super movie...API don't have description
+          ... The best way to learn code is to write code!
         </Typography>
       </Grid>
     </Grid>

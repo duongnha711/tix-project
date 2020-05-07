@@ -5,7 +5,6 @@ import Banner from "../../modules/home/components/Banner";
 import InfoCinema from "../../modules/home/components/InfoCinema/index.js";
 import News from "../../modules/home/components/News/index.js";
 import Showtime from "../../modules/home/components/Showtime/index.js";
-// import { sendRequest } from "./../../functions/effect";
 import {
   actGetCinemaBranch,
   actGetCinemaList,
@@ -43,24 +42,6 @@ function HomePage(props) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  // //test
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  //     const LayThongTinLichChieuPhim = await sendRequest({
-  //       url:
-  //         "http://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=1359",
-  //     });
-  //     console.log(
-  //       "getData -> LayThongTinLichChieuHeThongRap",
-  //       LayThongTinLichChieuPhim.data
-  //     );
-
-  //     //~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  //   };
-  //   getData();
-  // }, []);
 
   return (
     <Fragment>
