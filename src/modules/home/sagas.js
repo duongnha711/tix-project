@@ -1,38 +1,13 @@
 import { call, delay, put, takeLatest } from "redux-saga/effects";
 import Alert from "../../components/Alert";
+import { actCloseGlobalLoading, actOpenGlobalLoading } from "./../../commons/actions";
 import {
-  actCloseFilterLoading,
-  actCloseGlobalLoading,
-  actOpenFilterLoading,
-  actOpenGlobalLoading,
-} from "./../../commons/actions";
-import {
-  actBookTicketSuccess,
-  actFilterByNameSuccess,
-  actGetCinemaBranch,
-  actGetCinemaBranchSuccess,
-  actGetCinemaListSuccess,
-  actGetDetailMovieOfficialSuccess,
-  actGetMovieListSuccess,
-  actGetSeatListSuccess,
-  actGetShowTimeAll,
-  actGetShowTimeAllSuccess,
-  actGetShowTimeDetail,
-  actFilterByNameOfficial,
-  actFilterByNameOfficialSuccess,
+actBookTicketSuccess, actFilterByNameOfficial, actFilterByNameOfficialSuccess,
+  // actFilterByNameSuccess,
+  actGetCinemaBranch, actGetCinemaBranchSuccess, actGetCinemaListSuccess, actGetDetailMovieOfficialSuccess, actGetMovieListSuccess, actGetSeatListSuccess, actGetShowTimeAll, actGetShowTimeAllSuccess, actGetShowTimeDetail
 } from "./actions";
 import * as ActionType from "./constants";
-import {
-  bookTicketApi,
-  getCinemaBranchesApi,
-  getCinemaListApi,
-  getMovieDetailApi,
-  getMovieDetailOfficialApi,
-  getMovieListApi,
-  getSeatListApi,
-  getShowTimeAllApi,
-  filterByNameOfficialApi,
-} from "./handler";
+import { bookTicketApi, filterByNameOfficialApi, getCinemaBranchesApi, getCinemaListApi, getMovieDetailOfficialApi, getMovieListApi, getSeatListApi, getShowTimeAllApi } from "./handler";
 import STATUS from "./status";
 
 function* getMovieListSaga() {
@@ -63,9 +38,14 @@ function* getCinemaListSaga() {
     if (status === STATUS.SUCCESS) {
       yield put(actGetCinemaListSuccess(data));
       yield delay(50); // có thể bỏ
-      //lấy branch theo thằng logo đầu tiên
-      yield put(actGetCinemaBranch({ maHeThongRap: data[0].maHeThongRap }));
-      yield put(actGetShowTimeAll({ maHeThongRap: data[0].maHeThongRap }));
+
+      //lấy branch + info theo thằng logo đầu tiên
+      // yield put(actGetCinemaBranch({ maHeThongRap: data[0].maHeThongRap }));
+      // yield put(actGetShowTimeAll({ maHeThongRap: data[0].maHeThongRap }));
+
+      //uu tien lay CGV
+      yield put(actGetShowTimeAll({ maHeThongRap: "CGV" }));
+      yield put(actGetCinemaBranch({ maHeThongRap: "CGV" }));
     }
     yield delay(1000);
     yield put(actCloseGlobalLoading());
@@ -102,21 +82,7 @@ function* getShowTimeAllSaga({ maHeThongRap }) {
   }
 }
 
-function* filterByNameSaga({ MaPhim }) {
-  try {
-    yield put(actOpenFilterLoading());
 
-    const response = yield call(getMovieDetailApi, MaPhim);
-    const { status, data } = response;
-    if (status === STATUS.SUCCESS) {
-      yield put(actFilterByNameSuccess(data));
-    }
-    yield put(actCloseFilterLoading());
-  } catch (err) {
-    console.log("function*filterByNameSaga -> err", err.response);
-    yield put(actCloseFilterLoading());
-  }
-}
 
 function* getSeatListSaga({ maLichChieu }) {
   try {
@@ -218,10 +184,6 @@ function* watchGetShowTimeAll() {
   yield takeLatest(ActionType.GET_SHOWTIME_ALL, getShowTimeAllSaga);
 }
 
-function* watchFilterByName() {
-  yield takeLatest(ActionType.FILTER_BY_MOVIE_NAME, filterByNameSaga);
-}
-
 function* watchGetSeatList() {
   yield takeLatest(ActionType.GET_SEAT_LIST, getSeatListSaga);
 }
@@ -249,7 +211,6 @@ export default [
   watchGetCinemaList(),
   watchGetCinemaBranch(),
   watchGetShowTimeAll(),
-  watchFilterByName(),
   watchGetSeatList(),
   watchBookTicket(),
   watchGetDetailMovieOfficial(),

@@ -1,7 +1,7 @@
-import ENDPOINTS, { MA_NHOM } from "./model";
 import queryString from "querystring";
-
 import { sendRequest } from "./../../functions/effect";
+import ENDPOINTS, { MA_NHOM } from "./model";
+
 
 export const getMovieListApi = () => {
   return sendRequest({
@@ -12,12 +12,7 @@ export const getMovieListApi = () => {
   });
 };
 
-export const getMovieDetailApi = (MaPhim) => {
-  const params = queryString.stringify(MaPhim);
-  return sendRequest({
-    url: `${ENDPOINTS.LayThongTinPhim}?${params}`,
-  });
-};
+
 
 export const getMovieDetailOfficialApi = (MaPhim) => {
   const params = queryString.stringify(MaPhim);

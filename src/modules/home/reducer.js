@@ -15,11 +15,6 @@ const initialState = {
   cinemaBrach: [],
   showTimeAll: [],
   showTimeDetail: [],
-  arrShowTimeOfOneMovie: [], //mang lich chieu -> chua lich chieu tat ca cac rap cua 1 phim
-  arrDateOfOneMovie: [],
-  arrHourOfOneMovie: [],
-  maLichChieu: "",
-  activeName: "",
 
   maHeThongRap: "",
   maCumRap: "",
@@ -70,52 +65,6 @@ const homeReducer = (state = initialState, action) => {
       } else {
         return { ...state, showTimeDetail: [], maCumRap };
       }
-    }
-
-    case ActionType.FILTER_BY_MOVIE_NAME_SUCCESS: {
-      const { payload } = action;
-
-      return {
-        ...state,
-        arrShowTimeOfOneMovie: payload.lichChieu,
-        arrDateOfOneMovie: [],
-        arrHourOfOneMovie: [],
-        maLichChieu: "",
-        activeName: "",
-      };
-    }
-    case ActionType.FILTER_BY_MOVIE_CINEMA: {
-      const { arrShowTimeOfOneMovie } = state;
-      const { maCumRap } = action;
-      const newArr = arrShowTimeOfOneMovie.filter(
-        (movie) => movie.thongTinRap.maCumRap === maCumRap
-      );
-
-      return {
-        ...state,
-        arrDateOfOneMovie: newArr,
-        arrHourOfOneMovie: [],
-        maLichChieu: "",
-        activeName: maCumRap,
-      };
-    }
-
-    case ActionType.FILTER_BY_MOVIE_DAY: {
-      const { arrDateOfOneMovie } = state;
-      const { day } = action;
-      const newArr = arrDateOfOneMovie.filter(
-        (movie) => movie.ngayChieuGioChieu.substring(0, 10) === day
-      );
-      return {
-        ...state,
-        arrHourOfOneMovie: newArr,
-        maLichChieu: "",
-      };
-    }
-
-    case ActionType.CHANGE_SHOWTIME_CODE: {
-      const { maLichChieu } = action;
-      return { ...state, maLichChieu };
     }
 
     case ActionType.GET_SEAT_LIST_SUCCESS: {
