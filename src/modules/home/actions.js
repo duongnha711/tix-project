@@ -68,41 +68,6 @@ export const actGetShowTimeDetail = (maCumRap) => {
   };
 };
 
-export const actFilterByName = (MaPhim) => {
-  return {
-    type: ActionType.FILTER_BY_MOVIE_NAME,
-    MaPhim,
-  };
-};
-
-export const actFilterByNameSuccess = (payload) => {
-  return {
-    type: ActionType.FILTER_BY_MOVIE_NAME_SUCCESS,
-    payload,
-  };
-};
-
-export const actFilterByCinema = (maCumRap) => {
-  return {
-    type: ActionType.FILTER_BY_MOVIE_CINEMA,
-    maCumRap,
-  };
-};
-
-export const actFilterByDay = (day) => {
-  return {
-    type: ActionType.FILTER_BY_MOVIE_DAY,
-    day,
-  };
-};
-
-export const actChangeShowTimeCode = (maLichChieu) => {
-  return {
-    type: ActionType.CHANGE_SHOWTIME_CODE,
-    maLichChieu,
-  };
-};
-
 export const actGetSeatList = (maLichChieu) => {
   return {
     type: ActionType.GET_SEAT_LIST,
