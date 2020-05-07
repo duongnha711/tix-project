@@ -13,20 +13,6 @@ export const actGetMovieListSuccess = (payload) => {
   };
 };
 
-export const actGetMovieDetail = (params) => {
-  return {
-    type: ActionType.GET_MOVIE_DETAIL,
-    params,
-  };
-};
-
-export const actGetMovieDetailSuccess = (payload) => {
-  return {
-    type: ActionType.GET_MOVIE_DETAIL_SUCCESS,
-    payload,
-  };
-};
-
 export const actGetCinemaList = () => {
   return {
     type: ActionType.GET_CINEMA_LIST,
@@ -151,7 +137,6 @@ export const actBookTicketSuccess = (payload) => {
     payload,
   };
 };
-
 
 export const actGetDetailMovieOfficial = (maPhim) => {
   return {

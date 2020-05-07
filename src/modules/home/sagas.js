@@ -1,38 +1,10 @@
 import { call, delay, put, takeLatest } from "redux-saga/effects";
-import {
-  actCloseGlobalLoading,
-  actOpenGlobalLoading,
-  actCloseFilterLoading,
-  actOpenFilterLoading,
-} from "./../../commons/actions";
-import {
-  actFilterByName,
-  actFilterByNameSuccess,
-  actGetCinemaBranchSuccess,
-  actGetCinemaListSuccess,
-  actGetMovieDetailSuccess,
-  actGetMovieListSuccess,
-  actGetSeatListSuccess,
-  actGetShowTimeAllSuccess,
-  actBookTicketSuccess,
-  actGetCinemaBranch,
-  actGetShowTimeAll,
-  actGetShowTimeDetail,
-  actGetDetailMovieOfficialSuccess,
-} from "./actions";
-import * as ActionType from "./constants";
-import {
-  getCinemaBranchesApi,
-  getCinemaListApi,
-  getMovieDetailApi,
-  getMovieListApi,
-  getSeatListApi,
-  getShowTimeAllApi,
-  bookTicketApi,
-  getMovieDetailOfficialApi,
-} from "./handler";
-import STATUS from "./status";
 import Alert from "../../components/Alert";
+import { actCloseFilterLoading, actCloseGlobalLoading, actOpenFilterLoading, actOpenGlobalLoading } from "./../../commons/actions";
+import { actBookTicketSuccess, actFilterByNameSuccess, actGetCinemaBranch, actGetCinemaBranchSuccess, actGetCinemaListSuccess, actGetDetailMovieOfficialSuccess, actGetMovieListSuccess, actGetSeatListSuccess, actGetShowTimeAll, actGetShowTimeAllSuccess, actGetShowTimeDetail } from "./actions";
+import * as ActionType from "./constants";
+import { bookTicketApi, getCinemaBranchesApi, getCinemaListApi, getMovieDetailApi, getMovieDetailOfficialApi, getMovieListApi, getSeatListApi, getShowTimeAllApi } from "./handler";
+import STATUS from "./status";
 
 function* getMovieListSaga() {
   try {
@@ -41,28 +13,16 @@ function* getMovieListSaga() {
     const { data, status } = response;
     if (status === STATUS.SUCCESS) {
       yield put(actGetMovieListSuccess(data));
-      yield put(actFilterByName({ MaPhim: data[0].maPhim })); //chi lay thang dau tien
+      // yield put(actFilterByName({ MaPhim: data[0].maPhim })); //chi lay thang dau tien
     }
 
     yield delay(1000);
     yield put(actCloseGlobalLoading());
   } catch (err) {
-    console.log("function*getMovieListSaga -> err", err.response);
-    yield put(actCloseGlobalLoading());
-  }
-}
-
-function* getMovieDetailSaga({ params }) {
-  try {
-    yield put(actOpenGlobalLoading());
-    const response = yield call(getMovieDetailApi, params);
-    const { status, data } = response;
-    if (status === STATUS.SUCCESS) {
-      yield put(actGetMovieDetailSuccess(data));
+    if (err.response) {
+      console.log("function*getMovieListSaga -> err", err.response);
     }
     yield put(actCloseGlobalLoading());
-  } catch (err) {
-    console.log("function*getMovieDetailSaga -> err", err.response);
   }
 }
 
@@ -199,10 +159,6 @@ function* watchGetMovieList() {
   yield takeLatest(ActionType.GET_MOVIE_LIST, getMovieListSaga);
 }
 
-function* watchGetMovieDetail() {
-  yield takeLatest(ActionType.GET_MOVIE_DETAIL, getMovieDetailSaga);
-}
-
 function* watchGetCinemaList() {
   yield takeLatest(ActionType.GET_CINEMA_LIST, getCinemaListSaga);
 }
@@ -236,7 +192,6 @@ function* watchGetDetailMovieOfficial() {
 
 export default [
   watchGetMovieList(),
-  watchGetMovieDetail(),
   watchGetCinemaList(),
   watchGetCinemaBranch(),
   watchGetShowTimeAll(),

@@ -15,7 +15,7 @@ import { Redirect, Link } from "react-router-dom";
 import UserInformation from "./UserInformation";
 import UserChangePass from "./UserChangePass";
 import cn from "classnames";
-import { sendRequest } from "./../../functions/effect";
+// import { sendRequest } from "./../../functions/effect";
 
 function UserManagement(props) {
   const classes = useStyles();
@@ -40,28 +40,22 @@ function UserManagement(props) {
   };
 
   // //test
-  useEffect(() => {
-    const getData = async () => {
-      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      const LayThongTinLichChieuPhim = await sendRequest({
-        url:
-          "http://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=1359",
-      });
-      console.log(
-        "getData -> LayThongTinLichChieuHeThongRap",
-        LayThongTinLichChieuPhim.data
-      );
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  //     const LayThongTinLichChieuPhim = await sendRequest({
+  //       url:
+  //         "http://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=1359",
+  //     });
+  //     console.log(
+  //       "getData -> LayThongTinLichChieuPhim",
+  //       LayThongTinLichChieuPhim.data
+  //     );
 
-      const LayThongTinPhim = await sendRequest({
-        url:
-          "http://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayThongTinPhim?MaPhim=1359",
-      });
-      console.log("getData -> LayThongTinPhim", LayThongTinPhim.data);
-
-      //~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    };
-    getData();
-  }, []);
+  //     //~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  //   };
+  //   getData();
+  // }, []);
 
   return (
     <Fragment>
