@@ -18,6 +18,7 @@ import {
   actGetCinemaBranch,
   actGetShowTimeAll,
   actGetShowTimeDetail,
+  actGetDetailMovieOfficialSuccess,
 } from "./actions";
 import * as ActionType from "./constants";
 import {
@@ -28,6 +29,7 @@ import {
   getSeatListApi,
   getShowTimeAllApi,
   bookTicketApi,
+  getMovieDetailOfficialApi,
 } from "./handler";
 import STATUS from "./status";
 import Alert from "../../components/Alert";
@@ -164,9 +166,33 @@ function* bookTicketSaga({ payload }) {
       yield put(actBookTicketSuccess(payload));
     }
   } catch (err) {
-    console.log(err.response);
+    if (err.response) {
+      console.log("function*bookTicketSaga -> err.response", err.response);
+    }
   }
 }
+
+function* getDetailMovieOfficialSaga({ maPhim }) {
+  try {
+    yield put(actOpenGlobalLoading());
+    const response = yield call(getMovieDetailOfficialApi, maPhim);
+    const { data, status } = response;
+    if (status === STATUS.SUCCESS) {
+      yield put(actGetDetailMovieOfficialSuccess(data));
+    }
+    yield delay(500);
+    yield put(actCloseGlobalLoading());
+  } catch (err) {
+    if (err.response) {
+      yield put(actCloseGlobalLoading());
+      console.log(
+        "function*getDetailMovieOfficialSaga -> err.response",
+        err.response
+      );
+    }
+  }
+}
+
 //watch~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function* watchGetMovieList() {
@@ -201,6 +227,13 @@ function* watchBookTicket() {
   yield takeLatest(ActionType.BOOK_TICKET, bookTicketSaga);
 }
 
+function* watchGetDetailMovieOfficial() {
+  yield takeLatest(
+    ActionType.GET_MOVIE_DETAIL_OFFICIAL,
+    getDetailMovieOfficialSaga
+  );
+}
+
 export default [
   watchGetMovieList(),
   watchGetMovieDetail(),
@@ -210,4 +243,5 @@ export default [
   watchFilterByName(),
   watchGetSeatList(),
   watchBookTicket(),
+  watchGetDetailMovieOfficial(),
 ];

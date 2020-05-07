@@ -19,6 +19,13 @@ export const getMovieDetailApi = (MaPhim) => {
   });
 };
 
+export const getMovieDetailOfficialApi = (MaPhim) => {
+  const params = queryString.stringify(MaPhim);
+  return sendRequest({
+    url: `${ENDPOINTS.LayThongTinLichChieuPhim}?${params}`,
+  });
+};
+
 export const getCinemaListApi = () => {
   return sendRequest({
     url: ENDPOINTS.LayThongTinHeThongRap,

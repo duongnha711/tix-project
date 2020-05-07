@@ -37,7 +37,7 @@ function HomePage(props) {
 
   //lay lich chieu theo cum rap
   const handleGetShowTimeDetail = (maCumRap) => {
-    dispatch(actGetShowTimeDetail(maCumRap)); 
+    dispatch(actGetShowTimeDetail(maCumRap));
   };
 
   useEffect(() => {
@@ -48,13 +48,13 @@ function HomePage(props) {
   // useEffect(() => {
   //   const getData = async () => {
   //     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  //     const LayThongTinLichChieuHeThongRap = await sendRequest({
+  //     const LayThongTinLichChieuPhim = await sendRequest({
   //       url:
-  //         "http://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maHeThongRap=BHDStar&maNhom=GP10",
+  //         "http://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=1359",
   //     });
   //     console.log(
   //       "getData -> LayThongTinLichChieuHeThongRap",
-  //       LayThongTinLichChieuHeThongRap.data
+  //       LayThongTinLichChieuPhim.data
   //     );
 
   //     //~~~~~~~~~~~~~~~~~~~~~~~~~~~

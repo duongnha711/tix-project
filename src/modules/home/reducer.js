@@ -36,7 +36,7 @@ const homeReducer = (state = initialState, action) => {
     case ActionType.GET_MOVIE_LIST_SUCCESS: {
       return { ...state, movieList: action.payload };
     }
-    case ActionType.GET_MOVIE_DETAIL_SUCCESS:
+    case ActionType.GET_MOVIE_DETAIL_SUCCESS: //k dung nua~ - chac' co the dong'
       return { ...state, movieDetail: action.payload };
 
     case ActionType.GET_CINEMA_LIST_SUCCESS:
@@ -184,6 +184,11 @@ const homeReducer = (state = initialState, action) => {
         arrNormalSeatList: [...state.arrNormalSeatList],
         danhSachVe: [],
       };
+    }
+
+    case ActionType.GET_MOVIE_DETAIL_OFFICIAL_SUCCESS: {
+      const { payload } = action;
+      return { ...state, movieDetail: payload };
     }
 
     default:
