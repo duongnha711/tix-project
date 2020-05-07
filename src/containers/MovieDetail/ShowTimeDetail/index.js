@@ -1,4 +1,4 @@
-import { Box, Typography } from "@material-ui/core";
+import { Box, Typography, Paper, Divider } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import useStyles from "./styles";
 import cn from "classnames";
@@ -102,7 +102,14 @@ export default function ShowTimeDetail(props) {
               }}
               key={item.maCumRap}
             >
-              {item.tenCumRap}
+              <img
+                src="/images/cinema.png"
+                alt="cinema"
+                width="50px"
+                height="50px"
+              />
+
+              <Box marginLeft={1}>{item.tenCumRap}</Box>
             </Box>
           );
         });
@@ -222,24 +229,48 @@ export default function ShowTimeDetail(props) {
     history.push(`/booking-ticket/${maLichChieu}`);
   };
 
+  const addEmptyImage = (e) => {
+    e.target.src = "/images/defaultImage.png";
+  };
+
   return (
-    <Box>
-      <Box className={classes.listLogo}>
-        <Typography>Logo</Typography>
-        {renderLogo()}
-      </Box>
-      <Box>
-        <Typography>Branch</Typography>
-        {renderBranch()}
-      </Box>
-      <Box>
-        <Typography>Ngay</Typography>
-        {renderDate()}
-      </Box>
-      <Box>
-        <Typography>Time</Typography>
-        {renderHour()}
-      </Box>
+    <Box className={classes.container}>
+      <Paper className={classes.wrapperInfo}>
+        <Box display="flex">
+          <Box className={classes.listLogo}>{renderLogo()}</Box>
+          <Box className={classes.listCinema}>{renderBranch()}</Box>
+        </Box>
+        <Box className={classes.infoDateTime}>
+          <Box className={classes.dateCinema}>{renderDate()}</Box>
+          <Divider className={classes.divider} />
+          <Box className={classes.hourCinema}>
+            <Box className={classes.contentHour}>
+              <Box className={classes.wrapperImg}>
+                <Box className={classes.contentImg}>
+                  <img
+                    onError={addEmptyImage}
+                    src={movieDetail.hinhAnh}
+                    alt={movieDetail.tenPhim}
+                  />
+                </Box>
+              </Box>
+              <Box>
+                <Typography variant="h5">{movieDetail.tenPhim}</Typography>
+                <Typography>
+                  {movieDetail.heThongRapChieu &&
+                    movieDetail.heThongRapChieu.length > 0 &&
+                    movieDetail.heThongRapChieu[0].cumRapChieu[0]
+                      .lichChieuPhim[0].thoiLuong}{" "}
+                  phút - 0 IMdb - 2D/Digital
+                </Typography>
+                <Box display="flex" flexWrap="wrap">
+                  {renderHour()}
+                </Box>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      </Paper>
     </Box>
   );
 }
