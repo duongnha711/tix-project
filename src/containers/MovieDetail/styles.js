@@ -94,21 +94,7 @@ const useStyles = makeStyles((theme) => ({
       transform: "scale(1.1)",
     },
   },
-  text: {
-    display: "-webkit-box",
-    WebkitLineClamp: 1,
-    WebkitBoxOrient: "vertical",
-    textOverflow: "ellipsis",
-    overflow: "hidden",
-  },
-  textContent: {
-    marginTop: 10,
-    display: "-webkit-box",
-    WebkitLineClamp: 6,
-    WebkitBoxOrient: "vertical",
-    textOverflow: "ellipsis",
-    overflow: "hidden",
-  },
+ 
 
   [theme.breakpoints.down("900")]: {
     container: {

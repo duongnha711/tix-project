@@ -151,3 +151,18 @@ export const actBookTicketSuccess = (payload) => {
     payload,
   };
 };
+
+
+export const actGetDetailMovieOfficial = (maPhim) => {
+  return {
+    type: ActionType.GET_MOVIE_DETAIL_OFFICIAL,
+    maPhim,
+  };
+};
+
+export const actGetDetailMovieOfficialSuccess = (payload) => {
+  return {
+    type: ActionType.GET_MOVIE_DETAIL_OFFICIAL_SUCCESS,
+    payload,
+  };
+};
