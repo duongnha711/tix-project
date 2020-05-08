@@ -26,6 +26,10 @@ const initialState = {
   arrNormalSeatList: [],
   arrVipSeatList: [],
   danhSachVe: [],
+
+  //trailer
+  // openTrailer: {},
+  openTrailer: { open: false, trailer: "" },
 };
 
 const homeReducer = (state = initialState, action) => {
@@ -143,6 +147,16 @@ const homeReducer = (state = initialState, action) => {
     case ActionType.FILTER_BY_NAME_OFFICIAL_SUCCESS: {
       const { payload } = action;
       return { ...state, arrFilterByName: payload };
+    }
+
+    //trailer
+    case ActionType.OPEN_TRAILER: {
+      const { payload } = action;
+      return { ...state, openTrailer: { open: true, trailer: payload } };
+    }
+
+    case ActionType.CLOSE_TRAILER: {
+      return { ...state, openTrailer: { open: false, trailer: "empty" } };
     }
 
     default:

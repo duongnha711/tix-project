@@ -1,9 +1,9 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import MobileApp from "../../modules/home/components/AppMobile/index.js";
 import Banner from "../../modules/home/components/Banner";
 import InfoCinema from "../../modules/home/components/InfoCinema/index.js";
-import News from "../../modules/home/components/News/index.js";
+import Marvel from "../../modules/home/components/Marvel/index.js";
 import Showtime from "../../modules/home/components/Showtime/index.js";
 import {
   actGetCinemaBranch,
@@ -12,8 +12,16 @@ import {
   actGetShowTimeAll,
   actGetShowTimeDetail,
 } from "./../../modules/home/actions";
+import VideoModal from "../../components/index.js";
+import { Typography, Box } from "@material-ui/core";
+import useStyles from "./styles";
+import DC from "../../modules/home/components/DC/index.js";
+import cn from "classnames";
 
 function HomePage(props) {
+  const classes = useStyles();
+  const [marvelDC, setMarvelDC] = useState("marvel");
+
   const {
     dispatch,
     movieList,
@@ -43,8 +51,13 @@ function HomePage(props) {
     window.scrollTo(0, 0);
   }, []);
 
+  const handleMarvelDC = (value) => {
+    setMarvelDC(value);
+  };
+
   return (
     <Fragment>
+      <VideoModal />
       <Banner />
       <Showtime movieList={movieList} />
       <InfoCinema
@@ -56,7 +69,34 @@ function HomePage(props) {
         handleGetShowTimeDetail={handleGetShowTimeDetail}
         showTimeDetail={showTimeDetail}
       />
-      <News />
+      {/* ~~~~~~~~~~~~ */}
+      <Box display="flex" justifyContent="center">
+        <Box
+          onClick={() => {
+            handleMarvelDC("marvel");
+          }}
+          id="news"
+          className={cn(
+            classes.newsTitle,
+            marvelDC === "marvel" && classes.active
+          )}
+          marginRight={2}
+        >
+          <Typography variant="h5">Marvel</Typography>
+        </Box>
+        <Box
+          onClick={() => {
+            handleMarvelDC("dc");
+          }}
+          className={cn(classes.newsTitle, marvelDC === "dc" && classes.active)}
+          marginRight={2}
+        >
+          <Typography variant="h5">DC</Typography>
+        </Box>
+      </Box>
+      {/* ~~~~~~~~~~~~ */}
+      {marvelDC === "marvel" && <Marvel />}
+      {marvelDC === "dc" && <DC />}
       <MobileApp />
     </Fragment>
   );

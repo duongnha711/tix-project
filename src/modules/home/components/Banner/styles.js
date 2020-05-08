@@ -4,14 +4,8 @@ import { primaryColor } from "./../../../../commons/theme";
 const useStyles = makeStyles((theme) => ({
   containerFluid: {
     position: "relative",
-    "& img": {
-      width: "99%",
-      margin: "0 auto",
-    },
+
     cursor: "pointer",
-    "&:hover span ": {
-      display: "block",
-    },
 
     // custom arrow
     "& .slick-next": {
@@ -43,12 +37,17 @@ const useStyles = makeStyles((theme) => ({
     //custom dots
     "& .slick-dots": {
       bottom: 55,
+      display: "inline-block",
+      width: "unset",
+      left: "50%",
+      transform: "translate(-50%)",
     },
     "& .slick-dots li button:before ": {
       fontSize: 15,
     },
     "& .slick-dots li button:before": {
-      color: primaryColor,
+      color: "#867171",
+      opacity: 1,
     },
     "& .slick-dots li.slick-active button:before": {
       color: primaryColor,
@@ -58,7 +57,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   iconPlay: {
-    display: "none",
+    // display: "none",
+    opacity: "0",
     position: "absolute",
     top: "50%",
     left: "50%",
@@ -75,10 +75,43 @@ const useStyles = makeStyles((theme) => ({
       transform: "translate( -50%,-50%) scale(1.1)",
     },
   },
+  wrapperImg: {
+    width: "100%", // kích thước width mong muốn
+    position: "relative",
+    "&:hover span ": {
+      // display: "block",
+      opacity: 1,
+    },
+  },
+  contentImg: {
+    paddingTop: "40%", // dựa theo width thẻ bọc nó
+    position: "relative",
+    "& img": {
+      width: "100%",
+      height: "100%",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+    },
+  },
   [theme.breakpoints.down("960")]: {
     containerFluid: {
       "& .slick-dots": {
         bottom: 10,
+      },
+    },
+  },
+  [theme.breakpoints.down("760")]: {
+    containerFluid: {
+      "& .slick-prev": {
+        width: 30,
+        height: 30,
+      },
+      "& .slick-next": {
+        width: 30,
+        height: 30,
       },
     },
   },

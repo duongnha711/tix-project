@@ -130,3 +130,16 @@ export const actFilterByNameOfficialSuccess = (payload) => {
     payload,
   };
 };
+
+export const actOpenTrailer = (payload) => {
+  return {
+    type: ActionType.OPEN_TRAILER,
+    payload,
+  };
+};
+
+export const actCloseTrailer = () => {
+  return {
+    type: ActionType.CLOSE_TRAILER,
+  };
+};

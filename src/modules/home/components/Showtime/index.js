@@ -8,6 +8,8 @@ import Slider from "react-slick";
 import FilterFilm from "../FilterFilm";
 
 import useStyles from "./styles";
+import { actOpenTrailer } from "../../actions";
+import { connect } from "react-redux";
 
 function Arrow(props) {
   const { className, onClick, url } = props;
@@ -42,11 +44,10 @@ const settings = {
     },
   ],
 };
-
-export default function Showtime(props) {
+function Showtime(props) {
   const classes = useStyles();
 
-  const { movieList } = props;
+  const { dispatch, movieList } = props;
 
   const addEmptyImage = (e) => {
     e.target.src = "/images/defaultImage.png";
@@ -54,42 +55,56 @@ export default function Showtime(props) {
 
   const renderMovie = () => {
     if (Array.isArray(movieList) && movieList.length > 0) {
-      return movieList.map((movie, index) => (
-        <Link
-          key={index}
-          to={`/detail/${movie.maPhim}/${movie.biDanh}`}
-          className={classes.link}
-        >
-          <Box className={classes.itemWrapper} padding={1}>
-            <Paper className={classes.itemCarousel} elevation={1}>
-              <img
-                onError={addEmptyImage}
-                src={movie.hinhAnh}
-                alt={movie.tenPhim}
-                className={classes.images}
-              />
-              <Box component="span" className={classes.iconPlay}>
-                <img src="/images/play-video.png" alt="play-video" />
+      return movieList.map((movie, index) => {
+        return (
+          <Box key={index} className={classes.wrapperMovie}>
+            <Box
+              onClick={() => {
+                handleOpenTrailer(movie.trailer);
+              }}
+              component="span"
+              className={classes.iconPlay}
+            >
+              <img src="/images/play-video.png" alt="play-video" />
+            </Box>
+            <Link
+              to={`/detail/${movie.maPhim}/${movie.biDanh}`}
+              className={classes.link}
+            >
+              <Box className={classes.itemWrapper} padding={1}>
+                <Paper className={classes.itemCarousel} elevation={1}>
+                  <img
+                    onError={addEmptyImage}
+                    src={movie.hinhAnh}
+                    alt={movie.tenPhim}
+                    className={classes.images}
+                  />
+
+                  <Box className={classes.ageType}>C16</Box>
+                  <Box className={classes.avgPoint}>
+                    <Box>{movie.danhGia}</Box>
+                    <Box>
+                      <StarIcon color="primary" className={classes.star} />
+                      <StarIcon color="primary" className={classes.star} />
+                      <StarIcon color="primary" className={classes.star} />
+                    </Box>
+                  </Box>
+                  <Box component="span" className={classes.overLay}></Box>
+                </Paper>
+                <Typography className={classes.nameMovie} variant="h6">
+                  {movie.tenPhim}
+                </Typography>
+                <Typography className={classes.duration}>110 phút</Typography>
               </Box>
-              <Box className={classes.ageType}>C16</Box>
-              <Box className={classes.avgPoint}>
-                <Box>{movie.danhGia}</Box>
-                <Box>
-                  <StarIcon color="primary" className={classes.star} />
-                  <StarIcon color="primary" className={classes.star} />
-                  <StarIcon color="primary" className={classes.star} />
-                </Box>
-              </Box>
-              <Box component="span" className={classes.overLay}></Box>
-            </Paper>
-            <Typography className={classes.nameMovie} variant="h6">
-              {movie.tenPhim}
-            </Typography>
-            <Typography className={classes.duration}>110 phút</Typography>
+            </Link>
           </Box>
-        </Link>
-      ));
+        );
+      });
     }
+  };
+
+  const handleOpenTrailer = (trailer) => {
+    dispatch(actOpenTrailer(trailer));
   };
 
   return (
@@ -115,3 +130,5 @@ export default function Showtime(props) {
 Showtime.propTypes = {
   movieList: PropTypes.array,
 };
+
+export default connect()(Showtime);

@@ -33,9 +33,9 @@ function* registerSaga({ account }) {
     if (status === STATUS.SUCCESS) {
       Alert({
         icon: "success",
-        title: "Register Successfully !",
+        title: "Đăng ký thành công !",
         timer: 5000,
-        html: "Redirect to Log In after <b></b> milliseconds.",
+        html: "Chuyển đến trang Đăng Nhập sau <b></b> milliseconds.",
         showConfirmButton: false,
       });
       yield delay(5000);
@@ -43,7 +43,9 @@ function* registerSaga({ account }) {
       yield put(actOpenLogin());
     }
   } catch (err) {
-    Alert({ icon: "error", text: err.response.data });
+    if (err.response.data) {
+      Alert({ icon: "error", text: err.response.data });
+    }
   }
 }
 
@@ -59,7 +61,9 @@ function* logInSaga({ account }) {
     yield delay(1000);
     yield put(actCloseGlobalLoading());
   } catch (err) {
-    Alert({ icon: "error", text: err.response.data });
+    if (err.response.data) {
+      Alert({ icon: "error", text: err.response.data });
+    }
     yield put(actCloseGlobalLoading());
   }
 }
@@ -72,7 +76,9 @@ function* getInfoBookingUserSaga({ account }) {
       yield put(actGetInfoBookingUserSuccess(data));
     }
   } catch (err) {
-    console.log("function*getInfoBookingUserSaga -> err", err.response);
+    if (err.response) {
+      console.log("function*getInfoBookingUserSaga -> err", err.response);
+    }
   }
 }
 
@@ -88,7 +94,9 @@ function* changePasswordSaga({ account, token }) {
       });
     }
   } catch (err) {
-    console.log("function*changePasswordSaga -> err", err.response);
+    if (err.response) {
+      console.log("function*changePasswordSaga -> err", err.response);
+    }
   }
 }
 
