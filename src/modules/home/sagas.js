@@ -1,13 +1,35 @@
 import { call, delay, put, takeLatest } from "redux-saga/effects";
 import Alert from "../../components/Alert";
-import { actCloseGlobalLoading, actOpenGlobalLoading } from "./../../commons/actions";
 import {
-actBookTicketSuccess, actFilterByNameOfficial, actFilterByNameOfficialSuccess,
+  actCloseGlobalLoading,
+  actOpenGlobalLoading,
+} from "./../../commons/actions";
+import {
+  actBookTicketSuccess,
+  actFilterByNameOfficial,
+  actFilterByNameOfficialSuccess,
   // actFilterByNameSuccess,
-  actGetCinemaBranch, actGetCinemaBranchSuccess, actGetCinemaListSuccess, actGetDetailMovieOfficialSuccess, actGetMovieListSuccess, actGetSeatListSuccess, actGetShowTimeAll, actGetShowTimeAllSuccess, actGetShowTimeDetail
+  actGetCinemaBranch,
+  actGetCinemaBranchSuccess,
+  actGetCinemaListSuccess,
+  actGetDetailMovieOfficialSuccess,
+  actGetMovieListSuccess,
+  actGetSeatListSuccess,
+  actGetShowTimeAll,
+  actGetShowTimeAllSuccess,
+  actGetShowTimeDetail,
 } from "./actions";
 import * as ActionType from "./constants";
-import { bookTicketApi, filterByNameOfficialApi, getCinemaBranchesApi, getCinemaListApi, getMovieDetailOfficialApi, getMovieListApi, getSeatListApi, getShowTimeAllApi } from "./handler";
+import {
+  bookTicketApi,
+  filterByNameOfficialApi,
+  getCinemaBranchesApi,
+  getCinemaListApi,
+  getMovieDetailOfficialApi,
+  getMovieListApi,
+  getSeatListApi,
+  getShowTimeAllApi,
+} from "./handler";
 import STATUS from "./status";
 
 function* getMovieListSaga() {
@@ -50,7 +72,10 @@ function* getCinemaListSaga() {
     yield delay(1000);
     yield put(actCloseGlobalLoading());
   } catch (err) {
-    console.log("function*getCinemaListSaga -> err", err.response);
+    if (err.response) {
+      console.log("function*getCinemaListSaga -> err", err.response);
+    }
+    yield put(actCloseGlobalLoading());
   }
 }
 
@@ -70,19 +95,25 @@ function* getCinemaBranchSaga({ maHeThongRap }) {
     yield delay(50); //bắt buộc phải có nếu ko lỗi
     yield put(actGetShowTimeDetail(data[0].maCumRap));
   } catch (err) {
-    console.log("function*getCinemaBranchSaga -> err", err.response);
+    if (err.response) {
+      console.log("function*getCinemaBranchSaga -> err", err.response);
+    }
   }
 }
 
 function* getShowTimeAllSaga({ maHeThongRap }) {
-  const response = yield call(getShowTimeAllApi, maHeThongRap);
-  const { status, data } = response;
-  if (status === STATUS.SUCCESS) {
-    yield put(actGetShowTimeAllSuccess(data));
+  try {
+    const response = yield call(getShowTimeAllApi, maHeThongRap);
+    const { status, data } = response;
+    if (status === STATUS.SUCCESS) {
+      yield put(actGetShowTimeAllSuccess(data));
+    }
+  } catch (err) {
+    if (err.response) {
+      console.log("function*getShowTimeAllSaga -> err.response", err.response);
+    }
   }
 }
-
-
 
 function* getSeatListSaga({ maLichChieu }) {
   try {
@@ -94,7 +125,9 @@ function* getSeatListSaga({ maLichChieu }) {
     }
     yield put(actCloseGlobalLoading());
   } catch (err) {
-    console.log("function*getSeatListSaga -> err", err.response);
+    if (err.response) {
+      console.log("function*getSeatListSaga -> err.response", err.response);
+    }
     yield put(actCloseGlobalLoading());
   }
 }

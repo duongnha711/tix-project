@@ -53,9 +53,6 @@ const useStyles = makeStyles((theme) => ({
   },
   itemWrapper: {
     cursor: "pointer",
-    "&:hover span": {
-      display: "block",
-    },
   },
   images: {
     width: "100%",
@@ -90,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
   iconPlay: {
     display: "none",
     position: "absolute",
-    top: "50%",
+    top: "42%", // edit sau
     left: "50%",
     transform: "translate( -50%,-50%)",
     zIndex: 99,
@@ -140,6 +137,13 @@ const useStyles = makeStyles((theme) => ({
     left: 0,
     backgroundColor: "rgba(12,27,54,.8)",
     opacity: 0.3,
+  },
+
+  wrapperMovie: {
+    position: "relative",
+    "&:hover span": {
+      display: "block",
+    },
   },
 
   [theme.breakpoints.down("960")]: {
