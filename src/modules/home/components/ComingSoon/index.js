@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { actOpenTrailer } from "../../actions";
 import useStyles from "./styles";
-
+import arrMovieListDemo from "./demoData";
 
 function Arrow(props) {
   const { className, onClick, url } = props;
@@ -42,18 +42,18 @@ const settings = {
     },
   ],
 };
-function Showtime(props) {
+function ComingSoon(props) {
   const classes = useStyles();
 
-  const { dispatch, movieList } = props;
+  const { dispatch } = props;
 
   const addEmptyImage = (e) => {
     e.target.src = "/images/defaultImage.png";
   };
 
   const renderMovie = () => {
-    if (Array.isArray(movieList) && movieList.length > 0) {
-      return movieList.map((movie, index) => {
+    if (Array.isArray(arrMovieListDemo) && arrMovieListDemo.length > 0) {
+      return arrMovieListDemo.map((movie, index) => {
         return (
           <Box key={index} className={classes.wrapperMovie}>
             <Box
@@ -110,14 +110,6 @@ function Showtime(props) {
       {/* <FilterFilm /> */}
 
       <Box className={classes.container}>
-        {/* <Box className={classes.titleWrapper}>
-          <Typography className={classes.title} variant="h5">
-            Đang chiếu
-          </Typography>
-          <Typography className={classes.title} variant="h5">
-            Sắp chiếu
-          </Typography>
-        </Box> */}
         <Box className={classes.contentCarousel}>
           <Slider {...settings}>{renderMovie()}</Slider>
         </Box>
@@ -125,8 +117,8 @@ function Showtime(props) {
     </Box>
   );
 }
-Showtime.propTypes = {
+ComingSoon.propTypes = {
   movieList: PropTypes.array,
 };
 
-export default connect()(Showtime);
+export default connect()(ComingSoon);
