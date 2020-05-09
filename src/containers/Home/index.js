@@ -5,6 +5,8 @@ import Banner from "../../modules/home/components/Banner";
 import InfoCinema from "../../modules/home/components/InfoCinema/index.js";
 import Marvel from "../../modules/home/components/Marvel/index.js";
 import Showtime from "../../modules/home/components/Showtime/index.js";
+import ComingSoon from "../../modules/home/components/ComingSoon/index.js";
+
 import {
   actGetCinemaBranch,
   actGetCinemaList,
@@ -12,7 +14,6 @@ import {
   actGetShowTimeAll,
   actGetShowTimeDetail,
 } from "./../../modules/home/actions";
-import VideoModal from "../../components/index.js";
 import { Typography, Box } from "@material-ui/core";
 import useStyles from "./styles";
 import DC from "../../modules/home/components/DC/index.js";
@@ -21,6 +22,7 @@ import cn from "classnames";
 function HomePage(props) {
   const classes = useStyles();
   const [marvelDC, setMarvelDC] = useState("marvel");
+  const [showTimeComingSoon, setShowTimeComingSoon] = useState("showTime");
 
   const {
     dispatch,
@@ -55,11 +57,46 @@ function HomePage(props) {
     setMarvelDC(value);
   };
 
+  const handleShowTimeComingSoon = (value) => {
+    setShowTimeComingSoon(value);
+  };
+
   return (
     <Fragment>
-      <VideoModal />
       <Banner />
-      <Showtime movieList={movieList} />
+
+      {/* ~~~~~~~~~~~~~~~~SHOW TIME!~~~~~~~~~~~~~~~~~~~ */}
+      <Box id="showTime" display="flex" justifyContent="center">
+        <Box
+          onClick={() => {
+            handleShowTimeComingSoon("showTime");
+          }}
+          className={cn(
+            classes.newsTitle,
+            showTimeComingSoon === "showTime" && classes.activeTime
+          )}
+          marginRight={2}
+        >
+          <Typography variant="h5">Đang chiếu</Typography>
+        </Box>
+        <Box
+          onClick={() => {
+            handleShowTimeComingSoon("comingSoon");
+          }}
+          className={cn(
+            classes.newsTitle,
+            showTimeComingSoon === "comingSoon" && classes.activeTime
+          )}
+          marginRight={2}
+        >
+          <Typography variant="h5">Sắp chiếu</Typography>
+        </Box>
+      </Box>
+      {showTimeComingSoon === "showTime" && <Showtime movieList={movieList} />}
+      {showTimeComingSoon === "comingSoon" && <ComingSoon />}
+
+      {/* ~~~~~~~~~~~~~~~~SHOW TIME!~~~~~~~~~~~~~~~~~~~ */}
+
       <InfoCinema
         maCumRap={maCumRap}
         maHeThongRap={maHeThongRap}
@@ -69,16 +106,15 @@ function HomePage(props) {
         handleGetShowTimeDetail={handleGetShowTimeDetail}
         showTimeDetail={showTimeDetail}
       />
-      {/* ~~~~~~~~~~~~ */}
-      <Box display="flex" justifyContent="center">
+      {/* ~~~~~~~~~~~~Marvel DC ~~~~~~~~~~~~~~~~~~~ */}
+      <Box id="news" display="flex" justifyContent="center">
         <Box
           onClick={() => {
             handleMarvelDC("marvel");
           }}
-          id="news"
           className={cn(
             classes.newsTitle,
-            marvelDC === "marvel" && classes.active
+            marvelDC === "marvel" && classes.activeMarvelDC
           )}
           marginRight={2}
         >
@@ -88,13 +124,17 @@ function HomePage(props) {
           onClick={() => {
             handleMarvelDC("dc");
           }}
-          className={cn(classes.newsTitle, marvelDC === "dc" && classes.active)}
+          className={cn(
+            classes.newsTitle,
+            marvelDC === "dc" && classes.activeMarvelDC
+          )}
           marginRight={2}
         >
           <Typography variant="h5">DC</Typography>
         </Box>
       </Box>
-      {/* ~~~~~~~~~~~~ */}
+      {/* ~~~~~~~~~~~~Marvel DC ~~~~~~~~~~~~~~~~~~~ */}
+
       {marvelDC === "marvel" && <Marvel />}
       {marvelDC === "dc" && <DC />}
       <MobileApp />

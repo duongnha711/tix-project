@@ -25,11 +25,16 @@ const useStyles = makeStyles((theme) => ({
   },
 
   wrapperImg: {
+    position: "relative",
     width: 217,
     borderRadius: 4,
     overflow: "hidden",
     boxShadow:
       "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)",
+
+    "&:hover span": {
+      display: "block",
+    },
   },
   contentImg: {
     paddingTop: "143%",
@@ -104,6 +109,27 @@ const useStyles = makeStyles((theme) => ({
 
   button: {
     marginTop: 10,
+  },
+
+  iconPlay: {
+    display: "none",
+    position: "absolute",
+    top: "50%", // edit sau
+    left: "50%",
+    transform: "translate( -50%,-50%)",
+    zIndex: 99,
+    width: 60,
+    height: 60,
+    cursor: "pointer",
+    transition: "all 0.1s linear",
+    "& img": {
+      width: "100%",
+      display: "block",
+    },
+
+    "&:hover": {
+      transform: "translate( -50%,-50%) scale(1.1)",
+    },
   },
 
   [theme.breakpoints.down("900")]: {

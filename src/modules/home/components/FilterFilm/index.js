@@ -18,6 +18,8 @@ function FilterFilm(props) {
   const [maCumRap, setMaCumRap] = useState("");
   const [activeDate, setActiveDate] = useState("");
   const [maLichChieu, setMaLichChieu] = useState("");
+  //backend tra time ko dung nen lay them thang nay pass qua booking
+  const [hourToShow, setHourToShow] = useState("");
 
   //active cinema dau tien
   useEffect(() => {
@@ -55,8 +57,17 @@ function FilterFilm(props) {
     }
     if (arrHour && arrHour.length > 0) {
       setMaLichChieu(arrHour[0].maLichChieu);
+      setHourToShow(
+        convertFrom24To12Format(
+          arrHour[0].ngayChieuGioChieu.substring(
+            11,
+            arrHour[0].ngayChieuGioChieu.length
+          )
+        )
+      );
     } else {
       setMaLichChieu("");
+      setHourToShow("");
     }
   }, [arrFilterByName, maCumRap, activeDate]);
 
@@ -234,13 +245,14 @@ function FilterFilm(props) {
   };
 
   const handleChooseHour = (e) => {
-    const { value } = e.target;
+    const { value, selectedIndex } = e.target;
     setMaLichChieu(value);
+    setHourToShow(e.target.options[selectedIndex].text);
   };
 
   const handleOnclick = () => {
     if (maLichChieu) {
-      history.push(`/booking-ticket/${maLichChieu}`);
+      history.push(`/booking-ticket/${maLichChieu}`,{hourToShow});
     } else {
       alert("ma lich chieu rong~");
     }

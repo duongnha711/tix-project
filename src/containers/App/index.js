@@ -14,6 +14,8 @@ import theme from "./../../commons/theme";
 import PageNotFound from "./../../components/PageNotFound";
 import SignUp from "../../components/SignUp/index.js";
 
+import VideoModal from "./../../components/VideoModal";
+
 const store = configureStore();
 
 function App() {
@@ -44,6 +46,7 @@ function App() {
         <SignIn />
         <SignUp />
         <GlobalLoading />
+        <VideoModal />
       </Provider>
     </ThemeProvider>
   );

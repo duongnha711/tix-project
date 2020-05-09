@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Slider from "react-slick";
 import { actOpenTrailer } from "../../actions";
 import useStyles from "./styles";
+import FilterFilm from "../FilterFilm";
 
 function NextArrow(props) {
   const { className, onClick } = props;
@@ -99,6 +100,7 @@ function Banner(props) {
       <Box className={classes.containerFluid}>
         <Slider {...settings}>{renderBanner()}</Slider>
       </Box>
+      <FilterFilm />
     </Box>
   );
 }

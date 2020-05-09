@@ -14,6 +14,7 @@ import ClearIcon from "@material-ui/icons/Clear";
 
 import Alert from "./../../components/Alert";
 import AlertConfirm from "./../../components/AlertConfirm";
+import { Redirect } from "react-router-dom";
 
 function BookingPage(props) {
   const classes = useStyles();
@@ -26,6 +27,7 @@ function BookingPage(props) {
     isLogged,
     account,
   } = props;
+  const { location } = props.history;
 
   const { match } = props;
   const { params } = match;
@@ -200,18 +202,18 @@ function BookingPage(props) {
   };
 
   //back end trả data về ko đúng ...phải làm kiểu này
-  const renderTime = () => {
-    if (infoMovieForTicket.gioChieu) {
-      let time = infoMovieForTicket.gioChieu;
+  // const renderTime = () => {
+  //   if (infoMovieForTicket.gioChieu) {
+  //     let time = infoMovieForTicket.gioChieu;
 
-      // if (time.substring(0, 2) === "10") {
-      //   time = time.substring(0, 3) + "10 am";
-      // } else {
-      //   time = time.substring(0, 3) + "10 pm";
-      // }
-      return time;
-    }
-  };
+  //     if (time.substring(0, 2) === "10") {
+  //       time = time.substring(0, 3) + "10 am";
+  //     } else {
+  //       time = time.substring(0, 3) + "10 pm";
+  //     }
+  //     return time;
+  //   }
+  // };
 
   const addEmptyImage = (e) => {
     e.target.src = "/images/defaultImage.png";
@@ -222,105 +224,110 @@ function BookingPage(props) {
   }, []);
 
   return (
-    <Box className={classes.booking}>
-      <Box className={classes.container}>
-        <Box className={classes.wrapperSeat}>
-          <Box className={classes.wrapperScreen}>
-            <Box textAlign="center" className={classes.screen}>
-              Screen
-            </Box>
-            <Box>
-              <ExitToAppIcon fontSize="large" color="primary" />
-            </Box>
-          </Box>
-          <Box textAlign="center" className={classes.seatList}>
-            <Box display="flex" flexWrap="wrap">
-              {renderSeatNormal()}
-            </Box>
-            <Box display="flex" flexWrap="wrap">
-              {renderSeatVip()}
-            </Box>
-          </Box>
-          <Box display="flex" justifyContent="center">
-            <Box className={cn(classes.setInfo, classes.nor)}>
-              <Box className={classes.text}>Normal</Box>
-            </Box>
-            <Box className={cn(classes.setInfo, classes.vip)}>
-              <Box className={classes.text}>VIP</Box>
-            </Box>
-            <Box className={cn(classes.setInfo, classes.selecting)}>
-              <Box className={classes.text}>Selecting</Box>
-            </Box>
-            <Box
-              position="relative"
-              className={cn(classes.setInfo, classes.booked)}
-              textAlign="center"
-            >
-              <ClearIcon className={classes.iconBooked} />
-              <Box className={classes.text}>Booked</Box>
-            </Box>
-          </Box>
-        </Box>
-        <Box className={classes.wrapperInfo}>
-          <Box className={classes.infoMovie}>
-            <Box className={classes.wrapperImg}>
-              <Box className={classes.contentImg}>
-                <img
-                  onError={addEmptyImage}
-                  src={infoMovieForTicket.hinhAnh}
-                  alt={infoMovieForTicket.tenPhim}
-                />
+    <Fragment>
+      {!location.state && <Redirect to="/" />}
+
+      <Box className={classes.booking}>
+        <Box className={classes.container}>
+          <Box className={classes.wrapperSeat}>
+            <Box className={classes.wrapperScreen}>
+              <Box textAlign="center" className={classes.screen}>
+                Screen
+              </Box>
+              <Box>
+                <ExitToAppIcon fontSize="large" color="primary" />
               </Box>
             </Box>
-            <Box className={classes.textMovie}>
+            <Box textAlign="center" className={classes.seatList}>
+              <Box display="flex" flexWrap="wrap">
+                {renderSeatNormal()}
+              </Box>
+              <Box display="flex" flexWrap="wrap">
+                {renderSeatVip()}
+              </Box>
+            </Box>
+            <Box display="flex" justifyContent="center">
+              <Box className={cn(classes.setInfo, classes.nor)}>
+                <Box className={classes.text}>Normal</Box>
+              </Box>
+              <Box className={cn(classes.setInfo, classes.vip)}>
+                <Box className={classes.text}>VIP</Box>
+              </Box>
+              <Box className={cn(classes.setInfo, classes.selecting)}>
+                <Box className={classes.text}>Selecting</Box>
+              </Box>
+              <Box
+                position="relative"
+                className={cn(classes.setInfo, classes.booked)}
+                textAlign="center"
+              >
+                <ClearIcon className={classes.iconBooked} />
+                <Box className={classes.text}>Booked</Box>
+              </Box>
+            </Box>
+          </Box>
+          <Box className={classes.wrapperInfo}>
+            <Box className={classes.infoMovie}>
+              <Box className={classes.wrapperImg}>
+                <Box className={classes.contentImg}>
+                  <img
+                    onError={addEmptyImage}
+                    src={infoMovieForTicket.hinhAnh}
+                    alt={infoMovieForTicket.tenPhim}
+                  />
+                </Box>
+              </Box>
+              <Box className={classes.textMovie}>
+                <Typography className={classes.nameMovie}>
+                  {infoMovieForTicket.tenPhim}
+                </Typography>
+                <Typography variant="subtitle1">
+                  Ngày chiếu: {infoMovieForTicket.ngayChieu}
+                </Typography>
+                <Typography variant="subtitle1">
+                  {/* backend tra time ko dung nen phai lam kieu nay */}
+                  Giờ chiếu: {location.state && location.state.hourToShow}
+                </Typography>
+              </Box>
+            </Box>
+            <Box className={classes.infoCinema}>
               <Typography className={classes.nameMovie}>
-                {infoMovieForTicket.tenPhim}
+                {infoMovieForTicket.tenCumRap}
+              </Typography>
+              <Typography className={classes.addressMovie} variant="subtitle1">
+                Địa chỉ: {infoMovieForTicket.diaChi}
               </Typography>
               <Typography variant="subtitle1">
-                Ngày chiếu: {infoMovieForTicket.ngayChieu}
-              </Typography>
-              <Typography variant="subtitle1">
-                Giờ chiếu: {renderTime()}
+                Tên rạp: {infoMovieForTicket.tenRap}
               </Typography>
             </Box>
-          </Box>
-          <Box className={classes.infoCinema}>
-            <Typography className={classes.nameMovie}>
-              {infoMovieForTicket.tenCumRap}
-            </Typography>
-            <Typography className={classes.addressMovie} variant="subtitle1">
-              Địa chỉ: {infoMovieForTicket.diaChi}
-            </Typography>
-            <Typography variant="subtitle1">
-              Tên rạp: {infoMovieForTicket.tenRap}
-            </Typography>
-          </Box>
-          <Box className={cn(classes.infoCinema, classes.infoTicket)}>
-            <Typography>Số ghế đang chọn: {danhSachVe.length}</Typography>
-            <Box className={classes.wrapperInfoSeat}>
-              {renderInfoChooseSeat()}
+            <Box className={cn(classes.infoCinema, classes.infoTicket)}>
+              <Typography>Số ghế đang chọn: {danhSachVe.length}</Typography>
+              <Box className={classes.wrapperInfoSeat}>
+                {renderInfoChooseSeat()}
+              </Box>
+              <Box className={classes.total}>
+                {"Total: "}
+                {formatCurrencyVND(
+                  danhSachVe.reduce((sum, ticket) => {
+                    return sum + ticket.giaVe;
+                  }, 0)
+                )}
+              </Box>
             </Box>
-            <Box className={classes.total}>
-              {"Total: "}
-              {formatCurrencyVND(
-                danhSachVe.reduce((sum, ticket) => {
-                  return sum + ticket.giaVe;
-                }, 0)
-              )}
-            </Box>
+            <Button
+              onClick={handlePayment}
+              className={classes.button}
+              fullWidth
+              color="primary"
+              variant="contained"
+            >
+              Thanh toán
+            </Button>
           </Box>
-          <Button
-            onClick={handlePayment}
-            className={classes.button}
-            fullWidth
-            color="primary"
-            variant="contained"
-          >
-            Thanh toán
-          </Button>
         </Box>
       </Box>
-    </Box>
+    </Fragment>
   );
 }
 const mapStateToProps = (state) => ({

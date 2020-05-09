@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
 
     position: "absolute",
-    top: -5,
+    bottom: "-13%%",
     left: "50%",
     transform: "translate(-50%,-50%)",
     zIndex: 100,

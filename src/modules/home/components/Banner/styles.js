@@ -2,6 +2,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import { primaryColor } from "./../../../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
+  banner: {
+    position: "relative",
+  },
   containerFluid: {
     position: "relative",
 

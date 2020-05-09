@@ -6,7 +6,10 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
     padding: "80px 0 40px 0",
   },
-  active: {
+  activeMarvelDC: {
+    color: "red",
+  },
+  activeTime: {
     color: "red",
   },
 }));
