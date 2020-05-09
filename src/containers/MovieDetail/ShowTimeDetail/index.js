@@ -193,7 +193,15 @@ export default function ShowTimeDetail(props) {
               return (
                 <Box
                   onClick={() => {
-                    handleClickHour(item.maLichChieu);
+                    handleClickHour(
+                      item.maLichChieu,
+                      convertFrom24To12Format(
+                        item.ngayChieuGioChieu.substring(
+                          11,
+                          item.ngayChieuGioChieu.length
+                        )
+                      )
+                    );
                   }}
                   key={item.maLichChieu}
                   className={classes.itemHour}
@@ -225,8 +233,8 @@ export default function ShowTimeDetail(props) {
     setActiveDate(date);
   };
 
-  const handleClickHour = (maLichChieu) => {
-    history.push(`/booking-ticket/${maLichChieu}`);
+  const handleClickHour = (maLichChieu, hourToShow) => {
+    history.push(`/booking-ticket/${maLichChieu}`, { hourToShow });
   };
 
   const addEmptyImage = (e) => {
