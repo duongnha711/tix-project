@@ -8,7 +8,6 @@ import Slider from "react-slick";
 import { actOpenTrailer } from "../../actions";
 import useStyles from "./styles";
 
-
 function Arrow(props) {
   const { className, onClick, url } = props;
   return (
@@ -66,7 +65,11 @@ function Showtime(props) {
               <img src="/images/play-video.png" alt="play-video" />
             </Box>
             <Link
-              to={`/detail/${movie.maPhim}/${movie.biDanh}`}
+              // to={`/detail/${movie.maPhim}/${movie.biDanh}`}
+              to={{
+                pathname: `/detail/${movie.maPhim}/${movie.biDanh}`,
+                state: { kind: "showTime" },
+              }}
               className={classes.link}
             >
               <Box className={classes.itemWrapper} padding={1}>

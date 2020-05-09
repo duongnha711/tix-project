@@ -14,7 +14,6 @@ import {
   actGetShowTimeAll,
   actGetShowTimeDetail,
 } from "./../../modules/home/actions";
-import VideoModal from "../../components/index.js";
 import { Typography, Box } from "@material-ui/core";
 import useStyles from "./styles";
 import DC from "../../modules/home/components/DC/index.js";
@@ -64,7 +63,6 @@ function HomePage(props) {
 
   return (
     <Fragment>
-      <VideoModal />
       <Banner />
 
       {/* ~~~~~~~~~~~~~~~~SHOW TIME!~~~~~~~~~~~~~~~~~~~ */}

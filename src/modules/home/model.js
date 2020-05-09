@@ -17,6 +17,6 @@ const ENDPOINTS = {
   DatVe: `${rootUrl}${ticket}DatVe`,
 };
 
-export const MA_NHOM = "GP08";
+export const MA_NHOM = "GP01";
 
 export default ENDPOINTS;

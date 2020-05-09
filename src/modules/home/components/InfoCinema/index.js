@@ -2,7 +2,11 @@ import { Box, Divider, Paper, Typography } from "@material-ui/core";
 import cn from "classnames";
 import React, { Fragment, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { changeFormateDate, convertFrom24To12Format, removeDuplicateInArr } from "../../../../functions/helper";
+import {
+  changeFormateDate,
+  convertFrom24To12Format,
+  removeDuplicateInArr,
+} from "../../../../functions/helper";
 import useStyles from "./styles";
 
 export default function InfoCinema(props) {
@@ -180,7 +184,15 @@ export default function InfoCinema(props) {
         return (
           <Box
             onClick={() => {
-              handleClickHour(item.maLichChieu);
+              handleClickHour(
+                item.maLichChieu,
+                convertFrom24To12Format(
+                  item.ngayChieuGioChieu.substring(
+                    11,
+                    item.ngayChieuGioChieu.length
+                  )
+                )
+              );
             }}
             key={item.maLichChieu}
             className={classes.timeDetail}
@@ -211,8 +223,8 @@ export default function InfoCinema(props) {
     SetChoseDate(date);
   };
 
-  const handleClickHour = (maLichChieu) => {
-    history.push(`/booking-ticket/${maLichChieu}`);
+  const handleClickHour = (maLichChieu, hourToShow) => {
+    history.push(`/booking-ticket/${maLichChieu}`, { hourToShow });
   };
 
   const addEmptyImage = (e) => {

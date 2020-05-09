@@ -66,7 +66,11 @@ function ComingSoon(props) {
               <img src="/images/play-video.png" alt="play-video" />
             </Box>
             <Link
-              to={`/detail/${movie.maPhim}/${movie.biDanh}`}
+              // to={`/detail/${movie.maPhim}/${movie.biDanh}`,"aa"}
+              to={{
+                pathname: `/detail/${movie.maPhim}/${movie.biDanh}`,
+                state: { kind: "comingSoon", info: movie },
+              }}
               className={classes.link}
             >
               <Box className={classes.itemWrapper} padding={1}>
