@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 999,
     // background: "rgba(0,0,0,0.7)",
     background: "white",
-
+    // background: "#3772dd59",
   },
   icon: {
     position: "fixed",

@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { themeGradientPrimary } from "./../../../../commons/theme";
+import { newsFilterBackground } from "./../../../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     left: "50%",
     transform: "translateX(-50%)",
     zIndex: 100,
-    background: themeGradientPrimary,
+    background: newsFilterBackground,
   },
   wrapperSelect: {
     display: "flex",

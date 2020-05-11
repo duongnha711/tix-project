@@ -3,7 +3,11 @@ import { backgroundInfoCinema, primaryColor, textDefaultColor } from "./../../..
 
 const useStyles = makeStyles((theme) => ({
   infoCinema: {
-    paddingTop: 50,
+    padding: "50px 0",
+    backgroundImage: "url('/images/bg-info.jpg')",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
   },
   container: {
     width: "70%",

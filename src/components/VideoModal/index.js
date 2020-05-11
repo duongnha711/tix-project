@@ -21,8 +21,7 @@ function AlertDialog(props) {
       onClose={handleClose}
     >
       <iframe
-        width="560"
-        height="315"
+       className={classes.videoControl}
         src={`${openTrailer.trailer}?autoplay=1`}
         frameBorder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"

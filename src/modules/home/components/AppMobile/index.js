@@ -2,9 +2,14 @@ import React from "react";
 import useStyles from "./styles";
 import { Box, Grid, Typography, Button } from "@material-ui/core";
 import Mobile from "../../../../components/Mobile.js";
+import Alert from "./../../../../components/Alert";
 
 export default function MobileApp() {
   const classes = useStyles();
+
+  const handleOnclick = () => {
+    Alert({ icon: "info", text: "Coming soon...!" });
+  };
 
   return (
     <Box id="app" className={classes.mobileApp}>
@@ -19,6 +24,7 @@ export default function MobileApp() {
                 Không chỉ đặt vé, bạn còn có thể đổi quà hấp dẫn.
               </Typography>
               <Button
+                onClick={handleOnclick}
                 className={classes.button}
                 variant="contained"
                 size="large"

@@ -1,22 +1,16 @@
+import { Box, Typography } from "@material-ui/core";
+import cn from "classnames";
 import React, { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import MobileApp from "../../modules/home/components/AppMobile/index.js";
 import Banner from "../../modules/home/components/Banner";
-import InfoCinema from "../../modules/home/components/InfoCinema/index.js";
-import Showtime from "../../modules/home/components/Showtime/index.js";
 import ComingSoon from "../../modules/home/components/ComingSoon/index.js";
-
-import {
-  actGetCinemaBranch,
-  actGetCinemaList,
-  actGetMovieList,
-  actGetShowTimeAll,
-  actGetShowTimeDetail,
-} from "./../../modules/home/actions";
-import { Typography, Box } from "@material-ui/core";
-import useStyles from "./styles";
-import cn from "classnames";
+import InfoCinema from "../../modules/home/components/InfoCinema/index.js";
 import News from "../../modules/home/components/News/index.js";
+import Showtime from "../../modules/home/components/Showtime/index.js";
+import { actGetCinemaBranch, actGetCinemaList, actGetMovieList, actGetShowTimeAll, actGetShowTimeDetail } from "./../../modules/home/actions";
+import useStyles from "./styles";
+
 
 function HomePage(props) {
   const classes = useStyles();

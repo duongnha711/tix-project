@@ -3,7 +3,7 @@ import { primaryColor, activeTitleColor } from "./../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
   wrapperTitle: {
-    padding: "80px 0 40px 0",
+    padding: "60px 0 40px 0",
   },
   newsTitle: {
     cursor: "pointer",

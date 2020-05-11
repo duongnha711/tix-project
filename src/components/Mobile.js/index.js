@@ -15,7 +15,6 @@ const settings = {
 
 //data demo
 const arrCarousel = [
-  { url: "./images/slide1.jpg", name: "slide1" },
   { url: "./images/slide2.jpg", name: "slide2" },
   { url: "./images/slide3.jpg", name: "slide3" },
   { url: "./images/slide4.jpg", name: "slide4" },

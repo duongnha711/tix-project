@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { themeGradientPrimary } from "../../../../commons/theme";
+import { newsFilterBackground } from "../../../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
   },
   updateNewsItemEnd: {
-    background: themeGradientPrimary,
+    background: newsFilterBackground,
     height: "100%",
     borderRadius: 4,
     padding: 8,

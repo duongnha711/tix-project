@@ -1,5 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
-import * as themeColor from "./../../commons/theme";
+import {
+  primaryColor,
+  whiteColor,
+  activeTitleColor,
+} from "./../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
   movieDetail: {
@@ -7,11 +11,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
+    height: 900,
   },
   container: {
     width: 870,
     margin: "0 auto",
-    color: themeColor.whiteColor,
+    color: whiteColor,
     padding: "80px 0",
   },
 
@@ -27,6 +32,8 @@ const useStyles = makeStyles((theme) => ({
   wrapperImg: {
     position: "relative",
     width: 217,
+    border: `2px solid transparent`,
+
     borderRadius: 4,
     overflow: "hidden",
     boxShadow:
@@ -35,6 +42,21 @@ const useStyles = makeStyles((theme) => ({
     "&:hover span": {
       display: "block",
     },
+    "&:hover": {
+      border: `2px solid ${primaryColor}`,
+    },
+  },
+  overLay: {
+    background: "rgba(12, 96, 247, 0.89)",
+    opacity: 0.3,
+
+    position: "absolute",
+    top: 0,
+    right: 0,
+    left: 0,
+    bottom: 0,
+    zIndex: 99,
+    display: "none",
   },
   contentImg: {
     paddingTop: "143%",
@@ -76,35 +98,38 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 50,
     borderRadius: "50%",
     background: "#1a252b87",
-    // background: themeColor.primaryColor,
+    // background: primaryColor,
     // opacity: 0.5
   },
 
   infoEvaluate: {
     display: "flex",
     justifyContent: "center",
-    margin: "80px 0 40px 0",
+    margin: "50px 0 40px 0",
   },
   info: {
+    color: primaryColor,
     marginRight: 30,
     cursor: "pointer",
     transition: "all 0.2s linear",
     "&:hover": {
       transform: "scale(1.2)",
-      color: themeColor.hoverActiveTitleColor,
+      color: activeTitleColor,
     },
   },
   evaluate: {
+    color: primaryColor,
+
     cursor: "pointer",
     transition: "all 0.2s linear",
     "&:hover": {
       transform: "scale(1.2)",
-      color: themeColor.hoverActiveTitleColor,
+      color: activeTitleColor,
     },
   },
   activeTitle: {
     transform: "scale(1.2)",
-    color: themeColor.hoverActiveTitleColor,
+    color: activeTitleColor,
   },
 
   button: {
@@ -114,19 +139,32 @@ const useStyles = makeStyles((theme) => ({
   iconPlay: {
     display: "none",
     position: "absolute",
-    top: "50%", // edit sau
+    top: "50%",
     left: "50%",
     transform: "translate( -50%,-50%)",
     zIndex: 99,
-    width: 60,
-    height: 60,
+
+    background: "#2b27276e",
+
+    border: `2px solid ${primaryColor}`,
+    borderRadius: "50%",
+    textAlign: "center",
+
+    width: 50,
+    height: 50,
+    "& .MuiSvgIcon-colorPrimary": {
+      fontSize: 30,
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%,-50%)",
+    },
+
     cursor: "pointer",
     transition: "all 0.1s linear",
     "& img": {
       width: "100%",
-      display: "block",
     },
-
     "&:hover": {
       transform: "translate( -50%,-50%) scale(1.1)",
     },

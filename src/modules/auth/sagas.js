@@ -1,29 +1,9 @@
-import { call, delay, put, takeLatest } from "redux-saga/effects";
-import {
-  actCloseGlobalLoading,
-  actCloseLogin,
-  actCloseRegister,
-  actOpenGlobalLoading,
-  actOpenLogin,
-} from "./../../commons/actions";
+import { call, put, takeLatest } from "redux-saga/effects";
+import { actCloseLogin } from "./../../commons/actions";
 import Alert from "./../../components/Alert";
-import {
-  actChangePasswordSuccess,
-  actGetInfoBookingUserSuccess,
-  actLogInSuccess,
-} from "./actions";
-import {
-  CHANGE_PASSWORD,
-  GET_INFO_BOOKING_USER,
-  LOG_IN,
-  REGISTER,
-} from "./constants";
-import {
-  changePasswordAPI,
-  getInfoAccountApi,
-  logInApi,
-  registerApi,
-} from "./handler";
+import { actChangePasswordSuccess, actGetInfoBookingUserSuccess, actLogInSuccess } from "./actions";
+import { CHANGE_PASSWORD, GET_INFO_BOOKING_USER, LOG_IN, REGISTER } from "./constants";
+import { changePasswordAPI, getInfoAccountApi, logInApi, registerApi } from "./handler";
 import STATUS from "./status";
 
 function* registerSaga({ account }) {
@@ -33,14 +13,9 @@ function* registerSaga({ account }) {
     if (status === STATUS.SUCCESS) {
       Alert({
         icon: "success",
-        title: "Đăng ký thành công !",
-        timer: 5000,
-        html: "Chuyển đến trang Đăng Nhập sau <b></b> milliseconds.",
-        showConfirmButton: false,
+        title: "Đăng ký thành công",
+        html: `Account: ${account.taiKhoan}`,
       });
-      yield delay(5000);
-      yield put(actCloseRegister());
-      yield put(actOpenLogin());
     }
   } catch (err) {
     if (err.response.data) {
@@ -51,20 +26,20 @@ function* registerSaga({ account }) {
 
 function* logInSaga({ account }) {
   try {
-    yield put(actOpenGlobalLoading());
+    // yield put(actOpenGlobalLoading());
     const response = yield call(logInApi, account);
     const { data, status } = response;
     if (status === STATUS.SUCCESS) {
       yield put(actCloseLogin());
       yield put(actLogInSuccess(data));
     }
-    yield delay(1000);
-    yield put(actCloseGlobalLoading());
+    // yield delay(1000);
+    // yield put(actCloseGlobalLoading());
   } catch (err) {
     if (err.response.data) {
       Alert({ icon: "error", text: err.response.data });
     }
-    yield put(actCloseGlobalLoading());
+    // yield put(actCloseGlobalLoading());
   }
 }
 

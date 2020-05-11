@@ -1,6 +1,5 @@
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
 
-const blackColor = "#000000";
 const greyColor = "#9b9b9b";
 const whiteColor = "#fff";
 const tagColor = "#ffe0b2";
@@ -18,19 +17,24 @@ const themeGradientPrimary = "linear-gradient(to right, #4facfe,#00f2fe)";
 const themeGradientSecond =
   "linear-gradient(to right, #ed6ea0 0%, #ec8c69 100%)";
 const textDefaultColor = "white";
-// const borderColorPrimary = "#4facfe";
+const blackColor = "#000000";
+
 const borderColorSecondary = "#ed6ea0"; //my CV
 const activeTitleColor = "#ed6ea0";
 const backGroundHeader = "linear-gradient(to right, #09203f,#537895)";
-const backGroundGlobal = "linear-gradient(to right, #09203f 0%, #0d2e47 100%)";
+const backGroundGlobal = "linear-gradient(to right, #071324 0%, #0f2434 100%)";
 
 const backgroundInfoCinema =
-  "linear-gradient(-20deg, #064874 0%, #000302 100%)";
+  "linear-gradient(to right, #071324c2 0%, #0f2434d1 100%)";
+const newsFilterBackground =
+  "linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)";
 
- 
-  
-  
+const signUpInBackground =
+  "linear-gradient(to top, #fff1ebd6 0%, #ace0f9c7 100%)";
+
 export {
+  newsFilterBackground,
+  signUpInBackground,
   backgroundInfoCinema,
   backGroundGlobal,
   activeTitleColor,

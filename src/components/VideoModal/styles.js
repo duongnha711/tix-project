@@ -8,6 +8,10 @@ const useStyles = makeStyles((theme) => ({
       overflow: "unset",
     },
   },
+  videoControl: {
+    width: 560,
+    height: 315,
+  },
   iconCancel: {
     position: "absolute",
     top: -14,
@@ -16,6 +20,20 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     fontSize: 30,
     cursor: "pointer",
+  },
+
+  [theme.breakpoints.down("650")]: {
+    videoControl: {
+      width: 392,
+      height: 220,
+    },
+  },
+
+  [theme.breakpoints.down("460")]: {
+    videoControl: {
+      width: 308,
+      height: 164,
+    },
   },
 }));
 
