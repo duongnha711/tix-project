@@ -138,20 +138,16 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   [theme.breakpoints.down("670")]: {
-    textDetail: {
-      "& img": {
-        width: 150,
-      },
+    wrapperImg: {
+      width: 150,
     },
     starDetail: {
       display: "none",
     },
   },
   [theme.breakpoints.down("450")]: {
-    textDetail: {
-      "& img": {
-        width: 100,
-      },
+    wrapperImg: {
+      width: 100,
     },
     titleMovie: {
       fontSize: 14,

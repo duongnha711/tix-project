@@ -1,13 +1,15 @@
 import { Box, Button, Grid } from "@material-ui/core";
-import React, { Fragment, useState } from "react";
-import arrNewOfficial from "./demoData";
+import React, { Fragment, useState, useEffect } from "react";
+import marvelArrNewOfficial from "./marvelDemoData";
+import dcArrNewOfficial from "./dcDemoData";
+
 import ItemNews from "./ItemNews";
 import useStyles from "./styles";
 
-
-export default function DC() {
+export default function News(props) {
   const classes = useStyles();
   const [viewMore, setViewMore] = useState(1);
+  const { marvelDC } = props;
 
   const renderNews = (arrNews) => {
     if (Array.isArray(arrNews) && arrNews.length > 0) {
@@ -74,9 +76,20 @@ export default function DC() {
     }
   };
 
+  useEffect(() => {
+    setViewMore(1);
+  }, [marvelDC]);
+
   const renderNewsOfficial = () => {
-    if (arrNewOfficial && arrNewOfficial.length > 0) {
-      return arrNewOfficial.map((item, index) => {
+    let arrNews = [];
+    if (marvelDC === "marvel") {
+      arrNews = marvelArrNewOfficial;
+    }
+    if (marvelDC === "dc") {
+      arrNews = dcArrNewOfficial;
+    }
+    if (arrNews && arrNews.length > 0) {
+      return arrNews.map((item, index) => {
         if (index < viewMore) {
           return (
             <Fragment key={index}>
@@ -117,7 +130,7 @@ export default function DC() {
 
         {viewMore < 3 && (
           <Box onClick={handleClickViewMore} textAlign="center">
-            <Button variant="outlined" size="large" color="primary">
+            <Button variant="contained" size="large" color="secondary">
               View More
             </Button>
           </Box>
@@ -126,5 +139,3 @@ export default function DC() {
     </Box>
   );
 }
-
-//TODO: margion bottom -> tinh' toan de hop ly ca khi responsive

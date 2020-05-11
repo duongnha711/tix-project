@@ -1,14 +1,16 @@
 import { makeStyles } from "@material-ui/core/styles";
-// import * as themeColor from "./../../../../commons/theme";
+import { themeGradientPrimary } from "../../../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
   container: {
     width: "70%",
     margin: "0 auto",
+    // padding: "80px 0 40px 0",
     paddingBottom: 40,
     "& a": {
       textDecoration: "none",
       color: "inherit",
+      width: "100%",
     },
   },
   title: {
@@ -48,7 +50,14 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
   },
   updateNewsItemEnd: {
-    marginBottom: 30,
+    background: themeGradientPrimary,
+    height: "100%",
+    borderRadius: 4,
+    padding: 8,
+
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
   },
   [theme.breakpoints.down("468")]: {
     title: {

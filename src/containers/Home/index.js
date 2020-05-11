@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import MobileApp from "../../modules/home/components/AppMobile/index.js";
 import Banner from "../../modules/home/components/Banner";
 import InfoCinema from "../../modules/home/components/InfoCinema/index.js";
-import Marvel from "../../modules/home/components/Marvel/index.js";
 import Showtime from "../../modules/home/components/Showtime/index.js";
 import ComingSoon from "../../modules/home/components/ComingSoon/index.js";
 
@@ -16,8 +15,8 @@ import {
 } from "./../../modules/home/actions";
 import { Typography, Box } from "@material-ui/core";
 import useStyles from "./styles";
-import DC from "../../modules/home/components/DC/index.js";
 import cn from "classnames";
+import News from "../../modules/home/components/News/index.js";
 
 function HomePage(props) {
   const classes = useStyles();
@@ -66,7 +65,12 @@ function HomePage(props) {
       <Banner />
 
       {/* ~~~~~~~~~~~~~~~~SHOW TIME!~~~~~~~~~~~~~~~~~~~ */}
-      <Box id="showTime" display="flex" justifyContent="center">
+      <Box
+        className={classes.wrapperTitle}
+        id="showTime"
+        display="flex"
+        justifyContent="center"
+      >
         <Box
           onClick={() => {
             handleShowTimeComingSoon("showTime");
@@ -107,7 +111,12 @@ function HomePage(props) {
         showTimeDetail={showTimeDetail}
       />
       {/* ~~~~~~~~~~~~Marvel DC ~~~~~~~~~~~~~~~~~~~ */}
-      <Box id="news" display="flex" justifyContent="center">
+      <Box
+        className={classes.wrapperTitle}
+        id="news"
+        display="flex"
+        justifyContent="center"
+      >
         <Box
           onClick={() => {
             handleMarvelDC("marvel");
@@ -135,8 +144,7 @@ function HomePage(props) {
       </Box>
       {/* ~~~~~~~~~~~~Marvel DC ~~~~~~~~~~~~~~~~~~~ */}
 
-      {marvelDC === "marvel" && <Marvel />}
-      {marvelDC === "dc" && <DC />}
+      <News marvelDC={marvelDC} />
       <MobileApp />
     </Fragment>
   );

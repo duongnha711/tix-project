@@ -2,6 +2,7 @@ import HomePage from "./../containers/Home";
 import MovieDetail from "./../containers/MovieDetail";
 import BookingPage from "../containers/BookingPage";
 import UserManagement from "../containers/UserManagement";
+import PDF from "../components/PDF";
 
 export const routes = [
   {
@@ -23,5 +24,10 @@ export const routes = [
     path: "/user-info/",
     exact: false,
     component: UserManagement,
+  },
+  {
+    path: "/duong-hoang-nha/",
+    exact: false,
+    component: PDF,
   },
 ];

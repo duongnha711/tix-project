@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import * as themeColor from "./../../../../commons/theme";
+import { backgroundInfoCinema, primaryColor, textDefaultColor } from "./../../../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
   infoCinema: {
@@ -8,9 +8,11 @@ const useStyles = makeStyles((theme) => ({
   container: {
     width: "70%",
     margin: "0 auto",
+    background: backgroundInfoCinema,
   },
   cinemaWrapper: {
     display: "flex",
+    color: textDefaultColor,
   },
   listLogo: {
     minWidth: 90,
@@ -39,6 +41,11 @@ const useStyles = makeStyles((theme) => ({
     borderRight: "1px solid rgba(0,0,0,0.12)",
     maxHeight: 600,
     overflowY: "auto",
+    msOverflowStyle: "none" /* Internet Explorer 10+ */,
+    scrollbarWidth: "none" /* Firefox */,
+    "&::-webkit-scrollbar": {
+      display: "none" /* Safari and Chrome */,
+    },
   },
   itemCinema: {
     display: "flex",
@@ -72,13 +79,16 @@ const useStyles = makeStyles((theme) => ({
       overflow: "hidden",
     },
     "& span": {
-      color: themeColor.primaryColor,
+      color: primaryColor,
     },
   },
   listMovie: {
     flexGrow: 1,
     maxHeight: 600,
     overflowY: "auto",
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
   },
   itemMovie: {
     padding: "20px",
@@ -108,14 +118,6 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 10,
   },
 
-  // tag: {
-  //   background: themeColor.tagColor,
-  //   border: `1px solid ${themeColor.tagBorderColor}`,
-  //   padding: "2px 4px",
-  //   borderRadius: 4,
-  //   marginRight: 10,
-  //   color: themeColor.primaryColor,
-  // },
   titleMovie: {
     display: "-webkit-box",
     WebkitLineClamp: 1,
@@ -133,7 +135,7 @@ const useStyles = makeStyles((theme) => ({
   },
   time: {
     display: "flex",
-    color: themeColor.greyColor,
+    color: primaryColor,
   },
   timeView: {
     display: "flex",
@@ -161,7 +163,14 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 4,
   },
   activeDate: {
-    color: "red",
+    color: primaryColor,
+  },
+
+  viewMore: {
+    display:"inline-block",
+    color: "#f66161",
+    cursor: "pointer",
+    marginBottom: 10,
   },
 
   [theme.breakpoints.down("1140")]: {

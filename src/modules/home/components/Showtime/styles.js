@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import * as themeColor from "./../../../../commons/theme";
+import { primaryColor, textDefaultColor } from "./../../../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
   showtime: {
@@ -14,21 +14,17 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
   },
-  title: {
-    marginRight: 20,
-    cursor: "pointer",
-    transition: "all 0.1s linear",
-    "&:hover": {
-      transform: "scale(1.1)",
-    },
-  },
+
   contentCarousel: {
     "& img": {
       width: "100%",
+      display: "block",
+    },
+
+    "& .MuiSvgIcon-colorPrimary": {
+      fontSize: 50,
     },
     "& .slick-next": {
-      width: 50,
-      height: 50,
       right: -50,
       zIndex: 99,
       "&::before": {
@@ -36,8 +32,6 @@ const useStyles = makeStyles((theme) => ({
       },
     },
     "&  .slick-prev": {
-      width: 50,
-      height: 50,
       left: -50,
       zIndex: 99,
       "&::before": {
@@ -49,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   //item
   link: {
     textDecoration: "none",
-    color: themeColor.blackColor,
+    color: textDefaultColor,
   },
   itemWrapper: {
     cursor: "pointer",
@@ -82,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
   },
   duration: {
-    color: themeColor.greyColor,
+    color: textDefaultColor,
   },
   iconPlay: {
     display: "none",
@@ -91,8 +85,22 @@ const useStyles = makeStyles((theme) => ({
     left: "50%",
     transform: "translate( -50%,-50%)",
     zIndex: 99,
-    width: 48,
-    height: 48,
+
+    background: "#2b27276e",
+    border: `2px solid ${primaryColor}`,
+    borderRadius: "50%",
+    textAlign: "center",
+
+    width: 50,
+    height: 50,
+    "& .MuiSvgIcon-colorPrimary": {
+      fontSize: 30,
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%,-50%)",
+    },
+
     cursor: "pointer",
     transition: "all 0.1s linear",
 
@@ -112,7 +120,9 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   star: {
-    fontSize: 10,
+    "& .MuiSvgIcon-colorPrimary": {
+      fontSize: 10,
+    },
   },
   avgPoint: {
     fontSize: "16px",
@@ -126,7 +136,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
     width: 54,
     textAlign: "center",
-    lineHeight: 1.1,
+    lineHeight: 0.9,
   },
   overLay: {
     display: "none",
@@ -135,20 +145,44 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     bottom: 0,
     left: 0,
-    backgroundColor: "rgba(12,27,54,.8)",
+    backgroundColor: "rgba(12, 96, 247, 0.89)",
     opacity: 0.3,
   },
 
   wrapperMovie: {
+    // background: "red",
     position: "relative",
+    border: `1px solid transparent`,
+
     "&:hover span": {
       display: "block",
+    },
+    "&:hover": {
+      border: `1px solid ${primaryColor}`,
     },
   },
 
   [theme.breakpoints.down("960")]: {
     titleWrapper: {
       padding: "60px 0 20px 0",
+    },
+  },
+  [theme.breakpoints.down("600")]: {
+    contentCarousel: {
+      "& .MuiSvgIcon-colorPrimary": {
+        fontSize: 30,
+      },
+      "& .slick-next": {
+        right: -30,
+      },
+      "& .slick-prev": {
+        left: -30,
+      },
+    },
+    star: {
+      "& .MuiSvgIcon-colorPrimary": {
+        fontSize: 10,
+      },
     },
   },
   [theme.breakpoints.down("540")]: {

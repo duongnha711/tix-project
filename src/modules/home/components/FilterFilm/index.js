@@ -252,7 +252,7 @@ function FilterFilm(props) {
 
   const handleOnclick = () => {
     if (maLichChieu) {
-      history.push(`/booking-ticket/${maLichChieu}`,{hourToShow});
+      history.push(`/booking-ticket/${maLichChieu}`, { hourToShow });
     } else {
       alert("ma lich chieu rong~");
     }
@@ -309,7 +309,7 @@ function FilterFilm(props) {
       </Box>
 
       <Box className={classes.button}>
-        <Button onClick={handleOnclick} variant="contained" color="primary">
+        <Button onClick={handleOnclick} variant="contained" color="secondary">
           Mua vé ngay
         </Button>
       </Box>

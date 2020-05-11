@@ -1,16 +1,22 @@
 import { makeStyles } from "@material-ui/core/styles";
-// import * as themeColor from "./../../../../commons/theme";
+import { primaryColor, activeTitleColor } from "./../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
-  newsTitle: {
-    cursor: "pointer",
+  wrapperTitle: {
     padding: "80px 0 40px 0",
   },
+  newsTitle: {
+    cursor: "pointer",
+    color: primaryColor,
+    "&:hover": {
+      color: activeTitleColor,
+    },
+  },
   activeMarvelDC: {
-    color: "red",
+    color: activeTitleColor,
   },
   activeTime: {
-    color: "red",
+    color: activeTitleColor,
   },
 }));
 

@@ -7,13 +7,24 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { actOpenTrailer } from "../../actions";
 import useStyles from "./styles";
-import arrMovieListDemo from "./demoData";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import PlayArrowIcon from "@material-ui/icons/PlayArrow";
+import movieList from "./demoData";
 
-function Arrow(props) {
-  const { className, onClick, url } = props;
+function NextArrow(props) {
+  const { className, onClick } = props;
   return (
     <div className={className} onClick={onClick}>
-      <img src={url} alt="next" />
+      <ArrowForwardIosIcon color="primary" />
+    </div>
+  );
+}
+function PrevArrow(props) {
+  const { className, onClick } = props;
+  return (
+    <div className={className} onClick={onClick}>
+      <ArrowBackIosIcon color="primary" />
     </div>
   );
 }
@@ -24,8 +35,8 @@ const settings = {
   speed: 500,
   rows: 2,
   slidesPerRow: 4,
-  nextArrow: <Arrow url="./images/next-arrow.png" />,
-  prevArrow: <Arrow url="./images/back-arrow.png" />,
+  nextArrow: <NextArrow />,
+  prevArrow: <PrevArrow />,
   responsive: [
     {
       breakpoint: 960,
@@ -37,7 +48,6 @@ const settings = {
       breakpoint: 720,
       settings: {
         slidesPerRow: 2,
-        arrows: false,
       },
     },
   ],
@@ -52,8 +62,8 @@ function ComingSoon(props) {
   };
 
   const renderMovie = () => {
-    if (Array.isArray(arrMovieListDemo) && arrMovieListDemo.length > 0) {
-      return arrMovieListDemo.map((movie, index) => {
+    if (Array.isArray(movieList) && movieList.length > 0) {
+      return movieList.map((movie, index) => {
         return (
           <Box key={index} className={classes.wrapperMovie}>
             <Box
@@ -63,13 +73,13 @@ function ComingSoon(props) {
               component="span"
               className={classes.iconPlay}
             >
-              <img src="/images/play-video.png" alt="play-video" />
+              <PlayArrowIcon color="primary" />
             </Box>
             <Link
-              // to={`/detail/${movie.maPhim}/${movie.biDanh}`,"aa"}
+              // to={`/detail/${movie.maPhim}/${movie.biDanh}`}
               to={{
                 pathname: `/detail/${movie.maPhim}/${movie.biDanh}`,
-                state: { kind: "comingSoon", info: movie },
+                state: { kind: "showTime" },
               }}
               className={classes.link}
             >
@@ -85,10 +95,10 @@ function ComingSoon(props) {
                   <Box className={classes.ageType}>C16</Box>
                   <Box className={classes.avgPoint}>
                     <Box>{movie.danhGia}</Box>
-                    <Box>
-                      <StarIcon color="primary" className={classes.star} />
-                      <StarIcon color="primary" className={classes.star} />
-                      <StarIcon color="primary" className={classes.star} />
+                    <Box className={classes.star}>
+                      <StarIcon color="primary" />
+                      <StarIcon color="primary" />
+                      <StarIcon color="primary" />
                     </Box>
                   </Box>
                   <Box component="span" className={classes.overLay}></Box>
@@ -96,7 +106,7 @@ function ComingSoon(props) {
                 <Typography className={classes.nameMovie} variant="h6">
                   {movie.tenPhim}
                 </Typography>
-                <Typography className={classes.duration}>110 phút</Typography>
+                <Typography className={classes.duration}>05/2020</Typography>
               </Box>
             </Link>
           </Box>

@@ -10,11 +10,12 @@ const useStyles = makeStyles((theme) => ({
 
     cursor: "pointer",
 
+    "& .MuiSvgIcon-colorPrimary": {
+      fontSize: 50,
+    },
     // custom arrow
     "& .slick-next": {
-      width: 50,
-      height: 50,
-      right: 10,
+      right: 30,
       zIndex: 99,
       "&::before": {
         display: "none",
@@ -25,8 +26,6 @@ const useStyles = makeStyles((theme) => ({
     },
 
     "& .slick-prev": {
-      width: 50,
-      height: 50,
       left: 10,
       zIndex: 99,
       "&::before": {
@@ -67,8 +66,23 @@ const useStyles = makeStyles((theme) => ({
     left: "50%",
     transform: "translate( -50%,-50%)",
     zIndex: 99,
+
+    background: "#2b27276e",
+
+    border: `2px solid ${primaryColor}`,
+    borderRadius: "50%",
+    textAlign: "center",
+
     width: 80,
     height: 80,
+    "& .MuiSvgIcon-colorPrimary": {
+      fontSize: 50,
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%,-50%)",
+    },
+
     cursor: "pointer",
     transition: "all 0.1s linear",
     "& img": {
@@ -78,6 +92,9 @@ const useStyles = makeStyles((theme) => ({
       transform: "translate( -50%,-50%) scale(1.1)",
     },
   },
+
+
+
   wrapperImg: {
     width: "100%", // kích thước width mong muốn
     position: "relative",
@@ -108,13 +125,19 @@ const useStyles = makeStyles((theme) => ({
   },
   [theme.breakpoints.down("760")]: {
     containerFluid: {
-      "& .slick-prev": {
-        width: 30,
-        height: 30,
+      "& .MuiSvgIcon-colorPrimary": {
+        fontSize: 30,
       },
+      // custom arrow
       "& .slick-next": {
-        width: 30,
-        height: 30,
+        right: 15,
+      },
+    },
+    iconPlay: {
+      width: 40,
+      height: 40,
+      "& .MuiSvgIcon-colorPrimary": {
+        fontSize: 20,
       },
     },
   },

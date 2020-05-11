@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-// import * as themeColor from "./../../../../commons/theme";
+import { themeGradientPrimary } from "./../../../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -9,10 +9,11 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
 
     position: "absolute",
-    bottom: "-13%%",
+    bottom: "-8%",
     left: "50%",
-    transform: "translate(-50%,-50%)",
+    transform: "translateX(-50%)",
     zIndex: 100,
+    background: themeGradientPrimary,
   },
   wrapperSelect: {
     display: "flex",

@@ -1,6 +1,5 @@
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
 
-const primaryColor = "#fb4226";
 const blackColor = "#000000";
 const greyColor = "#9b9b9b";
 const whiteColor = "#fff";
@@ -13,7 +12,34 @@ const hoverActiveTitleColor = "#50ffe7";
 
 const labelForm = "#04ffc5";
 
+//summary
+const primaryColor = "#2791fa";
+const themeGradientPrimary = "linear-gradient(to right, #4facfe,#00f2fe)";
+const themeGradientSecond =
+  "linear-gradient(to right, #ed6ea0 0%, #ec8c69 100%)";
+const textDefaultColor = "white";
+// const borderColorPrimary = "#4facfe";
+const borderColorSecondary = "#ed6ea0"; //my CV
+const activeTitleColor = "#ed6ea0";
+const backGroundHeader = "linear-gradient(to right, #09203f,#537895)";
+const backGroundGlobal = "linear-gradient(to right, #09203f 0%, #0d2e47 100%)";
+
+const backgroundInfoCinema =
+  "linear-gradient(-20deg, #064874 0%, #000302 100%)";
+
+ 
+  
+  
 export {
+  backgroundInfoCinema,
+  backGroundGlobal,
+  activeTitleColor,
+  backGroundHeader,
+  // borderColorPrimary,
+  borderColorSecondary,
+  themeGradientSecond,
+  themeGradientPrimary,
+  textDefaultColor,
   signUpColor,
   whiteColor,
   primaryColor,
@@ -31,16 +57,16 @@ let theme = createMuiTheme({
     values: {
       xs: 0,
       sm: 450,
-      md: 730,
+      md: 867,
       lg: 960,
       xl: 1200,
     },
   },
   palette: {
     primary: {
-      main: "#fb4226",
-      dark: "#c00000",
-      light: "#ff7852",
+      main: "#2791fa",
+      // dark: "#0064c6",
+      // light: "#72c1ff",
     },
     secondary: {
       main: "#9b9b9b",

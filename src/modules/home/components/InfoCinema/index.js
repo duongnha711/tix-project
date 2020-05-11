@@ -1,11 +1,12 @@
 import { Box, Divider, Paper, Typography } from "@material-ui/core";
 import cn from "classnames";
 import React, { Fragment, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import {
   changeFormateDate,
   convertFrom24To12Format,
   removeDuplicateInArr,
+  toSlug,
 } from "../../../../functions/helper";
 import useStyles from "./styles";
 
@@ -104,12 +105,18 @@ export default function InfoCinema(props) {
               <Typography className={classes.textMovie}>
                 {`Movie name: ${movie.tenPhim} - API don't have description ... The best way to learn code is to write code!`}
               </Typography>
-              <Typography color="primary">
-                <em>
-                  <b>View More</b>
-                </em>
-              </Typography>
-
+              <Link
+                to={{
+                  pathname: `/detail/${movie.maPhim}/${toSlug(movie.tenPhim)}`,
+                  state: { kind: "showTime" },
+                }}
+              >
+                <Typography className={classes.viewMore} color="secondary">
+                  <em>
+                    <b>View More</b>
+                  </em>
+                </Typography>
+              </Link>
               <Box className={classes.time}>
                 <Box key={index} display="flex" flexWrap="wrap">
                   {renderHour(movie.maPhim)}
@@ -120,7 +127,11 @@ export default function InfoCinema(props) {
         );
       });
     } else {
-      return <Box className={classes.itemMovie}>Không có suất chiếu</Box>;
+      return (
+        <Box style={{ color: "grey" }} className={classes.itemMovie}>
+          Không có suất chiếu
+        </Box>
+      );
     }
   };
 
@@ -207,7 +218,7 @@ export default function InfoCinema(props) {
         );
       });
     } else {
-      return <Box>Không có suất chiếu</Box>;
+      return <Box style={{ color: "grey" }}>Không có suất chiếu</Box>;
     }
   };
 

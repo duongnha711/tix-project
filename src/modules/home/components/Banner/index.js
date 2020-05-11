@@ -5,12 +5,15 @@ import Slider from "react-slick";
 import { actOpenTrailer } from "../../actions";
 import useStyles from "./styles";
 import FilterFilm from "../FilterFilm";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 
 function NextArrow(props) {
   const { className, onClick } = props;
   return (
     <div className={className} onClick={onClick}>
-      <img src="./images/next-arrow.png" alt="next" />
+      <ArrowForwardIosIcon color="primary" />
     </div>
   );
 }
@@ -18,7 +21,7 @@ function PrevArrow(props) {
   const { className, onClick } = props;
   return (
     <div className={className} onClick={onClick}>
-      <img src="./images/back-arrow.png" alt="back" />
+      <ArrowBackIosIcon color="primary" />
     </div>
   );
 }
@@ -45,15 +48,20 @@ const settings = {
 //demo data
 const arrBanner = [
   {
-    name: "DreamEyes",
-    url: "/images/banner-eye.jpg",
-    trailer: "https://www.youtube.com/embed/ITlQ0oU7tDA",
-  },
-  {
     name: "EndGame",
     url: "/images/banner-endGame.jpg",
     trailer: "https://www.youtube.com/embed/TcMBFSGVi1c",
   },
+  {
+    name: "DreamEyes",
+    url: "/images/banner-eye.jpg",
+    trailer: "https://www.youtube.com/embed/ITlQ0oU7tDA",
+  },
+  // {
+  //   name: "EndGame",
+  //   url: "/images/banner-endGame.jpg",
+  //   trailer: "https://www.youtube.com/embed/TcMBFSGVi1c",
+  // },
   {
     name: "Spider",
     url: "/images/banner-spider.jpeg",
@@ -84,7 +92,7 @@ function Banner(props) {
             component="span"
             className={classes.iconPlay}
           >
-            <img src="./images/play-video.png" alt="play-video" />
+            <PlayArrowIcon color="primary" />
           </Box>
         </Box>
       ));

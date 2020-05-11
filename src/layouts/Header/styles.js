@@ -1,12 +1,11 @@
 import { makeStyles } from "@material-ui/core/styles";
-import * as theme from "../../commons/theme";
-import { primaryColor, blackColor, greyColor } from "../../commons/theme";
+import { backGroundHeader, borderColorSecondary, greyColor, themeGradientPrimary, themeGradientSecond } from "../../commons/theme";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   topHeader: {
-    background: "rgba(255,255,255,.95)",
+    background: backGroundHeader,
     position: "sticky",
-    padding: "7px 15px",
+    padding: "10px 50px",
     top: 0,
     zIndex: 999,
   },
@@ -18,10 +17,18 @@ const useStyles = makeStyles({
     "& a": {
       textDecoration: "none",
       marginRight: 20,
-      color: blackColor,
+      background: themeGradientPrimary,
+
+      WebkitTextFillColor: "transparent",
+      WebkitBackgroundClip: "text",
+      fontWeight: "bold",
+      transition: "all 0.2s linear",
     },
     "& a:hover": {
-      color: primaryColor,
+      background: themeGradientSecond,
+
+      WebkitTextFillColor: "transparent",
+      WebkitBackgroundClip: "text",
     },
   },
   login: {
@@ -33,14 +40,42 @@ const useStyles = makeStyles({
       color: greyColor,
     },
   },
-  logo: {
+  wrarperLogo: {
     display: "flex",
     alignItems: "center",
+  },
+
+  logo: {
+    fontSize: 25,
     cursor: "pointer",
+    "& a": {
+      textDecoration: "none",
+      background: themeGradientPrimary,
+
+      WebkitTextFillColor: "transparent",
+      WebkitBackgroundClip: "text",
+    },
   },
-  location: {
+
+  myCV: {
+    border: `1px solid ${borderColorSecondary}`,
     display: "flex",
+    borderRadius: 4,
+    height: 25,
+    padding: 3,
+    alignItems: "center",
+    cursor: "pointer",
+    marginLeft: 20,
+    "& a": {
+      textDecoration: "none",
+      fontWeight: "bold",
+      background: themeGradientSecond,
+
+      WebkitTextFillColor: "transparent",
+      WebkitBackgroundClip: "text",
+    },
   },
+
   button: {
     marginRight: 10,
   },
@@ -55,5 +90,5 @@ const useStyles = makeStyles({
       scrollBehavior: "smooth",
     },
   },
-});
+}));
 export default useStyles;

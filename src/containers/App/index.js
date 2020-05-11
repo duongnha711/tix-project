@@ -1,4 +1,4 @@
-import { CssBaseline } from "@material-ui/core";
+import { CssBaseline, Box } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
 import React from "react";
 import { Provider } from "react-redux";
@@ -15,10 +15,12 @@ import PageNotFound from "./../../components/PageNotFound";
 import SignUp from "../../components/SignUp/index.js";
 
 import VideoModal from "./../../components/VideoModal";
+import useStyles from "./styles";
 
 const store = configureStore();
 
 function App() {
+  const classes = useStyles();
   const renderHomeRoutes = () => {
     if (routes && routes.length > 0) {
       return routes.map((route, index) => (
@@ -33,22 +35,24 @@ function App() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <CssBaseline />
-        <Router>
-          <Switch>
-            {renderHomeRoutes()}
-            <Route path="" component={PageNotFound} />
-          </Switch>
-        </Router>
+    <Box className={classes.global}>
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <CssBaseline />
+          <Router>
+            <Switch>
+              {renderHomeRoutes()}
+              <Route path="" component={PageNotFound} />
+            </Switch>
+          </Router>
 
-        <SignIn />
-        <SignUp />
-        <GlobalLoading />
-        <VideoModal />
-      </Provider>
-    </ThemeProvider>
+          <SignIn />
+          <SignUp />
+          <GlobalLoading />
+          <VideoModal />
+        </Provider>
+      </ThemeProvider>
+    </Box>
   );
 }
 

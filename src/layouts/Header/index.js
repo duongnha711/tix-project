@@ -29,14 +29,18 @@ function Header(props) {
   };
 
   return (
-    <Box id="top" boxShadow={1} className={classes.topHeader}>
+    <Box id="top" className={classes.topHeader}>
       <Box className={classes.containerFluid}>
-        <Grid justify="space-between" container>
-          <Grid className={classes.logo} item>
-            <Link to="/">
-              <img src="/images/logo.png" alt="logo" width="50" />
-            </Link>
+        <Grid alignItems="center" justify="space-between" container>
+          <Grid className={classes.wrarperLogo} item>
+            <Box className={classes.logo}>
+              <Link to="/">N-cinema</Link>
+            </Box>
+            <Box className={classes.myCV} >
+              <Link to="/duong-hoang-nha">My CV</Link>
+            </Box>
           </Grid>
+
           {/* button login - location <730 -> hidden */}
           <Hidden smDown>
             <Grid className={classes.navigation} item>
@@ -64,7 +68,6 @@ function Header(props) {
                 alignItems="center"
                 className={classes.contentLogin}
               >
-
                 {/*  igLogin ? Duong Nha : log in */}
                 {isLogged ? (
                   <UserInfo />
@@ -84,7 +87,7 @@ function Header(props) {
                       <Button
                         onClick={handleOnClickOpenRegister}
                         color="primary"
-                        variant="outlined"
+                        variant="contained"
                         size="large"
                       >
                         Register

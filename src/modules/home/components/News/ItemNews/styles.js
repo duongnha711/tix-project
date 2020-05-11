@@ -1,9 +1,14 @@
 import { makeStyles } from "@material-ui/core/styles";
-import * as themeColor from "../../../../../commons/theme";
+import { greyColor, themeGradientPrimary } from "../../../../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
   containerItem: {
-    cursor: "pointer",
+    background: themeGradientPrimary,
+    borderRadius: 4,
+    overflow: "hidden",
+  },
+  wrapperText: {
+    padding: 10,
   },
   item: {
     overflow: "hidden",
@@ -30,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
   likeComment: {
     display: "flex",
-    color: themeColor.greyColor,
+    color: greyColor,
   },
   icon: {
     marginRight: 20,

@@ -11,25 +11,14 @@ export default function BottomFooter() {
         <img src="/images/zion.jpg" alt="zion" width="80px" />
       </Box>
       <Box className={classes.address}>
-        <Typography className={classes.title}>
-          TIX – SẢN PHẨM CỦA CÔNG TY CỔ PHẦN ZION
-        </Typography>
+        <Typography className={classes.title}>Dương Hoàng Nhã </Typography>
         <Typography variant="subtitle1">
-          Địa chỉ: Z06 Đường số 13, Phường Tân Thuận Đông, Quận 7, Tp. Hồ Chí
-          Minh, Việt Nam.
+          Truong Sa street, Binh Thanh District, Ho Chi Minh City
         </Typography>
+
+        <Typography variant="subtitle1">Phone number: 083.466.5959</Typography>
         <Typography variant="subtitle1">
-          Giấy chứng nhận đăng ký kinh doanh số: 0101659783,
-        </Typography>
-        <Typography variant="subtitle1">
-          đăng ký thay đổi lần thứ 30, ngày 22 tháng 01 năm 2020 do Sở kế hoạch
-          và đầu tư Thành phố Hồ Chí Minh cấp.
-        </Typography>
-        <Typography variant="subtitle1">
-          Số Điện Thoại (Hotline): 1900 545 436
-        </Typography>
-        <Typography variant="subtitle1">
-          Email: <a href="/"> support@tix.vn</a>
+          Email: duonghoangnha711@gmail.com
         </Typography>
       </Box>
       <Box className={classes.imgRight}>
