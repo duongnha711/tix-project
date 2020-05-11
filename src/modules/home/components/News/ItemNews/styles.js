@@ -1,9 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { greyColor, themeGradientPrimary } from "../../../../../commons/theme";
+import { greyColor, newsFilterBackground } from "../../../../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
   containerItem: {
-    background: themeGradientPrimary,
+    background: newsFilterBackground,
     borderRadius: 4,
     overflow: "hidden",
   },

@@ -8,7 +8,11 @@ function GlobalLoading(props) {
   const { isShowGlobalLoading } = props;
   return isShowGlobalLoading ? (
     <div className={classes.globalLoading}>
-      <img className={classes.icon} src="/images/dogLoading.gif" alt="Global loading" />
+      <img
+        className={classes.icon}
+        src="/images/dogLoading.gif"
+        alt="Global loading"
+      />
     </div>
   ) : null;
 }

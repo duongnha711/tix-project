@@ -1,14 +1,16 @@
 import { Box, TextField, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
-import CloseIcon from "@material-ui/icons/Close";
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
-import * as Actions from "./../../commons/actions";
-import useStyles from "./styles";
 import { actRegister } from "./../../modules/auth/actions";
+import useStyles from "./styles";
+import {
+  actOpenGlobalLoading,
+  actCloseGlobalLoading,
+} from "../../commons/actions";
 
 const validate = (values) => {
   const errors = {};
@@ -64,42 +66,37 @@ const renderTextField = ({
 
 let SignUp = (props) => {
   const classes = useStyles();
-  const { dispatch, isShowRegister, reset } = props;
+  const { dispatch } = props;
   const { handleSubmit } = props;
-
-  const handleClose = () => {
-    dispatch(Actions.actCloseRegister());
-    reset();
-  };
+  const history = useHistory();
 
   const handleGoToLogin = () => {
-    dispatch(Actions.actCloseRegister());
-    dispatch(Actions.actOpenLogin());
-    reset();
+    history.push("/log-in");
   };
 
   const submit = (values) => {
     const account = { ...values, maNhom: "GP01", maLoaiNguoiDung: "KhachHang" };
     delete account.confirmPassword;
     dispatch(actRegister(account));
-    reset();
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    dispatch(actOpenGlobalLoading());
+    setTimeout(() => {
+      dispatch(actCloseGlobalLoading());
+    }, 700);
+  }, [dispatch]);
+
   return (
-    <div>
-      <Dialog
-        className={classes.signUp}
-        open={isShowRegister}
-        onClose={handleClose}
-      >
+    <Box className={classes.container}>
+      <Box className={classes.signUp}>
         <DialogContent>
           <Box marginBottom={3} textAlign="center">
-            <CloseIcon onClick={handleClose} className={classes.iconClose} />
-
             <Typography variant="h5">Welcome to N-Cinema</Typography>
           </Box>
           <form onSubmit={handleSubmit(submit)}>
-            <label>Tài khoản *</label>
+            <label>Account *</label>
             <Field
               name="taiKhoan"
               variant="outlined"
@@ -143,7 +140,7 @@ let SignUp = (props) => {
             />
             <Box display="flex">
               <Box width="50%" paddingRight={1}>
-                <label>Họ Tên *</label>
+                <label>Full Name *</label>
                 <Field
                   name="hoTen"
                   variant="outlined"
@@ -152,7 +149,7 @@ let SignUp = (props) => {
                 />
               </Box>
               <Box width="50%" paddingLeft={1}>
-                <label>Số điện thoại *</label>
+                <label>Phone Number *</label>
                 <Field
                   name="soDt"
                   variant="outlined"
@@ -165,7 +162,7 @@ let SignUp = (props) => {
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
+              color="secondary"
               className={classes.submit}
               size="large"
             >
@@ -173,13 +170,13 @@ let SignUp = (props) => {
             </Button>
             <Box>
               <Typography onClick={handleGoToLogin} className={classes.link}>
-                {"Bạn đã có tài khoản? Đăng Nhập"}
+                {"Already have an account? Sign In"}
               </Typography>
             </Box>
           </form>
         </DialogContent>
-      </Dialog>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

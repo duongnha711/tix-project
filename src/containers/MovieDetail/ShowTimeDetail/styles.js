@@ -1,23 +1,21 @@
 import { makeStyles } from "@material-ui/core/styles";
-// import * as themeColor from "./../../../commons/theme";
+import {
+  backgroundInfoCinema,
+  textDefaultColor,
+  primaryColor,
+} from "./../../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
-  // container: {
-  //   background: "grey",
-  // },
-  // listLogo: {
-  //   display: "flex",
-  //   justifyContent: "center",
-  // },
-
   wrapperInfo: {
-    minHeight: 405,
+    minHeight: 350,
     display: "flex",
+    background: backgroundInfoCinema,
+    color: textDefaultColor,
   },
   listLogo: {
     padding: 20,
     maxWidth: 90,
-    borderRight: "1px solid",
+    borderRight: "1px solid #2d2c2c",
   },
   logo: {
     cursor: "pointer",
@@ -40,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 250,
 
     padding: 20,
-    borderRight: "1px solid",
+    borderRight: "1px solid #2d2c2c",
   },
   infoDateTime: {
     padding: 20,
@@ -60,7 +58,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 4,
     overflow: "hidden",
     marginRight: 10,
+    position: "relative",
   },
+
   contentImg: {
     paddingTop: "143%", // dựa theo width thẻ bọc nó
     position: "relative",
@@ -94,10 +94,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 4,
     marginRight: 10,
     marginBottom: 10,
-    opacity: 0.3,
   },
   activeDate: {
-    opacity: 1,
+    color: primaryColor,
   },
   itemHour: {
     cursor: "pointer",
@@ -106,6 +105,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 4,
     marginRight: 10,
     marginTop: 10,
+    color: primaryColor,
   },
   divider: {
     marginBottom: 10,

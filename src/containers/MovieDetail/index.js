@@ -17,6 +17,7 @@ import {
   actOpenGlobalLoading,
   actCloseGlobalLoading,
 } from "../../commons/actions";
+import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 
 function MovieDetail(props) {
   const classes = useStyles();
@@ -72,6 +73,8 @@ function MovieDetail(props) {
           <Box className={classes.topDetail}>
             <Box className={classes.textDetail}>
               <Box className={classes.wrapperImg}>
+                <Box component="span" className={classes.overLay}></Box>
+
                 <Box className={classes.contentImg}>
                   <img
                     onError={addEmptyImg}
@@ -86,7 +89,7 @@ function MovieDetail(props) {
                   component="span"
                   className={classes.iconPlay}
                 >
-                  <img src="/images/play-video.png" alt="play-video" />
+                  <PlayArrowIcon color="primary" />
                 </Box>
               </Box>
               <Box marginLeft={2}>
@@ -122,7 +125,6 @@ function MovieDetail(props) {
                 <StarIcon color="primary" />
                 <StarIcon color="primary" />
                 <StarIcon color="primary" />
-                <img src="/images/half.png" alt="half" width="20px" />
               </Box>
               <Typography>17 người đánh giá</Typography>
             </Box>

@@ -152,13 +152,14 @@ const useStyles = makeStyles((theme) => ({
   wrapperMovie: {
     // background: "red",
     position: "relative",
-    border: `1px solid transparent`,
+    borderRadius:4,
+    border: `2px solid transparent`,
 
     "&:hover span": {
       display: "block",
     },
     "&:hover": {
-      border: `1px solid ${primaryColor}`,
+      border: `2px solid ${primaryColor}`,
     },
   },
 

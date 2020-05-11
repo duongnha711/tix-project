@@ -1,25 +1,12 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  Drawer,
-  Hidden,
-  List,
-  ListItem,
-} from "@material-ui/core";
+import { Avatar, Box, Button, Drawer, Hidden, List, ListItem } from "@material-ui/core";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
-import {
-  actOpenLogin,
-  actOpenRegister,
-  actOpenGlobalLoading,
-  actCloseGlobalLoading,
-} from "../../commons/actions";
-import useStyles from "./styles";
-import { actLogOut } from "../../modules/auth/actions";
-import { HashLink } from "react-router-hash-link";
 import { Link, useHistory } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
+import { actCloseGlobalLoading, actOpenGlobalLoading } from "../../commons/actions";
+import { actLogOut } from "../../modules/auth/actions";
+import useStyles from "./styles";
 
 function MenuResponsive(props) {
   let history = useHistory();
@@ -34,11 +21,13 @@ function MenuResponsive(props) {
   };
 
   const handleOnClickOpenLogin = () => {
-    dispatch(actOpenLogin());
+    // dispatch(actOpenLogin());
     props.handleCloseMenuResponsive();
+    history.push("/log-in");
   };
   const handleOnClickOpenRegister = () => {
-    dispatch(actOpenRegister());
+    // dispatch(actOpenRegister());
+    history.push("/register");
     props.handleCloseMenuResponsive();
   };
 

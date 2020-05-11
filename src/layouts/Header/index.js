@@ -1,18 +1,17 @@
 import { Box, Button, Divider, Grid, Hidden } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import React, { useState, Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
-
-import * as Actions from "../../commons/actions";
 import MenuResponsive from "../../components/MenuResponsive";
 import UserInfo from "../../components/UserInfo";
 import useStyles from "./styles";
 
 function Header(props) {
   const classes = useStyles();
-  const { dispatch, isLogged } = props;
+  const { isLogged } = props;
+  const history = useHistory();
   const [isShowMenuResponsive, setShowMenuResponsive] = useState(false);
   const handleOpenMenuResponsive = () => {
     setShowMenuResponsive(true);
@@ -22,10 +21,10 @@ function Header(props) {
   };
 
   const handleOnClickOpenLogin = () => {
-    dispatch(Actions.actOpenLogin());
+    history.push("/log-in");
   };
   const handleOnClickOpenRegister = () => {
-    dispatch(Actions.actOpenRegister());
+    history.push("/register");
   };
 
   return (
@@ -36,7 +35,7 @@ function Header(props) {
             <Box className={classes.logo}>
               <Link to="/">N-cinema</Link>
             </Box>
-            <Box className={classes.myCV} >
+            <Box className={classes.myCV}>
               <Link to="/duong-hoang-nha">My CV</Link>
             </Box>
           </Grid>

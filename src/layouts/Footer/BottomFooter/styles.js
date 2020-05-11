@@ -1,30 +1,26 @@
 import { makeStyles } from "@material-ui/core/styles";
-import * as themeColor from "./../../../commons/theme";
+import {
+  textDefaultColor,
+  themeGradientPrimary,
+} from "./../../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
   bottomFooter: {
-    display: "flex",
-    padding: "30px 0",
+    padding: "15px 0",
   },
   address: {
-    flexGrow: 1,
     margin: "0 15px",
-    color: themeColor.greyColor,
+    color: textDefaultColor,
     "& a": {
-      color: themeColor.primaryColor,
+      color: textDefaultColor,
       textDecoration: "none",
     },
   },
   title: {
-    color: themeColor.whiteColor,
-  },
-  [theme.breakpoints.down("810")]: {
-    bottomFooter: {
-      display: "block",
-    },
-    address: {
-      margin: "20px 0",
-    },
+    background: themeGradientPrimary,
+
+    WebkitTextFillColor: "transparent",
+    WebkitBackgroundClip: "text",
   },
 }));
 

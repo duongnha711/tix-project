@@ -58,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
       color: primaryColor,
     },
   },
+  
   iconPlay: {
     // display: "none",
     opacity: "0",

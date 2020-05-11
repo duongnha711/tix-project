@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { backGroundHeader, borderColorSecondary, greyColor, themeGradientPrimary, themeGradientSecond } from "../../commons/theme";
+import { backGroundHeader, borderColorSecondary, textDefaultColor, themeGradientPrimary, themeGradientSecond } from "../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
   topHeader: {
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-end",
     "&>div": {
       justifyContent: "flex-end",
-      color: greyColor,
+      color: textDefaultColor,
     },
   },
   wrarperLogo: {
