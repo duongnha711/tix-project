@@ -9,10 +9,11 @@ import useStyles from "./styles";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { actFilterByNameOfficial } from "../../actions";
+import Alert from "../../../../components/Alert";
 
 function FilterFilm(props) {
   const classes = useStyles();
-  const { dispatch, arrFilterByName, movieList } = props;
+  const { dispatch, arrFilterByName, movieList, isLogged } = props;
   const history = useHistory();
 
   const [maCumRap, setMaCumRap] = useState("");
@@ -251,10 +252,10 @@ function FilterFilm(props) {
   };
 
   const handleOnclick = () => {
-    if (maLichChieu) {
+    if (isLogged) {
       history.push(`/booking-ticket/${maLichChieu}`, { hourToShow });
     } else {
-      alert("ma lich chieu rong~");
+      Alert({ icon: "warning", text: "Vui lòng đăng nhập" });
     }
   };
 
@@ -320,6 +321,7 @@ function FilterFilm(props) {
 const mapStateToProps = (state) => ({
   arrFilterByName: state.home.arrFilterByName,
   movieList: state.home.movieList,
+  isLogged: state.auth.isLogged,
 });
 
 export default connect(mapStateToProps)(FilterFilm);

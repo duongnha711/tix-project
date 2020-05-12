@@ -1,5 +1,4 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { actCloseLogin } from "./../../commons/actions";
 import Alert from "./../../components/Alert";
 import { actChangePasswordSuccess, actGetInfoBookingUserSuccess, actLogInSuccess } from "./actions";
 import { CHANGE_PASSWORD, GET_INFO_BOOKING_USER, LOG_IN, REGISTER } from "./constants";
@@ -30,7 +29,7 @@ function* logInSaga({ account }) {
     const response = yield call(logInApi, account);
     const { data, status } = response;
     if (status === STATUS.SUCCESS) {
-      yield put(actCloseLogin());
+      // yield put(actCloseLogin());
       yield put(actLogInSuccess(data));
     }
     // yield delay(1000);

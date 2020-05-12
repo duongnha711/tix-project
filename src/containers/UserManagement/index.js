@@ -15,6 +15,10 @@ import { Redirect, Link } from "react-router-dom";
 import UserInformation from "./UserInformation";
 import UserChangePass from "./UserChangePass";
 import cn from "classnames";
+import {
+  actOpenGlobalLoading,
+  actCloseGlobalLoading,
+} from "../../commons/actions";
 // import { sendRequest } from "./../../functions/effect";
 
 function UserManagement(props) {
@@ -57,6 +61,14 @@ function UserManagement(props) {
   //   getData();
   // }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    dispatch(actOpenGlobalLoading());
+    setTimeout(() => {
+      dispatch(actCloseGlobalLoading());
+    }, 700);
+  }, [dispatch]);
+
   return (
     <Fragment>
       {!isLogged && <Redirect to="/" />}
@@ -65,7 +77,9 @@ function UserManagement(props) {
           <Paper className={classes.controlUser}>
             <List>
               <ListItem>
-                <Typography variant="h5">{account.hoTen}</Typography>
+                <Typography className={classes.title} variant="h5">
+                  {account.hoTen}
+                </Typography>
               </ListItem>
               <Divider variant="middle" />
 
@@ -106,7 +120,9 @@ function UserManagement(props) {
               <Divider variant="middle" />
               <Link className={classes.link} to="/">
                 <ListItem button>
-                  <Typography>Home page</Typography>
+                  <Typography variant="h5" className={classes.homePage}>
+                    Home page
+                  </Typography>
                 </ListItem>
               </Link>
             </List>

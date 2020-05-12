@@ -1,17 +1,22 @@
 import { makeStyles } from "@material-ui/core/styles";
-import * as themeColor from "./../../commons/theme";
+import {
+  textDefaultColor,
+  bookingBackground,
+  activeTitleColor,
+} from "./../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
   wrapperUser: {
-    backgroundImage: "url('/images/backApp.jpg')",
+    backgroundImage: "url('/images/bg-login.jpg')",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
+    height: 550,
   },
   container: {
     width: 870,
     margin: "0 auto",
-    padding: "80px 0",
+    padding: "50px 0",
 
     display: "flex",
   },
@@ -19,18 +24,23 @@ const useStyles = makeStyles((theme) => ({
   controlUser: {
     width: 300,
     maxHeight: 220,
+    minHeight: 220,
+
     marginRight: 20,
 
-    color: themeColor.whiteColor,
+    color: textDefaultColor,
 
-    background: themeColor.signUpColor,
-    opacity: 0.9,
-
-    boxShadow: "0 2px 2px 0 rgba(223, 173, 173, 0.2), 0 5px 10px 0 #d8d8d8",
+    background: bookingBackground,
 
     "& .MuiListItem-root": {
       // justifyContent: "center",
     },
+  },
+  title: {
+    color: activeTitleColor,
+  },
+  homePage: {
+    color: activeTitleColor,
   },
 
   itemControl: {
@@ -43,22 +53,25 @@ const useStyles = makeStyles((theme) => ({
   },
 
   infoUser: {
-    minHeight: 460,
-    maxHeight: 460,
-    overflow: "auto",
+    // minHeight: 472,
+    maxHeight: 472,
+    overflowY: "auto",
+    msOverflowStyle: "none" /* Internet Explorer 10+ */,
+    scrollbarWidth: "none" /* Firefox */,
+    "&::-webkit-scrollbar": {
+      display: "none" /* Safari and Chrome */,
+    },
+
     flexGrow: 1,
 
-    color: themeColor.whiteColor,
+    color: textDefaultColor,
 
-    background: themeColor.signUpColor,
-    opacity: 0.9,
-
-    boxShadow: "0 2px 2px 0 rgba(223, 173, 173, 0.2), 0 5px 10px 0 #d8d8d8",
+    background: bookingBackground,
   },
 
   link: {
     textDecoration: "none",
-    color: themeColor.whiteColor,
+    color: textDefaultColor,
   },
 
   [theme.breakpoints.down("920")]: {

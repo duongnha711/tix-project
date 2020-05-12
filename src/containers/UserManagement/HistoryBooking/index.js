@@ -27,9 +27,11 @@ export default function HistoryBooking(props) {
 
         return (
           <Box key={index} className={classes.itemBooked}>
-            <Typography>Tên phim: {item.tenPhim}</Typography>
+            <Typography className={classes.nameMovie}>
+              {item.tenPhim}
+            </Typography>
             <Typography>
-              Tên rạp: {item.danhSachGhe[0].tenHeThongRap}
+              {item.danhSachGhe[0].tenHeThongRap}
             </Typography>
             <Grid container spacing={1}>
               <Grid item xs={6}>
@@ -50,7 +52,9 @@ export default function HistoryBooking(props) {
   return (
     <List>
       <ListItem>
-        <Typography variant="h5">Lịch sử đặt vé</Typography>
+        <Typography className={classes.title} variant="h5">
+          Lịch sử đặt vé
+        </Typography>
       </ListItem>
       <ListItem className={classes.wrapperItem}>{renderItemBooked()}</ListItem>
     </List>

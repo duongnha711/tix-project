@@ -48,12 +48,10 @@ const useStyles = makeStyles((theme) => ({
   },
 
   //item
-  link: {
-    textDecoration: "none",
-    color: textDefaultColor,
-  },
+
   itemWrapper: {
     cursor: "pointer",
+    color: textDefaultColor,
   },
   images: {
     width: "100%",

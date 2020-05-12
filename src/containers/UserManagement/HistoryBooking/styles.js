@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-// import * as themeColor from "./../../commons/theme";
+import { activeTitleColor, primaryColor } from "./../../../commons/theme";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -14,6 +14,13 @@ const useStyles = makeStyles(() => ({
     borderRadius: 4,
 
     padding: 20,
+  },
+  title: {
+    color: activeTitleColor,
+  },
+  nameMovie: {
+    color: primaryColor,
+    fontSize: 16,
   },
 }));
 

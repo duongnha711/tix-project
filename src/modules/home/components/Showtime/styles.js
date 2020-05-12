@@ -41,12 +41,10 @@ const useStyles = makeStyles((theme) => ({
   },
 
   //item
-  link: {
-    textDecoration: "none",
-    color: textDefaultColor,
-  },
+
   itemWrapper: {
     cursor: "pointer",
+    color: textDefaultColor,
   },
   images: {
     width: "100%",
@@ -152,7 +150,7 @@ const useStyles = makeStyles((theme) => ({
   wrapperMovie: {
     // background: "red",
     position: "relative",
-    borderRadius:4,
+    borderRadius: 4,
     border: `2px solid transparent`,
 
     "&:hover span": {

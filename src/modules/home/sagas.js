@@ -92,7 +92,7 @@ function* getCinemaBranchSaga({ maHeThongRap }) {
       );
     }
     //lấy danh sách phim theo thằng cinema đầu tiên
-    yield delay(50); //bắt buộc phải có nếu ko lỗi
+    yield delay(200); //bắt buộc phải có nếu ko lỗi
     yield put(actGetShowTimeDetail(data[0].maCumRap));
   } catch (err) {
     if (err.response) {

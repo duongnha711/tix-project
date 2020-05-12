@@ -1,24 +1,35 @@
 import { List, ListItem, Typography } from "@material-ui/core";
 import React from "react";
-
-export default function UserInformation() {
+import useStyles from "./styles";
+import { connect } from "react-redux";
+function UserInformation(props) {
+  const classes = useStyles();
+  const { account } = props;
   return (
     <List>
       <ListItem>
-        <Typography variant="h5">Thông Tin Tài Khoản</Typography>
+        <Typography className={classes.title} variant="h5">
+          Thông Tin Tài Khoản
+        </Typography>
       </ListItem>
       <ListItem>
-        <Typography>Tài khoản: Luffy zoro</Typography>
+        <Typography>Account: {account.taiKhoan}</Typography>
       </ListItem>
       <ListItem>
-        <Typography>Email: dsd@fdsfds.com</Typography>
+        <Typography>Name: {account.hoTen}</Typography>
       </ListItem>
       <ListItem>
-        <Typography>Số điện thoại: 90890890 </Typography>
+        <Typography>Email: {account.email}</Typography>
       </ListItem>
       <ListItem>
-        <Typography>Phân loại: Khách Hàng </Typography>
+        <Typography>Phone number: {account.soDT} </Typography>
       </ListItem>
     </List>
   );
 }
+
+const mapStateToProps = (state) => ({
+  account: state.auth.account,
+});
+
+export default connect(mapStateToProps)(UserInformation);

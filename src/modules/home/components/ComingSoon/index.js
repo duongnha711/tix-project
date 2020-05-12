@@ -1,16 +1,17 @@
 import { Box, Paper, Typography } from "@material-ui/core";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import StarIcon from "@material-ui/icons/Star";
 import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Slider from "react-slick";
+import Alert from "../../../../components/Alert";
 import { actOpenTrailer } from "../../actions";
-import useStyles from "./styles";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import movieList from "./demoData";
+import useStyles from "./styles";
 
 function NextArrow(props) {
   const { className, onClick } = props;
@@ -55,7 +56,8 @@ const settings = {
 function ComingSoon(props) {
   const classes = useStyles();
 
-  const { dispatch } = props;
+  const { dispatch, isLogged } = props;
+  const history = useHistory();
 
   const addEmptyImage = (e) => {
     e.target.src = "/images/defaultImage.png";
@@ -75,40 +77,38 @@ function ComingSoon(props) {
             >
               <PlayArrowIcon color="primary" />
             </Box>
-            <Link
-              // to={`/detail/${movie.maPhim}/${movie.biDanh}`}
-              to={{
-                pathname: `/detail/${movie.maPhim}/${movie.biDanh}`,
-                state: { kind: "showTime" },
-              }}
-              className={classes.link}
-            >
-              <Box className={classes.itemWrapper} padding={1}>
-                <Paper className={classes.itemCarousel} elevation={1}>
-                  <img
-                    onError={addEmptyImage}
-                    src={movie.hinhAnh}
-                    alt={movie.tenPhim}
-                    className={classes.images}
-                  />
 
-                  <Box className={classes.ageType}>C16</Box>
-                  <Box className={classes.avgPoint}>
-                    <Box>{movie.danhGia}</Box>
-                    <Box className={classes.star}>
-                      <StarIcon color="primary" />
-                      <StarIcon color="primary" />
-                      <StarIcon color="primary" />
-                    </Box>
+            <Box
+              onClick={() => {
+                handleGoToDetail(movie);
+              }}
+              className={classes.itemWrapper}
+              padding={1}
+            >
+              <Paper className={classes.itemCarousel} elevation={1}>
+                <img
+                  onError={addEmptyImage}
+                  src={movie.hinhAnh}
+                  alt={movie.tenPhim}
+                  className={classes.images}
+                />
+
+                <Box className={classes.ageType}>C16</Box>
+                <Box className={classes.avgPoint}>
+                  <Box>{movie.danhGia}</Box>
+                  <Box className={classes.star}>
+                    <StarIcon color="primary" />
+                    <StarIcon color="primary" />
+                    <StarIcon color="primary" />
                   </Box>
-                  <Box component="span" className={classes.overLay}></Box>
-                </Paper>
-                <Typography className={classes.nameMovie} variant="h6">
-                  {movie.tenPhim}
-                </Typography>
-                <Typography className={classes.duration}>05/2020</Typography>
-              </Box>
-            </Link>
+                </Box>
+                <Box component="span" className={classes.overLay}></Box>
+              </Paper>
+              <Typography className={classes.nameMovie} variant="h6">
+                {movie.tenPhim}
+              </Typography>
+              <Typography className={classes.duration}>05/2020</Typography>
+            </Box>
           </Box>
         );
       });
@@ -117,6 +117,17 @@ function ComingSoon(props) {
 
   const handleOpenTrailer = (trailer) => {
     dispatch(actOpenTrailer(trailer));
+  };
+
+  const handleGoToDetail = (movie) => {
+    if (isLogged) {
+      history.push({
+        pathname: `/detail/${movie.maPhim}/${movie.biDanh}`,
+        state: { kind: "comingSoon", info: movie },
+      });
+    } else {
+      Alert({ icon: "warning", text: "Vui lòng đăng nhập" });
+    }
   };
 
   return (
@@ -135,4 +146,8 @@ ComingSoon.propTypes = {
   movieList: PropTypes.array,
 };
 
-export default connect()(ComingSoon);
+const mapStateToProps = (state) => ({
+  isLogged: state.auth.isLogged,
+});
+
+export default connect(mapStateToProps)(ComingSoon);

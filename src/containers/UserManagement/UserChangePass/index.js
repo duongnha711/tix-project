@@ -64,7 +64,7 @@ let UserChangePass = (props) => {
         hoTen: userInfo.hoTen,
       };
 
-      dispatch(actChangePassword(account,token));
+      dispatch(actChangePassword(account, token));
       reset();
     }
   };
@@ -73,11 +73,14 @@ let UserChangePass = (props) => {
     <List>
       <form onSubmit={handleSubmit(submit)}>
         <ListItem>
-          <Typography variant="h5">Thay đổi mật khẩu</Typography>
+          <Typography className={classes.title} variant="h5">
+            Thay đổi mật khẩu
+          </Typography>
         </ListItem>
         <ListItem className={classes.input}>
           <label>Current password</label>
           <Field
+            placeholder="Enter your password"
             variant="outlined"
             fullWidth
             name="currentPass"
@@ -88,6 +91,7 @@ let UserChangePass = (props) => {
         <ListItem className={classes.input}>
           <label>New password</label>
           <Field
+            placeholder="Enter new password"
             variant="outlined"
             fullWidth
             name="matKhau"
@@ -98,6 +102,7 @@ let UserChangePass = (props) => {
         <ListItem className={classes.input}>
           <label>Confirm new password</label>
           <Field
+            placeholder="Confirm password"
             variant="outlined"
             fullWidth
             name="confirmMatKhau"

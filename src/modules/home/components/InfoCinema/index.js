@@ -9,8 +9,10 @@ import {
   toSlug,
 } from "../../../../functions/helper";
 import useStyles from "./styles";
+import { connect } from "react-redux";
+import Alert from "../../../../components/Alert";
 
-export default function InfoCinema(props) {
+function InfoCinema(props) {
   const classes = useStyles();
   const {
     cinemaList,
@@ -18,6 +20,7 @@ export default function InfoCinema(props) {
     showTimeDetail,
     maHeThongRap,
     maCumRap,
+    isLogged,
   } = props;
 
   const [choseDate, SetChoseDate] = useState("");
@@ -235,7 +238,11 @@ export default function InfoCinema(props) {
   };
 
   const handleClickHour = (maLichChieu, hourToShow) => {
-    history.push(`/booking-ticket/${maLichChieu}`, { hourToShow });
+    if (isLogged) {
+      history.push(`/booking-ticket/${maLichChieu}`, { hourToShow });
+    } else {
+      Alert({ icon: "warning", text: "Vui lòng đăng nhập" });
+    }
   };
 
   const addEmptyImage = (e) => {
@@ -262,3 +269,9 @@ export default function InfoCinema(props) {
     </Box>
   );
 }
+
+const mapStateToProps = (state) => ({
+  isLogged: state.auth.isLogged,
+});
+
+export default connect(mapStateToProps)(InfoCinema);

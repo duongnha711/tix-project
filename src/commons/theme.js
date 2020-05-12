@@ -32,7 +32,18 @@ const newsFilterBackground =
 const signUpInBackground =
   "linear-gradient(to top, #fff1ebd6 0%, #ace0f9c7 100%)";
 
+//color booking
+const bookingBackground =
+  "linear-gradient(to right, #071324c2 0%, #0f2434d1 100%)";
+const textBooking = "white";
+const titleBooking = "#2791fa";
+const highlightBooking = "#ed6ea0";
+
 export {
+  bookingBackground,
+  highlightBooking,
+  textBooking,
+  titleBooking,
   newsFilterBackground,
   signUpInBackground,
   backgroundInfoCinema,

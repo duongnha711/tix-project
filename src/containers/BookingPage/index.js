@@ -201,20 +201,6 @@ function BookingPage(props) {
     }
   };
 
-  //back end trả data về ko đúng ...phải làm kiểu này
-  // const renderTime = () => {
-  //   if (infoMovieForTicket.gioChieu) {
-  //     let time = infoMovieForTicket.gioChieu;
-
-  //     if (time.substring(0, 2) === "10") {
-  //       time = time.substring(0, 3) + "10 am";
-  //     } else {
-  //       time = time.substring(0, 3) + "10 pm";
-  //     }
-  //     return time;
-  //   }
-  // };
-
   const addEmptyImage = (e) => {
     e.target.src = "/images/defaultImage.png";
   };
@@ -282,11 +268,16 @@ function BookingPage(props) {
                   {infoMovieForTicket.tenPhim}
                 </Typography>
                 <Typography variant="subtitle1">
-                  Ngày chiếu: {infoMovieForTicket.ngayChieu}
+                  Date:{" "}
+                  <span className={classes.highLight}>
+                    {infoMovieForTicket.ngayChieu}
+                  </span>
                 </Typography>
                 <Typography variant="subtitle1">
-                  {/* backend tra time ko dung nen phai lam kieu nay */}
-                  Giờ chiếu: {location.state && location.state.hourToShow}
+                  Time:{" "}
+                  <span className={classes.highLight}>
+                    {location.state && location.state.hourToShow}
+                  </span>
                 </Typography>
               </Box>
             </Box>
@@ -295,14 +286,19 @@ function BookingPage(props) {
                 {infoMovieForTicket.tenCumRap}
               </Typography>
               <Typography className={classes.addressMovie} variant="subtitle1">
-                Địa chỉ: {infoMovieForTicket.diaChi}
+                Address: {infoMovieForTicket.diaChi}
               </Typography>
               <Typography variant="subtitle1">
-                Tên rạp: {infoMovieForTicket.tenRap}
+                Screen:{" "}
+                <span className={classes.highLight}>
+                  {infoMovieForTicket.tenRap}
+                </span>
               </Typography>
             </Box>
             <Box className={cn(classes.infoCinema, classes.infoTicket)}>
-              <Typography>Số ghế đang chọn: {danhSachVe.length}</Typography>
+              <Typography className={classes.nameMovie}>
+                Số ghế đang chọn: {danhSachVe.length}
+              </Typography>
               <Box className={classes.wrapperInfoSeat}>
                 {renderInfoChooseSeat()}
               </Box>

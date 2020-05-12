@@ -1,9 +1,14 @@
 import { makeStyles } from "@material-ui/core/styles";
-import * as themeColor from "./../../commons/theme";
+import {
+  bookingBackground,
+  textBooking,
+  titleBooking,
+  highlightBooking,
+} from "./../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
   booking: {
-    backgroundImage: "url('/images/backApp.jpg')",
+    backgroundImage: "url('/images/bg-login.jpg')",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
@@ -95,21 +100,18 @@ const useStyles = makeStyles((theme) => ({
 
   wrapperInfo: {
     width: "300px",
-    color: "#c3bbbb",
+    color: textBooking,
   },
   infoMovie: {
     display: "flex",
-    alignItems: "center",
 
     padding: 10,
     borderRadius: 4,
 
-    background: themeColor.signUpColor,
-    boxShadow: "0 2px 2px 0 rgba(223, 173, 173, 0.2), 0 5px 10px 0 #d8d8d8",
-    opacity: 0.9,
+    background: bookingBackground,
   },
   wrapperImg: {
-    width: 50,
+    minWidth: 50,
     borderRadius: 4,
   },
   contentImg: {
@@ -134,7 +136,14 @@ const useStyles = makeStyles((theme) => ({
     WebkitBoxOrient: "vertical",
     textOverflow: "ellipsis",
     overflow: "hidden",
-    color: "#ffffff",
+    color: titleBooking,
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  highLight: {
+    color: highlightBooking,
+    fontSize: 14,
+    fontWeight: "bold",
   },
   addressMovie: {
     display: "-webkit-box",
@@ -148,10 +157,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 10,
     borderRadius: 4,
 
-    background: themeColor.signUpColor,
-    opacity: 0.9,
-
-    boxShadow: "0 2px 2px 0 rgba(223, 173, 173, 0.2), 0 5px 10px 0 #d8d8d8",
+    background: bookingBackground,
   },
   infoTicket: {
     minHeight: 150,
@@ -184,7 +190,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
   },
   total: {
-    color: "#12fffb",
+    color: titleBooking,
     fontSize: 20,
   },
   button: {
