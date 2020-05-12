@@ -1,5 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { backgroundInfoCinema, primaryColor, textDefaultColor } from "./../../../../commons/theme";
+import {
+  backgroundInfoCinema,
+  primaryColor,
+  textDefaultColor,
+} from "./../../../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
   infoCinema: {
@@ -23,6 +27,19 @@ const useStyles = makeStyles((theme) => ({
     borderRight: "1px solid rgba(0,0,0,0.12)",
     maxHeight: 600,
     overflowY: "auto",
+
+    "&::-webkit-scrollbar": {
+      width: 3,
+    },
+
+    "&::-webkit-scrollbar-track": {
+      // background: "blue",
+      margin: 10,
+    },
+
+    "&::-webkit-scrollbar-thumb": {
+      background: "#33acf3",
+    },
   },
   itemLogo: {
     padding: 20,
@@ -45,10 +62,18 @@ const useStyles = makeStyles((theme) => ({
     borderRight: "1px solid rgba(0,0,0,0.12)",
     maxHeight: 600,
     overflowY: "auto",
-    msOverflowStyle: "none" /* Internet Explorer 10+ */,
-    scrollbarWidth: "none" /* Firefox */,
+
     "&::-webkit-scrollbar": {
-      display: "none" /* Safari and Chrome */,
+      width: 3,
+    },
+
+    "&::-webkit-scrollbar-track": {
+      // background: "blue",
+      margin: 10,
+    },
+
+    "&::-webkit-scrollbar-thumb": {
+      background: "#33acf3",
     },
   },
   itemCinema: {
@@ -90,8 +115,18 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     maxHeight: 600,
     overflowY: "auto",
+
     "&::-webkit-scrollbar": {
-      display: "none",
+      width: 3,
+    },
+
+    "&::-webkit-scrollbar-track": {
+      // background: "blue",
+      margin: 10,
+    },
+
+    "&::-webkit-scrollbar-thumb": {
+      background: "#33acf3",
     },
   },
   itemMovie: {
@@ -171,7 +206,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   viewMore: {
-    display:"inline-block",
+    display: "inline-block",
     color: "#f66161",
     cursor: "pointer",
     marginBottom: 10,

@@ -56,10 +56,18 @@ const useStyles = makeStyles((theme) => ({
     // minHeight: 472,
     maxHeight: 472,
     overflowY: "auto",
-    msOverflowStyle: "none" /* Internet Explorer 10+ */,
-    scrollbarWidth: "none" /* Firefox */,
+
     "&::-webkit-scrollbar": {
-      display: "none" /* Safari and Chrome */,
+      width: 3,
+    },
+
+    "&::-webkit-scrollbar-track": {
+      // background: "blue",
+      margin: 10,
+    },
+
+    "&::-webkit-scrollbar-thumb": {
+      background: "#33acf3",
     },
 
     flexGrow: 1,
