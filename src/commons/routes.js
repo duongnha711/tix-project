@@ -1,10 +1,9 @@
+import BookingPage from "../containers/BookingPage";
+import SignUp from "../containers/SignUp";
+import UserManagement from "../containers/UserManagement";
 import HomePage from "./../containers/Home";
 import MovieDetail from "./../containers/MovieDetail";
-import BookingPage from "../containers/BookingPage";
-import UserManagement from "../containers/UserManagement";
-import PDF from "../components/PDF";
 import SignIn from "./../containers/SignIn";
-import SignUp from "../containers/SignUp";
 
 export const routes = [
   {
