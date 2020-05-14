@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     lineHeight: "30px",
     fontSize: 12,
-    background: "#001f3fc4",
+    background: "#58738fc4",
     cursor: "pointer",
     textAlign: "center",
   },
@@ -59,18 +59,18 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     lineHeight: "30px",
     fontSize: 12,
-    background: "#001f3fc4",
+    // background: "#58738fc4",
     cursor: "pointer",
   },
 
   nor: {
-    background: "#001f3fc4",
+    background: "#58738fc4",
   },
   vip: {
-    background: "#8e1f0fc7",
+    background: "#f45a43c7",
   },
   selecting: {
-    background: "#2ddbcbd9",
+    background: "#00ffe8e6",
   },
   booked: {
     background: "#8080807d",
@@ -182,7 +182,7 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     lineHeight: "30px",
     fontSize: 12,
-    background: "#2ddbcbd9",
+    background: "#00ffe8e6",
     textAlign: "center",
   },
   wrapperInfoSeat: {

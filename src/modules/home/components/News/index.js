@@ -61,7 +61,7 @@ export default function News(props) {
           href={update.link}
         >
           <Box className={classes.itemUpdate}>
-            <Box>
+            <Box className={classes.wrapperImg}>
               <img
                 src={update.url}
                 alt="subUpdate1"
@@ -69,7 +69,11 @@ export default function News(props) {
                 height="50px"
               />
             </Box>
-            <Box className={classes.titleUpdate}>{update.title}</Box>
+            <Box className={classes.titleUpdate}>
+              <Box className={classes.nameHero}> {update.title}</Box>
+              {marvelDC === "marvel" && <Box>Character of Marvel</Box>}
+              {marvelDC === "dc" && <Box>Character of DC</Box>}
+            </Box>
           </Box>
         </a>
       ));

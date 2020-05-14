@@ -10,7 +10,7 @@ function GlobalLoading(props) {
     <div className={classes.globalLoading}>
       <img
         className={classes.icon}
-        src="/images/dogLoading.gif"
+        src="/images/loading.gif"
         alt="Global loading"
       />
     </div>

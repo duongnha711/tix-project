@@ -23,11 +23,11 @@ const validate = (values) => {
   }
 
   if (!values.matKhau) {
-    errors.matKhau = "Password not empty";
+    errors.matKhau = "Not empty";
   }
 
   if (!values.confirmPassword) {
-    errors.confirmPassword = "Password not empty";
+    errors.confirmPassword = "Not empty";
   } else if (values.confirmPassword !== values.matKhau) {
     errors.confirmPassword = "Password not match";
   }

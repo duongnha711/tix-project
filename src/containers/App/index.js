@@ -14,7 +14,6 @@ import PageNotFound from "./../../components/PageNotFound";
 import VideoModal from "./../../components/VideoModal";
 import useStyles from "./styles";
 
-
 const store = configureStore();
 
 function App() {
@@ -44,8 +43,6 @@ function App() {
             </Switch>
           </Router>
 
-          {/* <SignIn /> */}
-          {/* <SignUp /> */}
           <GlobalLoading />
           <VideoModal />
         </Provider>

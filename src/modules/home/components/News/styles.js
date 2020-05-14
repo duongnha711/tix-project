@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { newsFilterBackground } from "../../../../commons/theme";
+import { newsFilterBackground, primaryColor } from "../../../../commons/theme";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -40,6 +40,12 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
     alignItems: "center",
   },
+  wrapperImg: {
+    width: 50,
+    height: 50,
+    borderRadius: 4,
+    overflow: "hidden",
+  },
 
   titleUpdate: {
     marginLeft: 5,
@@ -58,6 +64,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
     alignItems: "center",
+  },
+  nameHero: {
+    color: primaryColor,
   },
   [theme.breakpoints.down("468")]: {
     title: {

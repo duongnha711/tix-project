@@ -5,7 +5,6 @@ const whiteColor = "#fff";
 const tagColor = "#ffe0b2";
 const tagBorderColor = "#fb8c00";
 const footerColor = "#222";
-// const signUpColor = "linear-gradient(to top,#614385 , #516395)";
 const signUpColor = "linear-gradient(to right,#000428 , #004e92)";
 const hoverActiveTitleColor = "#50ffe7";
 
@@ -26,8 +25,9 @@ const backGroundGlobal = "linear-gradient(to right, #071324 0%, #0f2434 100%)";
 
 const backgroundInfoCinema =
   "linear-gradient(to right, #071324c2 0%, #0f2434d1 100%)";
+
 const newsFilterBackground =
-  "linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)";
+  "linear-gradient(135deg, #c3cfe2 100%, #f5f7fa 0%)";
 
 const signUpInBackground =
   "linear-gradient(to top, #fff1ebd6 0%, #ace0f9c7 100%)";

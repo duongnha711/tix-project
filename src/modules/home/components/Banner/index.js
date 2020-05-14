@@ -53,24 +53,24 @@ const arrBanner = [
     trailer: "https://www.youtube.com/embed/TcMBFSGVi1c",
   },
   {
+    name: "Joker",
+    url: "/images/banner-joker.jpg",
+    trailer: "https://www.youtube.com/embed/RO3SxYwjlMk",
+  },
+  {
+    name: "Spider",
+    url: "/images/banner-spider.jpg",
+    trailer: "https://www.youtube.com/embed/akRHNEK_5is",
+  },
+  {
     name: "DreamEyes",
     url: "/images/banner-eye.jpg",
     trailer: "https://www.youtube.com/embed/ITlQ0oU7tDA",
   },
-  // {
-  //   name: "EndGame",
-  //   url: "/images/banner-endGame.jpg",
-  //   trailer: "https://www.youtube.com/embed/TcMBFSGVi1c",
-  // },
   {
-    name: "Spider",
-    url: "/images/banner-spider.jpeg",
-    trailer: "https://www.youtube.com/embed/Nt9L1jCKGnE",
-  },
-  {
-    name: "op",
-    url: "/images/banner-op.jpg",
-    trailer: "https://www.youtube.com/embed/S8_YwFLCh4U",
+    name: "Venom",
+    url: "/images/banner-venom.jpg",
+    trailer: "https://www.youtube.com/embed/u9Mv98Gr5pY",
   },
 ];
 
