@@ -35,9 +35,9 @@ function Header(props) {
             <Box className={classes.logo}>
               <Link to="/">N-cinema</Link>
             </Box>
-            <Box className={classes.myCV}>
+            {/* <Box className={classes.myCV}>
               <Link to="/duong-hoang-nha">My CV</Link>
-            </Box>
+            </Box> */}
           </Grid>
 
           {/* button login - location <730 -> hidden */}

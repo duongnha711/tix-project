@@ -27,11 +27,11 @@ export const routes = [
     exact: false,
     component: UserManagement,
   },
-  {
-    path: "/duong-hoang-nha/",
-    exact: false,
-    component: PDF,
-  },
+  // {
+  //   path: "/duong-hoang-nha/",
+  //   exact: false,
+  //   component: PDF,
+  // },
   {
     path: "/log-in",
     exact: false,
