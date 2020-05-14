@@ -96,6 +96,10 @@ const useStyles = makeStyles((theme) => ({
   },
 
   [theme.breakpoints.down("570")]: {
+    wrapperUser: {
+      height: "unset",
+    },
+
     container: {
       display: "block",
       width: "75%",
