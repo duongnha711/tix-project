@@ -30,9 +30,7 @@ export default function HistoryBooking(props) {
             <Typography className={classes.nameMovie}>
               {item.tenPhim}
             </Typography>
-            <Typography>
-              {item.danhSachGhe[0].tenHeThongRap}
-            </Typography>
+            <Typography>{item.danhSachGhe[0].tenHeThongRap}</Typography>
             <Grid container spacing={1}>
               <Grid item xs={6}>
                 <Typography>Screen: {item.danhSachGhe[0].tenRap}</Typography>
@@ -46,6 +44,8 @@ export default function HistoryBooking(props) {
           </Box>
         );
       });
+    } else {
+      return <Box>Empty history</Box>;
     }
   };
 

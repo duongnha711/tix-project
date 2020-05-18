@@ -6,27 +6,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import useStyles from "./styles";
 
-// const arrLogo = [
-//   { url: "/images/vietcom.png", name: "vietcom" },
-//   { url: "/images/vietin.png", name: "vietin" },
-//   { url: "/images/cgv.png", name: "cgv" },
-//   { url: "/images/bhd.png", name: "bhd" },
-//   { url: "/images/lotte.png", name: "lotte" },
-// ];
+import Tooltip from "@material-ui/core/Tooltip";
 
 export default function TopFooter() {
   const classes = useStyles();
-
-  // const renderLogo = () => {
-  //   if (arrLogo && arrLogo.length > 0) {
-  //     return arrLogo.map((logo, index) => (
-  //       <Box component="span" key={index} className={classes.logo}>
-  //         <img src={logo.url} alt={logo.name} width="30px" height="30px" />
-  //       </Box>
-  //     ));
-  //   }
-  // };
-
   return (
     <Box className={classes.topFooter}>
       <Box className={classes.logo}>
@@ -50,24 +33,28 @@ export default function TopFooter() {
           rel="noopener noreferrer"
           target="_blank"
         >
-          <Box className={classes.wrapperIcon}>
-            <TwitterIcon
-              style={{ color: "#1DA1F2" }}
-              className={classes.icon}
-            />
-          </Box>
+          <Tooltip title="Facebook">
+            <Box className={classes.wrapperIcon}>
+              <TwitterIcon
+                style={{ color: "#1DA1F2" }}
+                className={classes.icon}
+              />
+            </Box>
+          </Tooltip>
         </a>
         <a
           href="https://www.facebook.com/dhn711"
           rel="noopener noreferrer"
           target="_blank"
         >
-          <Box className={classes.wrapperIcon}>
-            <YouTubeIcon
-              style={{ color: "#FF0000" }}
-              className={classes.icon}
-            />
-          </Box>
+          <Tooltip title="Facebook">
+            <Box className={classes.wrapperIcon}>
+              <YouTubeIcon
+                style={{ color: "#FF0000" }}
+                className={classes.icon}
+              />
+            </Box>
+          </Tooltip>
         </a>
       </Box>
     </Box>

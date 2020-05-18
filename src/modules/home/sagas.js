@@ -18,6 +18,8 @@ import {
   actGetShowTimeAll,
   actGetShowTimeAllSuccess,
   actGetShowTimeDetail,
+  actGetCommentsListSuccess,
+  actAddCommentForOneMovieSuccess,
 } from "./actions";
 import * as ActionType from "./constants";
 import {
@@ -29,6 +31,8 @@ import {
   getMovieListApi,
   getSeatListApi,
   getShowTimeAllApi,
+  getCommentsListApi,
+  addCommentsApi,
 } from "./handler";
 import STATUS from "./status";
 
@@ -199,6 +203,37 @@ function* filterByNameOfficialSaga({ maPhim }) {
   }
 }
 
+function* getCommentsListSaga() {
+  try {
+    const response = yield call(getCommentsListApi);
+    const { status, data } = response;
+    if (status === STATUS.SUCCESS) {
+      yield put(actGetCommentsListSuccess(data));
+    }
+  } catch (err) {
+    if (err.response) {
+      console.log("function*getCommentsListSaga -> err", err.response);
+    }
+  }
+}
+
+function* addCommentOneMovieSaga({ payload }) {
+  try {
+    const response = yield call(addCommentsApi, payload.id, payload);
+    const { status, data } = response;
+    if (status === STATUS.SUCCESS) {
+      yield put(actAddCommentForOneMovieSuccess(data));
+    }
+  } catch (err) {
+    if (err.response) {
+      console.log(
+        "function*addCommentOneMovieSaga -> err.response",
+        err.response
+      );
+    }
+  }
+}
+
 //watch~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function* watchGetMovieList() {
@@ -239,6 +274,14 @@ function* watchFilterByNameOfficial() {
   );
 }
 
+function* watchGetCommentsList() {
+  yield takeLatest(ActionType.GET_COMMENTS_LIST, getCommentsListSaga);
+}
+
+function* watchAddCommentOneMovie() {
+  yield takeLatest(ActionType.ADD_COMMENT_ONE_MOVIE, addCommentOneMovieSaga);
+}
+
 export default [
   watchGetMovieList(),
   watchGetCinemaList(),
@@ -248,4 +291,6 @@ export default [
   watchBookTicket(),
   watchGetDetailMovieOfficial(),
   watchFilterByNameOfficial(),
+  watchGetCommentsList(),
+  watchAddCommentOneMovie(),
 ];

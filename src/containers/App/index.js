@@ -7,12 +7,13 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import GlobalLoading from "../../components/GlobalLoading/index.js";
 import HomeLayout from "./../../commons/HomeLayout";
-import { routes } from "./../../commons/routes";
+import { routes, adminRoutes } from "./../../commons/routes";
 import configureStore from "./../../commons/store";
 import theme from "./../../commons/theme";
 import PageNotFound from "./../../components/PageNotFound";
 import VideoModal from "./../../components/VideoModal";
 import useStyles from "./styles";
+import Dashboard from "../../layouts/Dashboard/index.js";
 
 const store = configureStore();
 
@@ -31,6 +32,19 @@ function App() {
     }
   };
 
+  const renderAdminRoutes = () => {
+    if (adminRoutes && adminRoutes.length > 0) {
+      return adminRoutes.map((route, index) => (
+        <Dashboard
+          key={index}
+          path={route.path}
+          exact={route.exact}
+          component={route.component}
+        />
+      ));
+    }
+  };
+
   return (
     <Box className={classes.global}>
       <ThemeProvider theme={theme}>
@@ -39,6 +53,7 @@ function App() {
           <Router>
             <Switch>
               {renderHomeRoutes()}
+              {renderAdminRoutes()}
               <Route path="" component={PageNotFound} />
             </Switch>
           </Router>

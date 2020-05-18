@@ -143,3 +143,30 @@ export const actCloseTrailer = () => {
     type: ActionType.CLOSE_TRAILER,
   };
 };
+
+export const actGetCommentsList = () => {
+  return {
+    type: ActionType.GET_COMMENTS_LIST,
+  };
+};
+
+export const actGetCommentsListSuccess = (payload) => {
+  return {
+    type: ActionType.GET_COMMENTS_LIST_SUCCESS,
+    payload,
+  };
+};
+
+export const actAddCommentForOneMovie = (payload) => {
+  return {
+    type: ActionType.ADD_COMMENT_ONE_MOVIE,
+    payload,
+  };
+};
+
+export const actAddCommentForOneMovieSuccess = (payload) => {
+  return {
+    type: ActionType.ADD_COMMENT_ONE_MOVIE_SUCCESS,
+    payload,
+  };
+};
