@@ -7,7 +7,10 @@ import { useHistory, Redirect } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
 import { actLogIn } from "../../modules/auth/actions";
 import useStyles from "./styles";
-import { actOpenGlobalLoading, actCloseGlobalLoading } from "../../commons/actions";
+import {
+  actOpenGlobalLoading,
+  actCloseGlobalLoading,
+} from "../../commons/actions";
 
 const validate = (values) => {
   const errors = {};
@@ -36,7 +39,7 @@ const renderTextField = ({
 
 let SignIn = (props) => {
   const classes = useStyles();
-  const { dispatch, isLogged } = props;
+  const { dispatch, isLogged, account } = props;
   const { handleSubmit } = props;
   const history = useHistory();
 
@@ -58,7 +61,9 @@ let SignIn = (props) => {
 
   return (
     <Fragment>
-      {isLogged && <Redirect to="/" />}
+      {isLogged && account.maLoaiNguoiDung==="KhachHang" &&<Redirect to="/" />}
+      {isLogged && account.maLoaiNguoiDung==="QuanTri" &&<Redirect to="/admin" />}
+
 
       <Box className={classes.container}>
         <Box className={classes.signIn}>
@@ -119,6 +124,7 @@ SignIn = reduxForm({
 
 const mapStateToProps = (state) => ({
   isLogged: state.auth.isLogged,
+  account: state.auth.account,
 });
 
 export default connect(mapStateToProps)(SignIn);

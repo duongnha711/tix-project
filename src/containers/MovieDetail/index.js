@@ -125,8 +125,10 @@ function MovieDetail(props) {
                 <StarIcon color="primary" />
                 <StarIcon color="primary" />
                 <StarIcon color="primary" />
+                <StarIcon color="primary" />
+                <StarIcon color="primary" />
               </Box>
-              <Typography>17 người đánh giá</Typography>
+              <Typography>Wonderful Movie</Typography>
             </Box>
           </Box>
           <Box className={classes.infoEvaluate}>
@@ -173,7 +175,7 @@ function MovieDetail(props) {
           {activeInfoState === "showTime" && (
             <ShowTimeDetail movieDetail={movieDetail} />
           )}
-          {activeInfoState === "comment" && <Comment />}
+          {activeInfoState === "comment" && <Comment maPhim={params.MaPhim} />}
 
           {/* abc */}
         </Box>

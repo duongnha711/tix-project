@@ -28,8 +28,10 @@ const initialState = {
   danhSachVe: [],
 
   //trailer
-  // openTrailer: {},
   openTrailer: { open: false, trailer: "" },
+
+  //comment
+  allCommentsList: [],
 };
 
 const homeReducer = (state = initialState, action) => {
@@ -157,6 +159,15 @@ const homeReducer = (state = initialState, action) => {
 
     case ActionType.CLOSE_TRAILER: {
       return { ...state, openTrailer: { open: false, trailer: "empty" } };
+    }
+
+    case ActionType.GET_COMMENTS_LIST_SUCCESS: {
+      return { ...state, allCommentsList: action.payload };
+    }
+
+    case ActionType.ADD_COMMENT_ONE_MOVIE_SUCCESS: {
+      const { payload } = action;
+      return { ...state, allCommentsList: [payload] };
     }
 
     default:

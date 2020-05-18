@@ -38,8 +38,12 @@ const bookingBackground =
 const textBooking = "white";
 const titleBooking = "#2791fa";
 const highlightBooking = "#ed6ea0";
+const commentColor1 = "#ffffffe0";
+const commentColor2 = "#7dbcf4d4";
 
 export {
+  commentColor2,
+  commentColor1,
   bookingBackground,
   highlightBooking,
   textBooking,
@@ -84,9 +88,9 @@ let theme = createMuiTheme({
       // light: "#72c1ff",
     },
     secondary: {
-      main: "#9b9b9b",
-      dark: "#6d6d6d",
-      light: "#cccccc",
+      main: "#ff9c66",
+      dark: "#c86d3a",
+      light: "#ffce95",
     },
     text: {
       secondary: "#e9e9e9",

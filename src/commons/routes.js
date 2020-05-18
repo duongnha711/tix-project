@@ -4,6 +4,8 @@ import UserManagement from "../containers/UserManagement";
 import HomePage from "./../containers/Home";
 import MovieDetail from "./../containers/MovieDetail";
 import SignIn from "./../containers/SignIn";
+import User from "../modules/admin/components/User";
+import Movie from "../modules/admin/components/Movie";
 
 export const routes = [
   {
@@ -42,3 +44,17 @@ export const routes = [
     component: SignUp,
   },
 ];
+
+export const adminRoutes = [
+  {
+    path: "/admin",
+    exact: true,
+    component: User,
+  },
+  {
+    path: "/admin/movie",
+    exact: false,
+    component: Movie,
+  },
+];
+

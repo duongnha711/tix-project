@@ -2,7 +2,6 @@ import queryString from "querystring";
 import { sendRequest } from "./../../functions/effect";
 import ENDPOINTS, { MA_NHOM } from "./model";
 
-
 export const getMovieListApi = () => {
   return sendRequest({
     url: ENDPOINTS.LayDanhSachPhim,
@@ -11,8 +10,6 @@ export const getMovieListApi = () => {
     },
   });
 };
-
-
 
 export const getMovieDetailOfficialApi = (MaPhim) => {
   const params = queryString.stringify(MaPhim);
@@ -70,5 +67,20 @@ export const bookTicketApi = (payload) => {
     method: "POST",
     data,
     headers: { Authorization: `Bearer ${token}` },
+  });
+};
+
+export const getCommentsListApi = () => {
+  return sendRequest({
+    url: `${ENDPOINTS.comments}`,
+  });
+};
+
+export const addCommentsApi = (id, data) => {
+  return sendRequest({
+    url: `${ENDPOINTS.comments}/${id}`,
+    // url: `${ENDPOINTS.comments}`,
+    method: "PUT",
+    data,
   });
 };
