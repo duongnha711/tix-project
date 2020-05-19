@@ -14,9 +14,10 @@ export default function TopFooter() {
     <Box className={classes.topFooter}>
       <Box className={classes.logo}>
         <Link to="/">N-cinema</Link>
-      </Box>{" "}
+      </Box>
       <Box display="flex" justifyContent="center">
         <a
+        className={classes.linkWrap}
           href="https://www.facebook.com/dhn711"
           rel="noopener noreferrer"
           target="_blank"
@@ -29,6 +30,7 @@ export default function TopFooter() {
           </Box>
         </a>
         <a
+        className={classes.linkWrap}
           href="https://www.facebook.com/dhn711"
           rel="noopener noreferrer"
           target="_blank"
@@ -43,6 +45,7 @@ export default function TopFooter() {
           </Tooltip>
         </a>
         <a
+        className={classes.linkWrap}
           href="https://www.facebook.com/dhn711"
           rel="noopener noreferrer"
           target="_blank"

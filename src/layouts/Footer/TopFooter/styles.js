@@ -17,8 +17,10 @@ const useStyles = makeStyles((theme) => ({
       WebkitBackgroundClip: "text",
     },
   },
-  wrapperIcon: {
+  linkWrap: {
     margin: "10px",
+  },
+  wrapperIcon: {
     width: 50,
     height: 50,
     borderRadius: "50%",
