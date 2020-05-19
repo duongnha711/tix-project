@@ -55,7 +55,7 @@ export default function InfoMovie(props) {
       <Grid md={5} item className={classes.content}>
         <Typography>Nội dung</Typography>
         <Typography className={classes.textContent}>
-          {movieDetail.tenPhim} is a super movie...API don't have description
+          {movieDetail.tenPhim} is a super movie...
           ... The best way to learn code is to write code!
         </Typography>
       </Grid>

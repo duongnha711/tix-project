@@ -106,7 +106,7 @@ function InfoCinema(props) {
                 {movie.tenPhim}
               </Typography>
               <Typography className={classes.textMovie}>
-                {`Movie name: ${movie.tenPhim} - API don't have description ... The best way to learn code is to write code!`}
+                {`Movie name: ${movie.tenPhim}. This is super movie... The best way to learn code is to write code!`}
               </Typography>
               <Link
                 to={{
