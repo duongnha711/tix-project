@@ -76,10 +76,10 @@ function MenuResponsive(props) {
             </Link>
           )}
 
-          <HashLink to="/#showTime">
+          <HashLink to="/#showtime">
             <ListItem button>Lịch chiếu</ListItem>
           </HashLink>
-          <HashLink to="/#infoCinema">
+          <HashLink to="/#cinemaInfo">
             <ListItem button>Cụm rạp</ListItem>
           </HashLink>
           <HashLink to="/#news">

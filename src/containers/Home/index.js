@@ -61,7 +61,7 @@ function HomePage(props) {
       {/* ~~~~~~~~~~~~~~~~SHOW TIME!~~~~~~~~~~~~~~~~~~~ */}
       <Box
         className={classes.wrapperTitle}
-        id="showTime"
+        id="showtime"
         display="flex"
         justifyContent="center"
       >

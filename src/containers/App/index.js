@@ -53,7 +53,7 @@ function App() {
           <Router>
             <Switch>
               {renderHomeRoutes()}
-              {renderAdminRoutes()}
+              {/* {renderAdminRoutes()} */}
               <Route path="" component={PageNotFound} />
             </Switch>
           </Router>

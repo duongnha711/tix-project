@@ -250,7 +250,7 @@ function InfoCinema(props) {
   };
 
   return (
-    <Box id="infoCinema" className={classes.infoCinema}>
+    <Box id="cinemaInfo" className={classes.infoCinema}>
       <Paper elevation={1} className={classes.container}>
         <Box className={classes.cinemaWrapper}>
           <Box display="flex">

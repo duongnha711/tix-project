@@ -61,9 +61,10 @@ let SignIn = (props) => {
 
   return (
     <Fragment>
-      {isLogged && account.maLoaiNguoiDung==="KhachHang" &&<Redirect to="/" />}
-      {isLogged && account.maLoaiNguoiDung==="QuanTri" &&<Redirect to="/admin" />}
+      {/* {isLogged && account.maLoaiNguoiDung==="KhachHang" &&<Redirect to="/" />}
+      {isLogged && account.maLoaiNguoiDung==="QuanTri" &&<Redirect to="/admin" />} */}
 
+      {isLogged && <Redirect to="/" />}
 
       <Box className={classes.container}>
         <Box className={classes.signIn}>

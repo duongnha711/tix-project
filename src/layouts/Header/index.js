@@ -44,8 +44,8 @@ function Header(props) {
           <Hidden smDown>
             <Grid className={classes.navigation} item>
               <Box>
-                <HashLink to="/#showTime">Lịch chiếu</HashLink>
-                <HashLink to="/#infoCinema">Cụm rạp</HashLink>
+                <HashLink to="/#showtime">Lịch chiếu</HashLink>
+                <HashLink to="/#cinemaInfo">Cụm rạp</HashLink>
                 <HashLink to="/#news">Tin tức</HashLink>
                 <HashLink to="/#app">Ứng dụng</HashLink>
               </Box>
