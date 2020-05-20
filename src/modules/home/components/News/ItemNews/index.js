@@ -13,7 +13,7 @@ export default function ItemNews(props) {
       <Box className={classes.item}>
         <Box className={classes.wrapperImg}>
           <Box className={classes.contentImg}>
-            <img src={news.url} alt="spider" />
+            <img src={news.url} alt={news.url} />
           </Box>
         </Box>
       </Box>

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useStyles from "./styles";
 import { Box, Grid, Typography, Button } from "@material-ui/core";
 import Mobile from "../../../../components/Mobile.js";
 import Alert from "./../../../../components/Alert";
+import WOW from "wowjs";
+import cn from "classnames";
 
 export default function MobileApp() {
   const classes = useStyles();
@@ -11,11 +13,21 @@ export default function MobileApp() {
     Alert({ icon: "info", text: "Coming soon...!" });
   };
 
+  useEffect(() => {
+    new WOW.WOW().init();
+  }, []);
+
   return (
     <Box id="app" className={classes.mobileApp}>
       <Box className={classes.container}>
         <Grid alignItems="center" container>
-          <Grid item xs={12} lg={6}>
+          <Grid
+            data-wow-duration="2s"
+            className="wow bounceInLeft"
+            item
+            xs={12}
+            lg={6}
+          >
             <Box className={classes.contentApp}>
               <Typography className={classes.title} variant="h3">
                 Ứng dụng tiện lợi cho người yêu điện ảnh!
@@ -35,7 +47,14 @@ export default function MobileApp() {
               <Typography>Download 2 phiên bản iOS & Android</Typography>
             </Box>
           </Grid>
-          <Grid className={classes.mobileContent} item xs={12} lg={6}>
+          {/* Left right */}
+          <Grid
+            data-wow-duration="2s"
+            className={cn(classes.mobileContent, "wow bounceInRight")}
+            item
+            xs={12}
+            lg={6}
+          >
             <Mobile />
           </Grid>
         </Grid>

@@ -5,11 +5,17 @@ import dcArrNewOfficial from "./dcDemoData";
 
 import ItemNews from "./ItemNews";
 import useStyles from "./styles";
+import WOW from "wowjs";
+import cn from "classnames";
 
 export default function News(props) {
   const classes = useStyles();
   const [viewMore, setViewMore] = useState(1);
   const { marvelDC } = props;
+
+  useEffect(() => {
+    new WOW.WOW().init();
+  }, []);
 
   const renderNews = (arrNews) => {
     if (Array.isArray(arrNews) && arrNews.length > 0) {
@@ -20,7 +26,11 @@ export default function News(props) {
             xs={12}
             lg={6}
             item
-            className={classes.mainNewsItem}
+            data-wow-duration="1.5s"
+            className={cn(
+              classes.mainNewsItem,
+              index % 2 === 0 ? "wow slideInLeft" : "wow slideInRight"
+            )}
           >
             <a target="_blank" rel="noopener noreferrer" href={news.link}>
               <ItemNews news={news} />
@@ -36,11 +46,15 @@ export default function News(props) {
       return arrNewsUpdate.map((news, index) => {
         return (
           <Grid
-            className={classes.updateNewsItem}
+            className={cn(
+              classes.updateNewsItem,
+              index % 2 === 0 ? "wow slideInLeft" : "wow slideInUp"
+            )}
             key={index}
             xs={12}
             lg={4}
             item
+            data-wow-duration="1.5s"
           >
             <a target="_blank" rel="noopener noreferrer" href={news.link}>
               <ItemNews news={news} />
@@ -106,7 +120,13 @@ export default function News(props) {
                 {renderNewsUpdate(item.arrNewsUpdate)}
 
                 {/* 3*/}
-                <Grid className={classes.updateNewsItem} xs={12} lg={4} item>
+                <Grid
+                  data-wow-duration="1.5s"
+                  className={cn(classes.updateNewsItem, "wow slideInRight")}
+                  xs={12}
+                  lg={4}
+                  item
+                >
                   <Box className={classes.updateNewsItemEnd}>
                     {renderTitleUpdate(item.arrTitleUpdate)}
 
