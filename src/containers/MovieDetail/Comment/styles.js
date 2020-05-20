@@ -11,18 +11,20 @@ const useStyles = makeStyles((theme) => ({
     overflowY: "auto",
     padding: "0 10px",
 
+    //chrome
     "&::-webkit-scrollbar": {
       width: 3,
     },
-
     "&::-webkit-scrollbar-track": {
-      // background: "blue",
       margin: 10,
     },
-
     "&::-webkit-scrollbar-thumb": {
       background: "#33acf3",
     },
+
+    //firefox
+    scrollbarColor: "#96B4D5 #0f2434d1 ",
+    scrollbarWidth: "thin",
   },
   mainComment: {
     cursor: "pointer",

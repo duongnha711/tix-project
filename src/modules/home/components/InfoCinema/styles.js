@@ -28,18 +28,21 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: 600,
     overflowY: "auto",
 
+    //chrome
     "&::-webkit-scrollbar": {
       width: 3,
     },
-
     "&::-webkit-scrollbar-track": {
-      // background: "blue",
       margin: 10,
     },
 
     "&::-webkit-scrollbar-thumb": {
       background: "#33acf3",
     },
+
+    //firefox
+    scrollbarColor: "#96B4D5 #0f2434d1 ",
+    scrollbarWidth: "thin",
   },
   itemLogo: {
     padding: 20,
@@ -62,19 +65,20 @@ const useStyles = makeStyles((theme) => ({
     borderRight: "1px solid rgba(0,0,0,0.12)",
     maxHeight: 600,
     overflowY: "auto",
-
+    //chrome
     "&::-webkit-scrollbar": {
       width: 3,
     },
-
     "&::-webkit-scrollbar-track": {
-      // background: "blue",
       margin: 10,
     },
-
     "&::-webkit-scrollbar-thumb": {
       background: "#33acf3",
     },
+
+    //firefox
+    scrollbarColor: "#96B4D5 #0f2434d1 ",
+    scrollbarWidth: "thin",
   },
   itemCinema: {
     display: "flex",
@@ -116,18 +120,20 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: 600,
     overflowY: "auto",
 
+    //chrome
     "&::-webkit-scrollbar": {
       width: 3,
     },
-
     "&::-webkit-scrollbar-track": {
-      // background: "blue",
       margin: 10,
     },
-
     "&::-webkit-scrollbar-thumb": {
       background: "#33acf3",
     },
+
+    //firefox
+    scrollbarColor: "#96B4D5 #0f2434d1 ",
+    scrollbarWidth: "thin",
   },
   itemMovie: {
     padding: "20px",
