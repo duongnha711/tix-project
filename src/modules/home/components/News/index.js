@@ -154,7 +154,13 @@ export default function News(props) {
 
         {viewMore < 3 && (
           <Box onClick={handleClickViewMore} textAlign="center">
-            <Button variant="contained" size="large" color="secondary">
+            <Button
+              data-wow-duration="1.5s"
+              className="wow slideInUp"
+              variant="contained"
+              size="large"
+              color="secondary"
+            >
               View More
             </Button>
           </Box>

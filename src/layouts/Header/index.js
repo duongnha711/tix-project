@@ -36,7 +36,13 @@ function Header(props) {
               <Link to="/">N-cinema</Link>
             </Box>
             <Box className={classes.myCV}>
-              <a href="https://drive.google.com/open?id=13r0OGHV4d3XzJKKMDnZaNE08LCu868d0" rel="noopener noreferrer" target="_blank">My CV</a>
+              <a
+                href="https://drive.google.com/open?id=1F207iXi3UzsvUCoWXWpd2YCgi7XWG-aw"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                My CV
+              </a>
             </Box>
           </Grid>
 

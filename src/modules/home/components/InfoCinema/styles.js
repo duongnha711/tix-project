@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   listLogo: {
     minWidth: 90,
     borderRight: "1px solid rgba(0,0,0,0.12)",
-    maxHeight: 600,
+    height: 600,
     overflowY: "auto",
 
     //chrome
